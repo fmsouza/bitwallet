@@ -7,6 +7,7 @@ import { colors } from './common/styles';
 export const INITIAL_ROUTE = 'Login';
 
 export default StackNavigator({
+    Extract: { screen: Views.Extract },
     Login: { screen: Views.Login },
     Overview: { screen: Views.Overview }
 }, {
