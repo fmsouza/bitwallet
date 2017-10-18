@@ -3,11 +3,11 @@ import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-n
 import { colors, measures } from 'common/styles';
 import Balance from './Balance';
 
-const Blocks = {
+const Views = {
     EXTRACT: 'Extract',
-    RECEIVE: 'Receive',
-    SEND: 'Send',
-    TRANSFER: 'Transfer',
+    RECEIVE: 'ReceivePoints',
+    SEND: 'SendPoints',
+    MANAGE: 'ManagePoints',
     OFFERS: 'Offers',
     PARTNERS: 'Partners'
 };
@@ -24,18 +24,18 @@ export class Overview extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.balance}>
-                    <Balance onPressExtract={() => navigate(Blocks.EXTRACT)} />
+                    <Balance onPressExtract={() => navigate(Views.EXTRACT)} />
                 </View>
                 <View style={styles.blocksContainer}>
                     <View style={styles.row}>
-                        <TouchableWithoutFeedback onPress={() => navigate(Blocks.RECEIVE)}>
+                        <TouchableWithoutFeedback onPress={() => navigate(Views.RECEIVE)}>
                             <View style={styles.block}>
                                 <Image style={styles.gridIcon} source={require('assets/img/qr_code.png')} />
                                 <Text>RECEBER</Text>
                                 <Text>PONTOS</Text>
                             </View>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={() => navigate(Blocks.SEND)}>
+                        <TouchableWithoutFeedback onPress={() => navigate(Views.SEND)}>
                             <View style={styles.block}>
                                 <Image style={styles.gridIcon} source={require('assets/img/send_points.png')} />
                                 <Text>ENVIAR</Text>
@@ -44,7 +44,7 @@ export class Overview extends React.Component {
                         </TouchableWithoutFeedback>
                     </View>
                     <View style={styles.row}>
-                        <TouchableWithoutFeedback onPress={() => navigate(Blocks.TRANSFER)}>
+                        <TouchableWithoutFeedback onPress={() => navigate(Views.MANAGE)}>
                             <View style={styles.block}>
                                 <Image style={styles.gridIcon} source={require('assets/img/transfer_points.png')} />
                                 <Text>COMPRAR</Text>
@@ -52,7 +52,7 @@ export class Overview extends React.Component {
                                 <Text>TRANSFERIR</Text>
                             </View>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={() => navigate(Blocks.OFFERS)}>
+                        <TouchableWithoutFeedback onPress={() => navigate(Views.OFFERS)}>
                             <View style={styles.block}>
                                 <Image style={styles.gridIcon} source={require('assets/img/offer.png')} />
                                 <Text>OFERTAS</Text>
@@ -60,9 +60,11 @@ export class Overview extends React.Component {
                         </TouchableWithoutFeedback>
                     </View>
                 </View>
-                <View style={styles.footer}>
-                    <Text style={styles.footerLabel}>PARCEIROS</Text>
-                </View>
+                <TouchableWithoutFeedback onPress={() => navigate(Views.PARTNERS)}>
+                    <View style={styles.footer}>
+                        <Text style={styles.footerLabel}>PARCEIROS</Text>
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
         );
     }

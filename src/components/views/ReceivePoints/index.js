@@ -2,10 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { colors, measures } from 'common/styles';
 
-export class Extract extends React.Component {
+export class ReceivePoints extends React.Component {
 
     static navigationOptions = {
-        title: 'Extrato de pontos'
+        title: 'Receber pontos'
     };
 
     render() {

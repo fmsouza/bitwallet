@@ -4,20 +4,23 @@ import { StackNavigator } from 'react-navigation';
 import * as Views from './components/views';
 import { colors } from './common/styles';
 
-export const INITIAL_ROUTE = 'Login';
+export const INITIAL_ROUTE = 'Overview';
 
 export default StackNavigator({
     Extract: { screen: Views.Extract },
     Login: { screen: Views.Login },
-    Overview: { screen: Views.Overview }
+    ManagePoints: { screen: Views.ManagePoints },
+    Offers: { screen: Views.Offers },
+    Overview: { screen: Views.Overview },
+    Partners: { screen: Views.Partners },
+    ReceivePoints: { screen: Views.ReceivePoints },
+    SendPoints: { screen: Views.SendPoints }
 }, {
     initialRouteName: INITIAL_ROUTE,
     navigationOptions: {
         headerStyle: {
             backgroundColor: colors.primary,
         },
-        headerTitleStyle: {
-            color: colors.secondary
-        }
+        headerTintColor: colors.secondary
     }
 });
