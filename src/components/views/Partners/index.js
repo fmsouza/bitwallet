@@ -12,7 +12,7 @@ export class Partners extends React.Component {
 
     state = { items };
 
-    renderPartner = ({ item }) => <ListItem {...item} />
+    renderItem = ({ item }) => <ListItem {...item} />
 
     render() {
         return (
@@ -20,7 +20,7 @@ export class Partners extends React.Component {
                 <FlatList
                     data={this.state.items}
                     keyExtractor={item => item.id}
-                    renderItem={this.renderPartner} />
+                    renderItem={this.renderItem} />
             </View>
         );
     }
