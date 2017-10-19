@@ -34,7 +34,6 @@ export default class LoginForm extends React.Component {
                     autoCapitalize="none"
                     onChangeText={password => this.setState({ password })} />
                 <Button title="Entrar" onPress={this.onSubmit} />
-                <Button title="Cancelar" onPress={onCancel} borderless />
             </View>
         );
     }

@@ -9,11 +9,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: measures.defaultPadding,
-        borderRadius: 4
-    },
-    border: {
         borderWidth: 2,
-        borderColor: colors.secondary
+        borderColor: colors.secondary,
+        borderRadius: 4
     },
     title: {
         color: colors.secondary,
@@ -21,10 +19,8 @@ const styles = StyleSheet.create({
     }
 });
 
-const getContainerStyle = (borderless) => borderless ? styles.container : StyleSheet.flatten([styles.container, styles.border]);
-
-export default ({ borderless, onPress, title, ...props }) => (
-    <TouchableHighlight style={getContainerStyle(borderless)} onPress={onPress} underlayColor={null}>
+export default ({ onPress, title, ...props }) => (
+    <TouchableHighlight style={styles.container} onPress={onPress} underlayColor={null}>
         <Text style={styles.title} children={title} />
     </TouchableHighlight>
 );

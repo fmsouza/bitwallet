@@ -4,7 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import * as Views from './components/views';
 import { colors } from './common/styles';
 
-export const INITIAL_ROUTE = 'Overview';
+export const INITIAL_ROUTE = 'Login';
 
 export default StackNavigator({
     Extract: { screen: Views.Extract },
