@@ -22,6 +22,7 @@ const Views = {
         loading: wallet.loading
     }),
     dispatch => ({
+        isLoading: (loading) => dispatch(Wallet.isLoading(loading)),
         updateBalance: (wallet, contract) => dispatch(Wallet.updateBalance(wallet, contract))
     })
 )
@@ -33,7 +34,12 @@ export class Overview extends React.Component {
     };
 
     componentDidMount() {
+        this.updateBalance();
+    }
+
+    updateBalance () {
         const { contract, wallet } = this.props;
+        this.props.isLoading(true);
         this.props.updateBalance(wallet, contract);
     }
 
@@ -44,6 +50,8 @@ export class Overview extends React.Component {
                 <View style={styles.balance}>
                     <Balance
                         balance={this.props.balance}
+                        loading={this.props.loading}
+                        onPressRefresh={() => this.updateBalance()}
                         onPressExtract={() => navigate(Views.EXTRACT)} />
                 </View>
                 <View style={styles.blocksContainer}>
