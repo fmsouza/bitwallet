@@ -3,7 +3,7 @@ import { BackHandler, Platform, StatusBar, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import Router, { INITIAL_ROUTE } from './src';
-import configureStore from 'common/stores';
+import store from 'common/stores';
 import AppConfig from './app.json';
 
 export default class Application extends React.Component {
@@ -28,7 +28,7 @@ export default class Application extends React.Component {
 
     render() {
         return (
-            <Provider store={configureStore()}>
+            <Provider store={store}>
                 <View style={{ flex: 1 }}>
                     <StatusBar {...AppConfig.expo.androidStatusBar} />
                     <Router />

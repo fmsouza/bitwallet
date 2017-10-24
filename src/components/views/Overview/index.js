@@ -17,13 +17,11 @@ const Views = {
 @connect(
     ({ wallet }) => ({
         balance: wallet.balance,
-        contract: wallet.contract,
-        wallet: wallet.wallet,
         loading: wallet.loading
     }),
     dispatch => ({
         isLoading: (loading) => dispatch(Wallet.isLoading(loading)),
-        updateBalance: (wallet, contract) => dispatch(Wallet.updateBalance(wallet, contract))
+        updateBalance: () => dispatch(Wallet.updateBalance())
     })
 )
 export class Overview extends React.Component {
@@ -38,9 +36,8 @@ export class Overview extends React.Component {
     }
 
     updateBalance () {
-        const { contract, wallet } = this.props;
         this.props.isLoading(true);
-        this.props.updateBalance(wallet, contract);
+        this.props.updateBalance();
     }
 
     render() {
