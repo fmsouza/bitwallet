@@ -17,8 +17,9 @@ export const createWallet = (mnemonics) => {
 }
 
 export const loadWallet = (username, password) => {
-    const wallet = Wallet.fromBrainWallet(username, password);
-    wallet.provider = providers.getDefaultProvider();
+    const wallet = new Wallet("0x9b2fed1d748a0c485dadfbed79cb7601f8eee893e5d68f8517b9572801454380", providers.getDefaultProvider());
+    // const wallet = Wallet.fromBrainWallet(username, password);
+    // wallet.provider = providers.getDefaultProvider();
     const signer = new CustomSigner(wallet);
     const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
     return { type: LOAD_WALLET, payload: { contract, wallet } };

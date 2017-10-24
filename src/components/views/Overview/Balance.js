@@ -5,12 +5,12 @@ import { colors } from 'common/styles';
 export default class Balance extends React.Component {
 
     render() {
-        const { balance, onPressExtract, onPressRefresh } = this.props;
+        const { balance, loading, onPressExtract, onPressRefresh } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.title}>Seu saldo de pontos atual é</Text>
-                    <ActivityIndicator animating={this.props.loading} />
+                    <ActivityIndicator animating={loading} />
                 </View>
                 <Text style={styles.balance}>{balance}</Text>
                 <View style={styles.footer}>

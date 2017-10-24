@@ -1,14 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { colors } from 'common/styles';
 
 export default class Balance extends React.Component {
 
     render() {
+        const { balance, loading, onPressExtract } = this.props;
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Seu saldo de pontos atual é</Text>
-                <Text style={styles.balance}>130.920</Text>
+                <View style={styles.header}>
+                    <Text style={styles.title}>Seu saldo de pontos atual é</Text>
+                    <ActivityIndicator animating={loading} />
+                </View>
+                <Text style={styles.balance}>{balance}</Text>
             </View>
         );
     }
@@ -22,7 +26,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#CCCCCC',
         alignItems: 'center',
         justifyContent: 'space-around',
-        paddingVertical: 16
+        padding: 8
     },
     title: {
         fontSize: 20
@@ -32,8 +36,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#0C71B1'
     },
-    history: {
-        fontSize: 14,
-        color: 'grey'
+    header: {
+        flexDirection: 'row'
     }
 });
