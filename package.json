@@ -19,11 +19,15 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "ethers": "2.1.2",
     "expo": "21.0.0",
     "react": "16.0.0-alpha.12",
     "react-native": "0.48.4",
     "react-native-qrcode-svg": "5.0.3",
     "react-native-svg": "5.4.2",
-    "react-navigation": "1.0.0-beta.15"
+    "react-navigation": "1.0.0-beta.15",
+    "react-redux": "5.0.6",
+    "redux": "3.7.2",
+    "redux-thunk": "2.2.0"
   }
 }

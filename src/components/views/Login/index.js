@@ -1,28 +1,41 @@
 import React from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 import { colors, measures } from 'common/styles';
+import { Wallet } from 'common/actions';
 import Button from './Button';
 import LoginForm from './LoginForm';
 
+@connect(
+    ({ wallet }) => ({
+        wallet: wallet.wallet,
+        loading: wallet.loading
+    }),
+    dispatch => ({
+        loadWallet: (username, password) => dispatch(Wallet.loadWallet(username, password)),
+        isLoading: (loading) => dispatch(Wallet.isLoading(loading))
+    })
+)
 export class Login extends React.Component {
 
     static navigationOptions = { header: null };
 
-    state = { loading: false };
+    reset = () => this.setState({ loginForm: false });
 
-    reset = () => this.setState({ loginForm: false, loading: false });
-
-    onSubmitLogin = (data) => this.setState({ loading: true }, () => {
-        this.props.navigation.navigate('Overview');
-        console.log(data);
-    });
+    onSubmitLogin = ({ username, password }) => {
+        this.props.isLoading(true);
+        setTimeout(() => {
+            this.props.loadWallet(username, password);
+            this.props.navigation.navigate('Overview');
+        }, 1);
+    }
 
     render() {
         return (
             <View style={styles.background}>
                 <View style={styles.container}>
                     <Image style={styles.logo} source={require('assets/img/logo.png')} />
-                    <ActivityIndicator animating={this.state.loading} />
+                    <ActivityIndicator animating={this.props.loading} />
                     <LoginForm
                         onSubmit={this.onSubmitLogin}
                         onCancel={this.reset} />

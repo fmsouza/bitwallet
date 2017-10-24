@@ -5,11 +5,11 @@ import { colors } from 'common/styles';
 export default class Balance extends React.Component {
 
     render() {
-        const { onPressExtract } = this.props;
+        const { balance, onPressExtract } = this.props;
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Seu saldo de pontos atual é</Text>
-                <Text style={styles.balance}>130.920</Text>
+                <Text style={styles.balance}>{balance}</Text>
                 <TouchableWithoutFeedback onPress={onPressExtract}>
                     <View>
                         <Text style={styles.history}>Ver extrato de pontos</Text>

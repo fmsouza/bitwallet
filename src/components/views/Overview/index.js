@@ -1,6 +1,8 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { connect } from 'react-redux';
 import { colors, measures } from 'common/styles';
+import { Wallet } from 'common/actions';
 import Balance from './Balance';
 
 const Views = {
@@ -12,6 +14,17 @@ const Views = {
     PARTNERS: 'Partners'
 };
 
+@connect(
+    ({ wallet }) => ({
+        balance: wallet.balance,
+        contract: wallet.contract,
+        wallet: wallet.wallet,
+        loading: wallet.loading
+    }),
+    dispatch => ({
+        updateBalance: (wallet, contract) => dispatch(Wallet.updateBalance(wallet, contract))
+    })
+)
 export class Overview extends React.Component {
 
     static navigationOptions = {
@@ -19,12 +32,19 @@ export class Overview extends React.Component {
         gesturesEnabled: false
     };
 
+    componentDidMount() {
+        const { contract, wallet } = this.props;
+        this.props.updateBalance(wallet, contract);
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <View style={styles.balance}>
-                    <Balance onPressExtract={() => navigate(Views.EXTRACT)} />
+                    <Balance
+                        balance={this.props.balance}
+                        onPressExtract={() => navigate(Views.EXTRACT)} />
                 </View>
                 <View style={styles.blocksContainer}>
                     <View style={styles.row}>
