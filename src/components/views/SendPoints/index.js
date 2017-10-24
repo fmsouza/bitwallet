@@ -15,14 +15,10 @@ export class SendPoints extends React.Component {
     state = { address: '', amount: '', showCamera: false, contacts };
 
     onPressCamera = async () => {
-        console.log("Getting camera permission");
         try {
             const { status } = await Permissions.askAsync(Permissions.CAMERA);
-            console.log("Permission:", status);
-            console.log("Trying to show the camera...")
             this.setState({ showCamera: (status === 'granted') });
         } catch (e) {
-            console.log("An error ocurred...");
             console.error(e);
         }
     }
