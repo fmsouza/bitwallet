@@ -19,7 +19,9 @@ export default class Balance extends React.Component {
                     </TouchableWithoutFeedback>
                     
                     <TouchableWithoutFeedback onPress={onPressExtract}>
-                        <Text style={styles.history}>Ver extrato de pontos</Text>
+                        <View>
+                            <Text style={styles.history}>Ver extrato de pontos</Text>
+                        </View>
                     </TouchableWithoutFeedback>
                 </View>
             </View>
