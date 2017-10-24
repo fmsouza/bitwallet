@@ -1,25 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { connect } from 'react-redux';
 import QRCode from 'react-native-qrcode-svg';
 import { colors, measures } from 'common/styles';
 
+@connect(({ wallet }) => ({ wallet: wallet.wallet }))
 export class ReceivePoints extends React.Component {
 
     static navigationOptions = {
         title: 'Receber pontos'
     };
 
-    state = { address: '0xMyWalletAddressHashCode' };
-
     render() {
-        const { address } = this.state;
+        const { wallet } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.subContainer}>
                     <Text children="Mostre o código abaixo para receber os pontos" />
                     <View style={styles.qrcodeContainer}>
-                        <QRCode size={256} value={address} />
-                        <Text children={address} />
+                        <QRCode size={256} value={wallet.getAddress()} />
+                        <Text children={wallet.getAddress()} />
                     </View>
                 </View>
 
@@ -42,13 +42,14 @@ const styles = StyleSheet.create({
     },
     subContainer: {
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         flex: 1
     },
     qrcodeContainer: {
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: 300
+        height: 300,
+        marginTop: 50
     },
     footer: {
         height: 48,

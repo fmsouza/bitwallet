@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { colors } from 'common/styles';
 
 export default class Balance extends React.Component {
@@ -10,11 +10,12 @@ export default class Balance extends React.Component {
             <View style={styles.container}>
                 <Text style={styles.title}>Seu saldo de pontos atual é</Text>
                 <Text style={styles.balance}>{balance}</Text>
-                <TouchableWithoutFeedback onPress={onPressExtract}>
-                    <View>
+                <View style={styles.footer}>
+                    <Image style={styles.refresh} source={require('assets/img/refresh.png')} />
+                    <TouchableWithoutFeedback onPress={onPressExtract}>
                         <Text style={styles.history}>Ver extrato de pontos</Text>
-                    </View>
-                </TouchableWithoutFeedback>
+                    </TouchableWithoutFeedback>
+                </View>
             </View>
         );
     }
@@ -27,8 +28,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         borderBottomColor: '#CCCCCC',
         alignItems: 'center',
-        justifyContent: 'space-around',
-        paddingVertical: 16
+        justifyContent: 'space-between',
+        padding: 8
     },
     title: {
         fontSize: 20
@@ -37,6 +38,16 @@ const styles = StyleSheet.create({
         fontSize: 26,
         fontWeight: 'bold',
         color: '#0C71B1'
+    },
+    footer: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    refresh: {
+        width: 24,
+        height: 24
     },
     history: {
         fontSize: 14,

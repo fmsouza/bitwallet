@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { colors, measures } from 'common/styles';
+import ListItem from './ListItem';
+import items from './mockedList';
 
 export class Offers extends React.Component {
 
@@ -8,9 +10,17 @@ export class Offers extends React.Component {
         title: 'Ofertas'
     };
 
+    state = { items };
+
+    renderItem = ({ item }) => <ListItem {...item} />
+
     render() {
         return (
             <View style={styles.container}>
+                <FlatList
+                    data={this.state.items}
+                    keyExtractor={item => item.id}
+                    renderItem={this.renderItem} />
             </View>
         );
     }
@@ -18,13 +28,6 @@ export class Offers extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.defaultBackground,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        flex: 1
-    },
-    balance: {
-        height: 140,
-        width: '100%'
+        backgroundColor: colors.defaultBackground
     }
 });
