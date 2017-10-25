@@ -4,3 +4,4 @@ export const TRANSACTION_ACTIONS = {
 };
 
 export const GAS_LIMIT = 40000;
+export const gasPrice = 0xBEBC200;
