@@ -13,14 +13,19 @@ const styles = StyleSheet.create({
         borderColor: colors.secondary,
         borderRadius: 4
     },
+    borderless: {
+        borderWidth: 0
+    },
     title: {
         color: colors.secondary,
         fontSize: 16
     }
 });
 
-export default ({ onPress, title, ...props }) => (
-    <TouchableHighlight style={styles.container} onPress={onPress} underlayColor={null}>
+const getStyles = (borderless) => StyleSheet.flatten([styles.container, borderless && styles.borderless]);
+
+export default ({ borderless, onPress, title, ...props }) => (
+    <TouchableHighlight style={getStyles(borderless)} onPress={onPress} underlayColor={null}>
         <Text style={styles.title} children={title} />
     </TouchableHighlight>
 );

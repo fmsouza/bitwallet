@@ -8,6 +8,7 @@ export const INITIAL_ROUTE = 'Login';
 
 export default StackNavigator({
     Extract: { screen: Views.Extract },
+    LoadPK: { screen: Views.LoadPK },
     Login: { screen: Views.Login },
     ManagePoints: { screen: Views.ManagePoints },
     Offers: { screen: Views.Offers },

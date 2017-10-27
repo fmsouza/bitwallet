@@ -40,6 +40,9 @@ export class Login extends React.Component {
                     <LoginForm
                         onSubmit={this.onSubmitLogin}
                         onCancel={this.reset} />
+                    <Button
+                        borderless title="Entrar com chave privada"
+                        onPress={() => this.props.navigation.navigate('LoadPK')}/>
                 </View>
             </View>
         );

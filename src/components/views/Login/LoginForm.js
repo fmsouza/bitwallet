@@ -21,7 +21,6 @@ export default class LoginForm extends React.Component {
                     style={styles.input}
                     placeholder="Usuário"
                     placeholderTextColor={colors.secondary}
-                    autoFocus
                     autoCorrect={false}
                     autoCapitalize="none"
                     underlineColorAndroid="transparent"
