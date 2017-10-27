@@ -1,6 +1,7 @@
 import React from 'react';
 import { BackHandler, Platform, StatusBar, View } from 'react-native';
 import { Provider } from 'react-redux';
+import autobind from 'autobind-decorator';
 import store from 'common/stores';
 import Router, { INITIAL_ROUTE } from './Router';
 
@@ -19,7 +20,8 @@ export default class Application extends React.Component {
         BackHandler.removeEventListener('hardwareBackPress');
     }
 
-    handleBackButton = () => {
+    @autobind
+    handleBackButton() {
         const { state, goBack } = this.props.navigation;
         const { index, routes } = state;
         if (routes[index].routeName !== INITIAL_ROUTE) {

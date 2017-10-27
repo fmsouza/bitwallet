@@ -35,7 +35,7 @@ export class Overview extends React.Component {
         this.updateBalance();
     }
 
-    updateBalance () {
+    updateBalance() {
         this.props.isLoading(true);
         this.props.updateBalance();
     }

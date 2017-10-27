@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import autobind from 'autobind-decorator';
 import Permissions from 'react-native-permissions';
 import BarcodeScanner from 'react-native-barcodescanner';
 import { colors, measures } from 'common/styles';
@@ -15,7 +16,8 @@ export class SendPoints extends React.Component {
     
     state = { address: '', amount: '', showCamera: false, contacts };
 
-    onPressCamera = async () => {
+    @autobind
+    async onPressCamera() {
         var status;
         try {
             status = await Permissions.check('camera');
@@ -30,13 +32,15 @@ export class SendPoints extends React.Component {
         }
     }
     
-    onBarCodeRead = ({ type, data }) => {
+    @autobind
+    onBarCodeRead({ type, data }) {
         if (type === 'QR_CODE') {
             this.setState({ address: data, showCamera: false });
         }
     }
 
-    onSend = () => {
+    @autobind
+    onSend() {
         const { address, amount } = this.state;
         console.log(address, amount);
     }

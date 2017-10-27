@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, Vibration, View } from 'react-native';
 import { connect } from 'react-redux';
+import autobind from 'autobind-decorator';
 import Permissions from 'react-native-permissions';
 import BarcodeScanner from 'react-native-barcodescanner';
 import { Wallet } from 'common/actions';
@@ -37,7 +38,8 @@ export class LoadPK extends React.Component {
         }
     }
 
-    onBarCodeRead = ({ type, data }) => {
+    @autobind
+    onBarCodeRead({ type, data }) {
         if (type === BarcodeScanner.BarcodeFormat.QR_CODE) {
             Vibration.vibrate();
             this.props.isLoading(true);

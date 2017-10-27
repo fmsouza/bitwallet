@@ -1,6 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, Image, Keyboard, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
+import autobind from 'autobind-decorator';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
 import Button from './Button';
@@ -22,7 +23,8 @@ export class Login extends React.Component {
 
     reset = () => this.setState({ loginForm: false });
 
-    onSubmitLogin = ({ username, password }) => {
+    @autobind
+    onSubmitLogin({ username, password }) {
         Keyboard.dismiss();
         this.props.isLoading(true);
         setTimeout(() => 

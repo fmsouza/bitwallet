@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, StyleSheet, TextInput, View } from 'react-native';
+import autobind from 'autobind-decorator';
 import { colors } from 'common/styles';
 import Button from './Button';
 
@@ -7,7 +8,8 @@ export default class LoginForm extends React.Component {
 
     state = { username: '', password: '' };
 
-    onSubmit = () => {
+    @autobind
+    onSubmit () {
         const { username, password } = this.state;
         if (!username || !password) return;
         this.props.onSubmit({ username, password });
