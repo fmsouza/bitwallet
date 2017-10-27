@@ -20,12 +20,12 @@ export const createWallet = (mnemonics) => {
     return { type: LOAD_WALLET, payload: wallet };
 }
 
-export const loadWallet = (username, password) => {
-    const wallet = Wallet.fromBrainWallet(username, password);
-    wallet.provider = PROVIDER;
-    const signer = new CustomSigner(wallet);
-    const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-    return { type: LOAD_WALLET, payload: { contract, wallet } };
-};
+export const loadWallet = (username, password) => (dispatch) =>
+    Wallet.fromBrainWallet(username, password).then(wallet => {
+        wallet.provider = PROVIDER;
+        const signer = new CustomSigner(wallet);
+        const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+        dispatch({ type: LOAD_WALLET, payload: { contract, wallet } });
+    });
 
 export const isLoading = (loading) => ({ type: LOADING, payload: !!loading });
