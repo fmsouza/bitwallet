@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { Platform, StyleSheet, TextInput, View } from 'react-native';
 import { colors } from 'common/styles';
 import Button from './Button';
 
@@ -24,6 +24,7 @@ export default class LoginForm extends React.Component {
                     autoFocus
                     autoCorrect={false}
                     autoCapitalize="none"
+                    underlineColorAndroid="transparent"
                     onChangeText={username => this.setState({ username })} />
                 <TextInput
                     style={styles.input}
@@ -32,6 +33,7 @@ export default class LoginForm extends React.Component {
                     secureTextEntry
                     autoCorrect={false}
                     autoCapitalize="none"
+                    underlineColorAndroid="transparent"
                     onChangeText={password => this.setState({ password })} />
                 <Button title="Entrar" onPress={this.onSubmit} />
             </View>
