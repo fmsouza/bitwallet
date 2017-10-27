@@ -10,10 +10,10 @@
       "barStyle": "light-content"
     },
     "ios": {
-      "bundleIdentifier": "com.bitwallet.app"
+      "bundleIdentifier": "com.bitalliance.bitwallet"
     },
     "android": {
-      "package": "com.bitwallet.app"
+      "package": "com.bitalliance.bitwallet"
     }
   }
 }
