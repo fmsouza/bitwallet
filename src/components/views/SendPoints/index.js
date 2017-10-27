@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
-import { BarCodeScanner, Permissions } from 'expo';
+import Permissions from 'react-native-permissions';
+import BarcodeScanner from 'react-native-barcodescanner';
 import { colors, measures } from 'common/styles';
 import Button from './Button';
 import ListItem from './ListItem';
@@ -15,9 +16,15 @@ export class SendPoints extends React.Component {
     state = { address: '', amount: '', showCamera: false, contacts };
 
     onPressCamera = async () => {
+        var status;
         try {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA);
-            this.setState({ showCamera: (status === 'granted') });
+            status = await Permissions.check('camera');
+            if (status === 'authorized') this.setState({ showCamera: true });
+            else {
+                status = await Permissions.request('camera');
+                if (status === 'authorized') this.setState({ showCamera: true });
+                else throw new Error('Not allowed to use the camera.');
+            }
         } catch (e) {
             console.error(e);
         }
@@ -38,7 +45,6 @@ export class SendPoints extends React.Component {
         return (
             <BarCodeScanner
                 style={styles.fullScreen}
-                barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
                 onBarCodeRead={this.onBarCodeRead} />
         );
     }

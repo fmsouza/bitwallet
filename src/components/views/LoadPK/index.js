@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, Vibration, View } from 'react-native';
-import { BarCodeScanner, Permissions } from 'expo';
 import { connect } from 'react-redux';
+import Permissions from 'react-native-permissions';
+import BarcodeScanner from 'react-native-barcodescanner';
 import { Wallet } from 'common/actions';
 import { colors, measures } from 'common/styles';
 
@@ -21,23 +22,23 @@ export class LoadPK extends React.Component {
 
     state = { showCamera: false };
 
-    componentWillMount() {
-        this.enableCamera();
-    }
-
-    enableCamera = async () => {
+    async componentWillMount() {
+        var status;
         try {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA);
-            console.log("Camera permission:", status);
-            this.setState({ showCamera: (status === 'granted') });
+            status = await Permissions.check('camera');
+            if (status === 'authorized') this.setState({ showCamera: true });
+            else {
+                status = await Permissions.request('camera');
+                if (status === 'authorized') this.setState({ showCamera: true });
+                else throw new Error('Not allowed to use the camera.');
+            }
         } catch (e) {
-            console.log("An error ocurred...");
             console.error(e);
         }
     }
 
     onBarCodeRead = ({ type, data }) => {
-        if (type === BarCodeScanner.Constants.BarCodeType.qr) {
+        if (type === BarcodeScanner.BarcodeFormat.QR_CODE) {
             Vibration.vibrate();
             this.props.isLoading(true);
             this.setState({ showCamera: false }, () => {
@@ -55,7 +56,6 @@ export class LoadPK extends React.Component {
                     <View style={styles.cameraLayer}>
                         <BarCodeScanner
                             style={styles.cameraLayer}
-                            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
                             onBarCodeRead={this.onBarCodeRead} />
                         <View style={styles.marker} />
                     </View>

@@ -1,27 +1,42 @@
 import React from 'react';
-import { Platform, StatusBar } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import * as Views from './components/views';
-import { colors } from './common/styles';
+import { BackHandler, Platform, StatusBar, View } from 'react-native';
+import { Provider } from 'react-redux';
+import store from 'common/stores';
+import Router, { INITIAL_ROUTE } from './Router';
 
-export const INITIAL_ROUTE = 'Login';
+const ANDROID_STATUSBAR = {
+    backgroundColor: "#000000",
+    barStyle: "light-content"
+};
 
-export default StackNavigator({
-    Extract: { screen: Views.Extract },
-    LoadPK: { screen: Views.LoadPK },
-    Login: { screen: Views.Login },
-    ManagePoints: { screen: Views.ManagePoints },
-    Offers: { screen: Views.Offers },
-    Overview: { screen: Views.Overview },
-    Partners: { screen: Views.Partners },
-    ReceivePoints: { screen: Views.ReceivePoints },
-    SendPoints: { screen: Views.SendPoints }
-}, {
-    initialRouteName: INITIAL_ROUTE,
-    navigationOptions: {
-        headerStyle: {
-            backgroundColor: colors.primary,
-        },
-        headerTintColor: colors.secondary
+export default class Application extends React.Component {
+
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     }
-});
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
+    }
+
+    handleBackButton = () => {
+        const { state, goBack } = this.props.navigation;
+        const { index, routes } = state;
+        if (routes[index].routeName !== INITIAL_ROUTE) {
+            goBack();
+            return true;
+        }
+        return false;
+    }
+
+    render() {
+        return (
+            <Provider store={store}>
+                <View style={{ flex: 1 }}>
+                    <StatusBar {...ANDROID_STATUSBAR} />
+                    <Router />
+                </View>
+            </Provider>
+        );
+    }
+}

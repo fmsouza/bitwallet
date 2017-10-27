@@ -1,19 +1,4 @@
 {
-  "expo": {
-    "name": "BitWallet",
-    "slug": "bitwallet",
-    "version": "0.0.1",
-    "sdkVersion": "21.0.0",
-    "primaryColor": "#27354A",
-    "androidStatusBar": {
-      "backgroundColor": "#000000",
-      "barStyle": "light-content"
-    },
-    "ios": {
-      "bundleIdentifier": "com.bitalliance.bitwallet"
-    },
-    "android": {
-      "package": "com.bitalliance.bitwallet"
-    }
-  }
+  "name": "BitWallet",
+  "displayName": "BitWallet"
 }
