@@ -24,10 +24,10 @@ export class Login extends React.Component {
 
     onSubmitLogin = ({ username, password }) => {
         this.props.isLoading(true);
-        setTimeout(() => {
-            this.props.loadWallet(username, password);
-            this.props.navigation.navigate('Overview');
-        }, 1);
+        setTimeout(() => 
+            this.props.loadWallet(username, password)
+                .then(() => this.props.navigation.navigate('Overview'))
+        , 0);
     }
 
     render() {
