@@ -12,7 +12,7 @@ import LoginForm from './LoginForm';
         loading: wallet.loading
     }),
     dispatch => ({
-        loadWallet: (username, password) => dispatch(Wallet.loadWallet(username, password)),
+        loadWallet: (username, password) => dispatch(Wallet.loadWalletFromLogin(username, password)),
         isLoading: (loading) => dispatch(Wallet.isLoading(loading))
     })
 )

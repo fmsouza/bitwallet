@@ -14,13 +14,13 @@ export const updateBalance = () => (dispatch) => {
         .then(({ balance }) => dispatch({ type: UPDATE_BALANCE, payload: balance }));
 }
 
-export const createWallet = (mnemonics) => {
+export const loadWalletFromMnemonics = (mnemonics) => {
     const wallet = Wallet.fromMnemonics(mnemonics);
     wallet.provider = PROVIDER;
     return { type: LOAD_WALLET, payload: wallet };
 }
 
-export const loadWallet = (username, password) => (dispatch) =>
+export const loadWalletFromLogin = (username, password) => (dispatch) =>
     Wallet.fromBrainWallet(username, password).then(wallet => {
         wallet.provider = PROVIDER;
         const signer = new CustomSigner(wallet);
