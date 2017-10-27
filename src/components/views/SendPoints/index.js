@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import autobind from 'autobind-decorator';
 import Permissions from 'react-native-permissions';
-import BarcodeScanner from 'react-native-barcodescanner';
+// import BarcodeScanner from 'react-native-barcodescanner';
 import { colors, measures } from 'common/styles';
 import Button from './Button';
 import ListItem from './ListItem';
@@ -47,9 +47,10 @@ export class SendPoints extends React.Component {
 
     renderCamera() {
         return (
-            <BarCodeScanner
-                style={styles.fullScreen}
-                onBarCodeRead={this.onBarCodeRead} />
+            null
+            // <BarCodeScanner
+            //     style={styles.fullScreen}
+            //     onBarCodeRead={this.onBarCodeRead} />
         );
     }
 
