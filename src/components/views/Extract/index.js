@@ -2,54 +2,46 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { colors, measures } from 'common/styles';
-import { Wallet } from 'common/actions';
+import { Wallet, Transaction } from 'common/actions';
 import Balance from './Balance';
 import ListItem from './ListItem';
 import transactions from './mockedTransactions';
 
 @connect(
-    ({ wallet }) => ({
-        balance: wallet.balance,
-        contract: wallet.contract,
-        wallet: wallet.wallet,
-        loading: wallet.loading
+    ({ transaction, wallet }) => ({
+        transactionHistory: transaction.history,
+        walletBalance: wallet.balance,
+        walletLoading: wallet.loading
     }),
     dispatch => ({
-        isLoading: (loading) => dispatch(Wallet.isLoading(loading)),
-        updateBalance: (wallet, contract) => dispatch(Wallet.updateBalance(wallet, contract))
+        transactionLoadHistory: () => dispatch(Transaction.history()),
+        walletIsLoading: (loading) => dispatch(Wallet.isLoading(loading)),
+        walletUpdateBalance: () => dispatch(Wallet.updateBalance())
     })
 )
 export class Extract extends React.Component {
 
-    static navigationOptions = {
-        title: 'Extrato de pontos'
-    };
-
-    state = { transactions };
+    static navigationOptions = { title: 'Extrato de pontos' };
     
     componentDidMount() {
-        this.updateBalance();
+        this.props.walletIsLoading(true);
+        this.props.walletUpdateBalance();
+        this.props.transactionLoadHistory();
     }
 
-    updateBalance () {
-        const { contract, wallet } = this.props;
-        this.props.isLoading(true);
-        this.props.updateBalance(wallet, contract);
-    }
-
-    renderItem = ({ item }) => <ListItem {...item} />
+    renderItem = ({ item }) => <ListItem transaction={item} />
 
     render() {
-        const { balance, loading } = this.props;
+        const { transactionHistory, walletBalance, walletLoading } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.balance}>
-                    <Balance balance={balance} loading={loading} />
+                    <Balance balance={walletBalance} loading={walletLoading} />
                 </View>
                 <View style={styles.historyContainer}>
                     <FlatList
-                        data={this.state.transactions}
-                        keyExtractor={item => item.txDate}
+                        data={transactionHistory}
+                        keyExtractor={item => item.transactionHash}
                         renderItem={this.renderItem} />
                 </View>
             </View>
