@@ -1,8 +1,8 @@
 import React from 'react';
-import { FlatList, Image, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { FlatList, Image, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Vibration, View } from 'react-native';
 import autobind from 'autobind-decorator';
 import Permissions from 'react-native-permissions';
-// import BarcodeScanner from 'react-native-barcodescanner';
+import Camera from 'react-native-camera';
 import { colors, measures } from 'common/styles';
 import Button from './Button';
 import ListItem from './ListItem';
@@ -35,6 +35,7 @@ export class SendPoints extends React.Component {
     @autobind
     onBarCodeRead({ type, data }) {
         if (type === 'QR_CODE') {
+            Vibration.vibrate();
             this.setState({ address: data, showCamera: false });
         }
     }
@@ -47,10 +48,13 @@ export class SendPoints extends React.Component {
 
     renderCamera() {
         return (
-            null
-            // <BarCodeScanner
-            //     style={styles.fullScreen}
-            //     onBarCodeRead={this.onBarCodeRead} />
+            <View style={styles.cameraLayer}>
+                <Camera
+                    style={styles.cameraLayer}
+                    barCodeTypes={['qr']}
+                    onBarCodeRead={this.onBarCodeRead} />
+                <View style={styles.marker} />
+            </View>
         );
     }
 
@@ -138,7 +142,21 @@ const styles = StyleSheet.create({
     label: {
         marginVertical: measures.defaultMargin
     },
-    fullScreen: {
-        flex: 1
+    cameraLayer: {
+        position: 'absolute',
+        zIndex: 1,
+        left: 0,
+        top: 0,
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    marker: {
+        zIndex: 2,
+        width: 200,
+        height: 200,
+        borderWidth: 4,
+        borderColor: 'green'
     }
 });

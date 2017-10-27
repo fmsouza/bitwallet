@@ -3,7 +3,7 @@ import { StyleSheet, Text, Vibration, View } from 'react-native';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 import Permissions from 'react-native-permissions';
-// import BarcodeScanner from 'react-native-barcodescanner';
+import Camera from 'react-native-camera';
 import { Wallet } from 'common/actions';
 import { colors, measures } from 'common/styles';
 
@@ -40,15 +40,15 @@ export class LoadPK extends React.Component {
 
     @autobind
     onBarCodeRead({ type, data }) {
-        // if (type === BarcodeScanner.BarcodeFormat.QR_CODE) {
-        //     Vibration.vibrate();
-        //     this.props.isLoading(true);
-        //     this.setState({ showCamera: false }, () => {
-        //         if(data.indexOf('0x')) data = `0x${data}`; // Add '0x' to the beginning case it is not present
-        //         this.props.loadWallet(data);
-        //         this.props.navigation.navigate('Overview');
-        //     });
-        // }
+        if (type === 'QR_CODE') {
+            Vibration.vibrate();
+            this.props.isLoading(true);
+            this.setState({ showCamera: false }, () => {
+                if(data.indexOf('0x')) data = `0x${data}`; // Add '0x' to the beginning case it is not present
+                this.props.loadWallet(data);
+                this.props.navigation.navigate('Overview');
+            });
+        }
     }
 
     render() {
@@ -56,8 +56,9 @@ export class LoadPK extends React.Component {
             <View style={styles.container}>
                 {this.state.showCamera && (
                     <View style={styles.cameraLayer}>
-                        <BarCodeScanner
+                        <Camera
                             style={styles.cameraLayer}
+                            barCodeTypes={['qr']}
                             onBarCodeRead={this.onBarCodeRead} />
                         <View style={styles.marker} />
                     </View>
