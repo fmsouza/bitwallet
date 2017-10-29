@@ -21,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
             return newState;
 
         case UPDATE_BALANCE:
-            newState.balance = Number(action.payload);
+            newState.balance = action.payload;
             newState.loading = false;
             return newState;
 

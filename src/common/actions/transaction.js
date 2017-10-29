@@ -1,7 +1,7 @@
 import ethers from 'ethers';
 import axios from 'axios';
 import { GAS_LIMIT as gasLimit, GAS_PRICE as gasPrice, TRANSACTION_ACTIONS, OPERATION_TRANSFER_HASH, CONTRACT_ADDRESS } from 'common/constants';
-import store from 'common/stores';
+import store from 'common/store';
 import { padStartHex } from 'common/utils';
 
 const { HISTORY, LOADING, TRANSFER } = TRANSACTION_ACTIONS;
