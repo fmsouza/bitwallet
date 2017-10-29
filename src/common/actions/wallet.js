@@ -14,14 +14,6 @@ export const updateBalance = () => (dispatch) => {
         .then(({ balance }) => dispatch({ type: UPDATE_BALANCE, payload: balance }));
 }
 
-export const loadWalletFromMnemonics = (mnemonics) => {
-    const wallet = Wallet.fromMnemonics(mnemonics);
-    wallet.provider = PROVIDER;
-    const signer = new CustomSigner(wallet);
-    const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-    return { type: LOAD_WALLET, payload: { contract, wallet } };
-}
-
 export const loadWalletFromPrivateKey = (pk) => {
     const wallet = new Wallet(pk, PROVIDER);
     const signer = new CustomSigner(wallet);
