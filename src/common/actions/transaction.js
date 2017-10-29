@@ -6,10 +6,10 @@ import { padStartHex } from 'common/utils';
 
 const { HISTORY, LOADING, TRANSFER } = TRANSACTION_ACTIONS;
 
-export const transfer = (amount, to) => (dispatch) => {
+export const transfer = (to, amount) => (dispatch) => {
     const { contract, wallet } = store.getState().wallet;
     contract.functions.transfer(to, amount, { gasLimit, gasPrice })
-        .then(txn => dispatch({ type: TRANSFER, payload: txn }));
+        .then(transactionHash => dispatch({ type: TRANSFER, payload: { to, amount, transactionHash } }));
 }
 
 export const history = () => (dispatch) => {

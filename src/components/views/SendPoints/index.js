@@ -1,13 +1,20 @@
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Vibration, View } from 'react-native';
+import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 import Permissions from 'react-native-permissions';
 import Camera from 'react-native-camera';
 import { colors, measures } from 'common/styles';
+import { Transaction } from 'common/actions';
 import Button from './Button';
 import ListItem from './ListItem';
 import contacts from './mockedContacts';
 
+@connect(null,
+    dispatch => ({
+        isLoading: (loading) => dispatch(Transaction.isLoading(loading)),
+        transfer: (address, amount) => dispatch(Transaction.transfer(address, amount))
+    }))
 export class SendPoints extends React.Component {
 
     static navigationOptions = {
@@ -43,7 +50,13 @@ export class SendPoints extends React.Component {
     @autobind
     onSend() {
         const { address, amount } = this.state;
+        const { isLoading, navigation, transfer } = this.props;
         console.log(address, amount);
+        isLoading(true);
+        setTimeout(() => {
+            transfer(address, amount);
+            navigation.goBack();
+        }, 1);
     }
 
     renderCamera() {

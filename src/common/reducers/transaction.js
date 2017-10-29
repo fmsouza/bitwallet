@@ -21,6 +21,8 @@ export default (state = INITIAL_STATE, action) => {
             return newState;
             
         case TRANSFER:
+            console.log(action.payload);
+            newState.loading = false;
             return newState;
 
         default: return newState;
