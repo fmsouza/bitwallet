@@ -44,7 +44,7 @@ export class LoadPK extends React.Component {
             Vibration.vibrate();
             this.props.isLoading(true);
             this.setState({ showCamera: false }, () => {
-                if(data.indexOf('0x')) data = `0x${data}`; // Add '0x' to the beginning case it is not present
+                if(data.indexOf('0x') !== 0) data = `0x${data}`; // Add '0x' to the beginning case it is not present
                 this.props.loadWallet(data);
                 this.props.navigation.navigate('Overview');
             });
