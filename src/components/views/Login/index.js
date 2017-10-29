@@ -27,7 +27,9 @@ export class Login extends React.Component {
         this.props.isLoading(true);
         setTimeout(() => {
             this.props.loadWallet(username, password);
-            this.props.navigation.navigate('Overview');
+            setTimeout(() =>
+                this.props.navigation.navigate('Overview', { replaceRoute: true })
+            , 1);
         }, 0);
     }
 

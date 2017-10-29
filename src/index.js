@@ -2,7 +2,7 @@ import React from 'react';
 import { BackHandler, Platform, StatusBar, View } from 'react-native';
 import { Provider } from 'react-redux';
 import autobind from 'autobind-decorator';
-import store from 'common/stores';
+import store from 'common/store';
 import Router, { INITIAL_ROUTE } from './Router';
 
 const ANDROID_STATUSBAR = {
@@ -22,9 +22,10 @@ export default class Application extends React.Component {
 
     @autobind
     handleBackButton() {
+        if (!this.props.navigation) return false;
+        
         const { state, goBack } = this.props.navigation;
-        const { index, routes } = state;
-        if (routes[index].routeName !== INITIAL_ROUTE) {
+        if (state.routes.length > 1 && state.index > 0) {
             goBack();
             return true;
         }
