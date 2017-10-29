@@ -21,16 +21,14 @@ export class Login extends React.Component {
 
     static navigationOptions = { header: null };
 
-    reset = () => this.setState({ loginForm: false });
-
     @autobind
     onSubmitLogin({ username, password }) {
         Keyboard.dismiss();
         this.props.isLoading(true);
-        setTimeout(() => 
-            this.props.loadWallet(username, password)
-                .then(() => this.props.navigation.navigate('Overview'))
-        , 0);
+        setTimeout(() => {
+            this.props.loadWallet(username, password);
+            this.props.navigation.navigate('Overview');
+        }, 0);
     }
 
     render() {
@@ -39,9 +37,7 @@ export class Login extends React.Component {
                 <View style={styles.container}>
                     <Image style={styles.logo} source={require('assets/img/logo.png')} />
                     <ActivityIndicator animating={this.props.loading} />
-                    <LoginForm
-                        onSubmit={this.onSubmitLogin}
-                        onCancel={this.reset} />
+                    <LoginForm onSubmit={this.onSubmitLogin} />
                     <Button
                         borderless title="Entrar com chave privada"
                         onPress={() => this.props.navigation.navigate('LoadPK')}/>
