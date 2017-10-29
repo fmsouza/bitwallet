@@ -1,1 +1,1 @@
-export const transactionDetailsURL = (txHash) => `https://etherscan.io/tx/${txHash}`;
+export const transactionDetailsURL = (txHash) => `https://ethplorer.io/tx/${txHash}`;
