@@ -1,7 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Linking, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import moment from 'moment';
-import { measures } from 'common/styles';
+import autobind from 'autobind-decorator';
+import { colors, measures } from 'common/styles';
+import { transactionDetailsURL } from 'common/utils';
 
 export default class ListItem extends React.Component {
 
@@ -25,6 +27,12 @@ export default class ListItem extends React.Component {
 
     isSending() {
         return parseInt(this.from) === parseInt(this.props.walletAddress);
+    }
+
+    @autobind
+    onPress() {
+        const { transactionHash } = this.props.transaction;
+        Linking.openURL(transactionDetailsURL(transactionHash));
     }
 
     renderIncoming = () => (
@@ -58,7 +66,11 @@ export default class ListItem extends React.Component {
     );
 
     render() {
-        return this.isSending() ? this.renderOutcoming() : this.renderIncoming();
+        return (
+            <TouchableWithoutFeedback
+                onPress={this.onPress}
+                children={this.isSending() ? this.renderOutcoming() : this.renderIncoming()} />
+        );
     }
 }
 

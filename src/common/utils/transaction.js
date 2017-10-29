@@ -1,0 +1,1 @@
+export const transactionDetailsURL = (txHash) => `https://etherscan.io/tx/${txHash}`;
