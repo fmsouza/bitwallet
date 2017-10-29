@@ -1,15 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Clipboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
+import autobind from 'autobind-decorator';
 import QRCode from 'react-native-qrcode-svg';
 import { colors, measures } from 'common/styles';
 
 @connect(({ wallet }) => ({ wallet: wallet.wallet }))
 export class ReceivePoints extends React.Component {
 
-    static navigationOptions = {
-        title: 'Receber pontos'
-    };
+    static navigationOptions = { title: 'Receber pontos' };
+
+    state = { copiedToClipboard: false };
+
+    @autobind
+    copyToClipboard() {
+        const { wallet } = this.props;
+        Clipboard.setString(wallet.getAddress());
+        this.setState({ copiedToClipboard: true });
+    }
+
+    componentWillUnmount() {
+        this.setState({ copiedToClipboard: false });
+    }
 
     render() {
         const { wallet } = this.props;
@@ -17,10 +29,13 @@ export class ReceivePoints extends React.Component {
             <View style={styles.container}>
                 <View style={styles.subContainer}>
                     <Text children="Mostre o código abaixo para receber os pontos" />
-                    <View style={styles.qrcodeContainer}>
-                        <QRCode size={256} value={wallet.getAddress()} />
-                        <Text children={wallet.getAddress()} />
-                    </View>
+                    <TouchableWithoutFeedback onPress={this.copyToClipboard}>
+                        <View style={styles.qrcodeContainer}>
+                            <QRCode size={256} value={wallet.getAddress()} />
+                            <Text children={wallet.getAddress()} />
+                        </View>
+                    </TouchableWithoutFeedback>
+                    {this.state.copiedToClipboard && <Text style={styles.copied}>Copiado!</Text>}
                 </View>
 
                 <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Extract')}>
@@ -61,5 +76,8 @@ const styles = StyleSheet.create({
     footerLabel: {
         color: 'white',
         fontWeight: 'bold'
+    },
+    copied: {
+        color: 'green'
     }
 });
