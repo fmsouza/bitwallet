@@ -51,7 +51,6 @@ export class SendPoints extends React.Component {
     onSend() {
         const { address, amount } = this.state;
         const { isLoading, navigation, transfer } = this.props;
-        console.log(address, amount);
         isLoading(true);
         setTimeout(() => {
             transfer(address, amount);
@@ -88,6 +87,7 @@ export class SendPoints extends React.Component {
                             autoFocus={this.props.autoFocus}
                             autoCorrect={false}
                             value={this.state.address}
+                            underlineColorAndroid="transparent"
                             onChangeText={(address) => this.setState({ address })}
                             placeholder="Ex.: 0xZ173VZ103139dvd1eew0n3716vz07131731" />
                         <TouchableWithoutFeedback onPress={this.onPressCamera}>
@@ -103,6 +103,7 @@ export class SendPoints extends React.Component {
                         autoCorrect={false}
                         value={this.state.amount}
                         keyboardType="numeric"
+                        underlineColorAndroid="transparent"
                         onChangeText={(amount) => this.setState({ amount })}
                         placeholder="Ex.: 123457000000" />
                     <Button title="Enviar" onPress={this.onSend} />
