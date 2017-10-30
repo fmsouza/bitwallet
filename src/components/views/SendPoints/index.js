@@ -1,12 +1,12 @@
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Vibration, View } from 'react-native';
 import { connect } from 'react-redux';
+import { Button } from 'components/widgets';
 import autobind from 'autobind-decorator';
 import Permissions from 'react-native-permissions';
 import Camera from 'react-native-camera';
 import { colors, measures } from 'common/styles';
 import { Transaction } from 'common/actions';
-import Button from './Button';
 import ListItem from './ListItem';
 import contacts from './mockedContacts';
 
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     },
     topBox: {
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'flex-start'
     },
     bottomBox: {
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '90%',
+        alignSelf: 'center',
         borderBottomWidth: 1,
         borderBottomColor: 'black',
         padding: 4,
@@ -154,6 +155,7 @@ const styles = StyleSheet.create({
         height: 36
     },
     label: {
+        alignSelf: 'center',
         marginVertical: measures.defaultMargin
     },
     cameraLayer: {
