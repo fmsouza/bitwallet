@@ -1,13 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import autobind from 'autobind-decorator';
 import { measures } from 'common/styles';
-import { ExpandablePanel, SelectInput } from 'components/widgets';
+import { Button, ExpandablePanel, SelectInput } from 'components/widgets';
 import { PAYMENT_METHODS } from 'common/constants';
 import ExchangeInput from './ExchangeInput';
 
 export default class BuyPanel extends React.Component {
 
-    state = { method: '', fiat: 0, token: 0 };
+    state = { fiat: 0, method: '', token: 0 };
+
+    @autobind
+    onPressBuy() {
+        const { fiat, method, token } = this.state;
+        console.log(method, fiat, token);
+    }
 
     render() {
         return (
@@ -22,6 +29,7 @@ export default class BuyPanel extends React.Component {
                         fiatUnit="R$"
                         tokenUnit="Pontos"
                         onChange={({ fiat, token }) => this.setState({ fiat, token })} />
+                    <Button title="Comprar" onPress={this.onPressBuy} />
                 </View>
             </ExpandablePanel>
         );
