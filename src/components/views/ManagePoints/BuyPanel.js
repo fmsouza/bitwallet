@@ -9,7 +9,7 @@ export default class BuyPanel extends React.Component {
         return (
             <ExpandablePanel title="Comprar pontos">
                 <View style={styles.container}>
-                    <Text>Quero comprar pontos</Text>
+                    <Text>Saldo disponível: R$ 248,56</Text>
                 </View>
             </ExpandablePanel>
         );

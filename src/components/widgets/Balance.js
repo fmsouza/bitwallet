@@ -1,11 +1,48 @@
 import React from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { connect } from 'react-redux';
+import autobind from 'autobind-decorator';
 import { colors } from 'common/styles';
+import { Wallet } from 'common/actions';
 
-export default class Balance extends React.Component {
+@connect(
+    ({ wallet }) => ({
+        balance: wallet.balance,
+        loading: wallet.loading
+    }),
+    dispatch => ({
+        isLoading: (loading) => dispatch(Wallet.isLoading(loading)),
+        updateBalance: () => dispatch(Wallet.updateBalance())
+    })
+)
+export class Balance extends React.Component {
+    
+    componentWillMount() {
+        this.onPressRefresh();
+    }
+
+    @autobind
+    onPressRefresh() {
+        this.props.isLoading(true);
+        setTimeout(() => {
+            this.props.updateBalance();
+        }, 1);
+    }
+
+    renderExtractButton() {
+        const { onPressExtract } = this.props;
+        if (!onPressExtract) return <View />;
+        return (
+            <TouchableWithoutFeedback onPress={onPressExtract}>
+                <View>
+                    <Text style={styles.history}>Ver extrato de pontos</Text>
+                </View>
+            </TouchableWithoutFeedback>
+        );
+    }
 
     render() {
-        const { balance, loading, onPressExtract, onPressRefresh } = this.props;
+        const { balance, loading, onPressExtract } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -14,15 +51,10 @@ export default class Balance extends React.Component {
                 </View>
                 <Text style={styles.balance}>{balance}</Text>
                 <View style={styles.footer}>
-                    <TouchableWithoutFeedback onPress={onPressRefresh}>
+                    <TouchableWithoutFeedback onPress={this.onPressRefresh}>
                         <Image style={styles.refresh} source={require('assets/img/refresh.png')} />
                     </TouchableWithoutFeedback>
-                    
-                    <TouchableWithoutFeedback onPress={onPressExtract}>
-                        <View>
-                            <Text style={styles.history}>Ver extrato de pontos</Text>
-                        </View>
-                    </TouchableWithoutFeedback>
+                    {this.renderExtractButton()}
                 </View>
             </View>
         );
@@ -33,6 +65,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.defaultBackground,
         flex: 1,
+        maxHeight: 128,
         borderBottomWidth: 2,
         borderBottomColor: '#CCCCCC',
         alignItems: 'center',

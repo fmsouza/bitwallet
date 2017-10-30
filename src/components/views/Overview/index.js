@@ -1,9 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { connect } from 'react-redux';
+import { Balance } from 'components/widgets';
 import { colors, measures } from 'common/styles';
-import { Wallet } from 'common/actions';
-import Balance from './Balance';
 
 const Views = {
     EXTRACT: 'Extract',
@@ -14,42 +12,16 @@ const Views = {
     PARTNERS: 'Partners'
 };
 
-@connect(
-    ({ wallet }) => ({
-        balance: wallet.balance,
-        loading: wallet.loading
-    }),
-    dispatch => ({
-        isLoading: (loading) => dispatch(Wallet.isLoading(loading)),
-        updateBalance: () => dispatch(Wallet.updateBalance())
-    })
-)
 export class Overview extends React.Component {
 
-    static navigationOptions = {
-        title: 'Multiplus',
-        gesturesEnabled: false
-    };
-
-    componentDidMount() {
-        this.updateBalance();
-    }
-
-    updateBalance() {
-        this.props.isLoading(true);
-        this.props.updateBalance();
-    }
+    static navigationOptions = { title: 'Multiplus' };
 
     render() {
         const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <View style={styles.balance}>
-                    <Balance
-                        balance={this.props.balance}
-                        loading={this.props.loading}
-                        onPressRefresh={() => this.updateBalance()}
-                        onPressExtract={() => navigate(Views.EXTRACT)} />
+                    <Balance onPressExtract={() => navigate(Views.EXTRACT)} />
                 </View>
                 <View style={styles.blocksContainer}>
                     <View style={styles.row}>

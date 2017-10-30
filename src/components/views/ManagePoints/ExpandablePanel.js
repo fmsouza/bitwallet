@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { measures } from 'common/styles';
+import { colors, measures } from 'common/styles';
 
 export default class ExpandablePanel extends React.Component {
 
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: measures.defaultPadding
     },
     containerBody: {
-        padding: measures.defaultPadding
+        padding: measures.defaultPadding,
+        backgroundColor: colors.defaultBackground
     }
 });
