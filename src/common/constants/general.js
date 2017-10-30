@@ -13,4 +13,9 @@ export const PAYMENT_METHODS = [
     { value: 'bill', label: 'Boleto' }
 ];
 
+export const CREDIT_METHODS = [
+    { value: 'deposit', label: 'Depósito bancário' },
+    { value: 'prepaid_card', label: 'Cartão pré-pago' }
+];
+
 export const FIAT_TOKEN_RATE = 0.10;
