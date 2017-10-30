@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Balance } from 'components/widgets';
+import { Balance, Footer } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 
 const Views = {
@@ -44,9 +44,9 @@ export class Overview extends React.Component {
                         <TouchableWithoutFeedback onPress={() => navigate(Views.MANAGE)}>
                             <View style={styles.block}>
                                 <Image style={styles.gridIcon} source={require('assets/img/transfer_points.png')} />
-                                <Text>COMPRAR</Text>
+                                <Text>COMPRAR/</Text>
                                 <Text>VENDER</Text>
-                                <Text>TRANSFERIR</Text>
+                                <Text>PONTOS</Text>
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.OFFERS)}>
@@ -57,11 +57,9 @@ export class Overview extends React.Component {
                         </TouchableWithoutFeedback>
                     </View>
                 </View>
-                <TouchableWithoutFeedback onPress={() => navigate(Views.PARTNERS)}>
-                    <View style={styles.footer}>
-                        <Text style={styles.footerLabel}>PARCEIROS</Text>
-                    </View>
-                </TouchableWithoutFeedback>
+                <Footer
+                    label="PARCEIROS"
+                    onPress={() => navigate(Views.PARTNERS)} />
             </View>
         );
     }
@@ -70,7 +68,7 @@ export class Overview extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'space-between',
     },
     balance: {
@@ -97,16 +95,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: colors.secondary
-    },
-    footer: {
-        height: 70,
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: colors.primary
-    },
-    footerLabel: {
-        color: 'white',
-        fontWeight: 'bold'
     }
 });

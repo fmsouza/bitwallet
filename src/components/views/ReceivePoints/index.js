@@ -2,6 +2,7 @@ import React from 'react';
 import { Clipboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
+import { Footer } from 'components/widgets';
 import QRCode from 'react-native-qrcode-svg';
 import { colors, measures } from 'common/styles';
 
@@ -38,11 +39,9 @@ export class ReceivePoints extends React.Component {
                     {this.state.copiedToClipboard && <Text style={styles.copied}>Copiado!</Text>}
                 </View>
 
-                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Extract')}>
-                    <View style={styles.footer}>
-                        <Text style={styles.footerLabel}>Ver meu extrato de pontos</Text>
-                    </View>
-                </TouchableWithoutFeedback>
+                <Footer
+                    label="Ver meu extrato de pontos"
+                    onPress={() => this.props.navigation.navigate('Extract')} />
             </View>
         );
     }
@@ -51,7 +50,7 @@ export class ReceivePoints extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.defaultBackground,
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'space-between',
         flex: 1
     },
@@ -65,17 +64,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         height: 300,
         marginTop: 50
-    },
-    footer: {
-        height: 48,
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: colors.primary
-    },
-    footerLabel: {
-        color: 'white',
-        fontWeight: 'bold'
     },
     copied: {
         color: 'green'
