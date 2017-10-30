@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 import { colors, measures } from 'common/styles';
+import ExpandablePanel from './ExpandablePanel';
 
 export class ManagePoints extends React.Component {
 
@@ -10,8 +11,17 @@ export class ManagePoints extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-            </View>
+            <ScrollView style={styles.container}>
+                <ExpandablePanel title="Comprar pontos">
+                    <Text>Quero comprar pontos</Text>
+                </ExpandablePanel>
+                <ExpandablePanel title="Vender pontos">
+                    <Text>Quero vender pontos</Text>
+                </ExpandablePanel>
+                <ExpandablePanel title="Sacar pontos">
+                    <Text>Quero sacar pontos</Text>
+                </ExpandablePanel>
+            </ScrollView>
         );
     }
 }
@@ -19,12 +29,7 @@ export class ManagePoints extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.defaultBackground,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
+        padding: measures.defaultPadding,
         flex: 1
-    },
-    balance: {
-        height: 140,
-        width: '100%'
     }
 });
