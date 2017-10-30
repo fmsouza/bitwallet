@@ -22,6 +22,7 @@
     "react-native-camera": "0.10.0",
     "react-native-permissions": "1.0.1",
     "react-native-qrcode-svg": "5.0.3",
+    "react-native-sensitive-info": "5.1.0",
     "react-native-svg": "5.4.2",
     "react-navigation": "1.0.0-beta.15",
     "react-redux": "5.0.6",
