@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { measures } from 'common/styles';
-import ExpandablePanel from './ExpandablePanel';
+import { ExpandablePanel } from 'components/widgets';
 
 export default class SellPanel extends React.Component {
 

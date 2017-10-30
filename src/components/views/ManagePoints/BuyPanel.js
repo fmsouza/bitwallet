@@ -1,15 +1,27 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { measures } from 'common/styles';
-import ExpandablePanel from './ExpandablePanel';
+import { ExpandablePanel, SelectInput } from 'components/widgets';
+import { PAYMENT_METHODS } from 'common/constants';
+import ExchangeInput from './ExchangeInput';
 
 export default class BuyPanel extends React.Component {
+
+    state = { method: '', fiat: 0, token: 0 };
 
     render() {
         return (
             <ExpandablePanel title="Comprar pontos">
                 <View style={styles.container}>
-                    <Text>Saldo disponível: R$ 248,56</Text>
+                    <Text>Forma de pagamento</Text>
+                    <SelectInput
+                        options={PAYMENT_METHODS}
+                        onValueChange={method => this.setState({ method })} />
+                    <Text>Quantidade</Text>
+                    <ExchangeInput
+                        fiatUnit="R$"
+                        tokenUnit="Pontos"
+                        onChange={({ fiat, token }) => this.setState({ fiat, token })} />
                 </View>
             </ExpandablePanel>
         );
@@ -17,5 +29,8 @@ export default class BuyPanel extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {}
+    container: {
+        flexDirection: 'column',
+        alignItems: 'stretch'
+    }
 });

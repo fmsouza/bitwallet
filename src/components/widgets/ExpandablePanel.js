@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { colors, measures } from 'common/styles';
 
-export default class ExpandablePanel extends React.Component {
+export class ExpandablePanel extends React.Component {
 
     state = { expanded: false };
 
