@@ -2,19 +2,19 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Balance, Footer } from 'components/widgets';
 import { colors, measures } from 'common/styles';
-
-const Views = {
-    EXTRACT: 'Extract',
-    RECEIVE: 'ReceivePoints',
-    SEND: 'SendPoints',
-    MANAGE: 'ManagePoints',
-    OFFERS: 'Offers',
-    PARTNERS: 'Partners'
-};
+import { NAVIGABLE_VIEWS as Views } from 'common/constants';
 
 export class Overview extends React.Component {
 
-    static navigationOptions = { title: 'Multiplus' };
+    static navigationOptions = ({ navigation, screenProps }) => ({
+        title: 'Multiplus',
+        headerRight: (
+            <TouchableWithoutFeedback onPress={() => navigation.navigate(Views.SETTINGS)}>
+                <Image style={styles.headerIcon} source={require('assets/img/settings.png')} />
+            </TouchableWithoutFeedback>
+        )
+
+    });
 
     render() {
         const { navigate } = this.props.navigation;
@@ -95,5 +95,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: colors.secondary
+    },
+    headerIcon: {
+        width: 24,
+        height: 24,
+        marginRight: measures.defaultMargin
     }
 });

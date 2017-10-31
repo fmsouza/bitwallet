@@ -7,3 +7,4 @@ export * from './Overview';
 export * from './Partners';
 export * from './ReceivePoints';
 export * from './SendPoints';
+export * from './Settings';

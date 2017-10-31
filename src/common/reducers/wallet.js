@@ -1,6 +1,7 @@
-import { WALLET_ACTIONS } from 'common/constants';
+import { SECURITY_ACTIONS, WALLET_ACTIONS } from 'common/constants';
 
 const { UPDATE_BALANCE, LOAD_WALLET, LOADING } = WALLET_ACTIONS;
+const { RESET } = SECURITY_ACTIONS;
 
 const INITIAL_STATE = {
     balance: 0,
@@ -27,6 +28,13 @@ export default (state = INITIAL_STATE, action) => {
 
         case LOADING:
             newState.loading = action.payload;
+            return newState;
+            
+        case RESET:
+            newState.balance = INITIAL_STATE.balance;
+            newState.wallet = INITIAL_STATE.wallet;
+            newState.contract = INITIAL_STATE.contract;
+            newState.loading = INITIAL_STATE.loading;
             return newState;
 
         default: return newState;

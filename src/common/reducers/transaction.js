@@ -1,6 +1,7 @@
-import { TRANSACTION_ACTIONS } from 'common/constants';
+import { SECURITY_ACTIONS, TRANSACTION_ACTIONS } from 'common/constants';
 
 const { HISTORY, LOADING, TRANSFER } = TRANSACTION_ACTIONS;
+const { RESET } = SECURITY_ACTIONS;
 
 const INITIAL_STATE = {
     history: [],
@@ -21,8 +22,12 @@ export default (state = INITIAL_STATE, action) => {
             return newState;
             
         case TRANSFER:
-            console.log(action.payload);
             newState.loading = false;
+            return newState;
+
+        case RESET:
+            newState.history = INITIAL_STATE.history;
+            newState.loading = INITIAL_STATE.loading;
             return newState;
 
         default: return newState;

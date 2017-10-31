@@ -1,10 +1,11 @@
 import React from 'react';
 import { Clipboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 import { Footer } from 'components/widgets';
-import QRCode from 'react-native-qrcode-svg';
 import { colors, measures } from 'common/styles';
+import { NAVIGABLE_VIEWS as Views } from 'common/constants';
 
 @connect(({ wallet }) => ({ wallet: wallet.wallet }))
 export class ReceivePoints extends React.Component {
@@ -41,7 +42,7 @@ export class ReceivePoints extends React.Component {
 
                 <Footer
                     label="Ver meu extrato de pontos"
-                    onPress={() => this.props.navigation.navigate('Extract')} />
+                    onPress={() => this.props.navigation.navigate(Views.EXTRACT)} />
             </View>
         );
     }
