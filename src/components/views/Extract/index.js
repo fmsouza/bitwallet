@@ -10,6 +10,7 @@ import ListItem from './ListItem';
     ({ transaction, wallet }) => ({
         transactionHistory: transaction.history,
         transactionLoading: transaction.loading,
+        walletAddress: wallet.wallet.getAddress()
     }),
     dispatch => ({
         transactionLoadHistory: () => dispatch(Transaction.history()),
@@ -30,7 +31,7 @@ export class Extract extends React.Component {
     renderItem = ({ item }) => <ListItem transaction={item} walletAddress={this.props.walletAddress} />
 
     render() {
-        const { transactionHistory, transactionLoading, walletBalance, walletLoading } = this.props;
+        const { transactionHistory, transactionLoading } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.balance}>
