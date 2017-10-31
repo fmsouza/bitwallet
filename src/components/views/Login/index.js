@@ -2,9 +2,9 @@ import React from 'react';
 import { ActivityIndicator, Image, Keyboard, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
+import { Button } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
-import Button from './Button';
 import LoginForm from './LoginForm';
 
 @connect(

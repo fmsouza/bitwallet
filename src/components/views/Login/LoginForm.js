@@ -1,8 +1,8 @@
 import React from 'react';
 import { Platform, StyleSheet, TextInput, View } from 'react-native';
 import autobind from 'autobind-decorator';
+import { Button } from 'components/widgets';
 import { colors } from 'common/styles';
-import Button from './Button';
 
 export default class LoginForm extends React.Component {
 
@@ -36,7 +36,9 @@ export default class LoginForm extends React.Component {
                     autoCapitalize="none"
                     underlineColorAndroid="transparent"
                     onChangeText={password => this.setState({ password })} />
-                <Button title="Entrar" onPress={this.onSubmit} />
+                <Button
+                    title="Entrar"
+                    onPress={this.onSubmit} />
             </View>
         );
     }

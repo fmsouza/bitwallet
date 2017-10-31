@@ -13,14 +13,23 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
         borderRadius: 4
     },
+    borderless: {
+        borderWidth: 0
+    },
     title: {
         color: colors.secondary,
         fontSize: 16
     }
 });
 
-export const Button = ({ onPress, title, ...props }) => (
-    <TouchableHighlight style={styles.container} onPress={onPress} underlayColor={null}>
+const getStyles = (borderless) => {
+    const mergedStyles = [styles.container];
+    if (borderless) mergedStyles.push(styles.borderless);
+    return StyleSheet.flatten(mergedStyles);
+}
+
+export const Button = ({ borderless, onPress, title, ...props }) => (
+    <TouchableHighlight style={getStyles(borderless)} onPress={onPress} underlayColor={null}>
         <Text style={styles.title} children={title} />
     </TouchableHighlight>
 );
