@@ -8,6 +8,7 @@ import { colors } from './common/styles';
 export const INITIAL_ROUTE = 'Login';
 
 const navigator = StackNavigator({
+    ConfirmTransaction: { screen: Views.ConfirmTransaction },
     Extract: { screen: Views.Extract },
     LoadPK: { screen: Views.LoadPK },
     Login: { screen: Views.Login },

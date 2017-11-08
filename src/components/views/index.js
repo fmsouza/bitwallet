@@ -1,3 +1,4 @@
+export * from './ConfirmTransaction';
 export * from './Extract';
 export * from './LoadPK';
 export * from './Login';

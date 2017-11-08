@@ -50,12 +50,12 @@ export class SendPoints extends React.Component {
     @autobind
     onSend() {
         const { address, amount } = this.state;
-        const { isLoading, navigation, transfer } = this.props;
-        isLoading(true);
-        setTimeout(() => {
-            transfer(address, amount);
-            navigation.goBack();
-        }, 1);
+        const { /*isLoading,*/ navigation } = this.props;
+        navigation.navigate('ConfirmTransaction', { address, amount });
+        // setTimeout(() => {
+        //     transfer(address, amount);
+        //     navigation.goBack();
+        // }, 1);
     }
 
     renderCamera() {
