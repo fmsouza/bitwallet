@@ -1,10 +1,3 @@
-if (!Uint8Array.prototype.slice) {
-    Uint8Array.prototype.slice = function() {
-        var args = Array.prototype.slice.call(arguments);
-        return new Uint8Array(Array.prototype.slice.apply(this, args));
-    }
-}
-
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
 if (!String.prototype.padStart) {
