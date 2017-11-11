@@ -7,7 +7,7 @@ import { NAVIGABLE_VIEWS as Views } from 'common/constants';
 export class Overview extends React.Component {
 
     static navigationOptions = ({ navigation, screenProps }) => ({
-        title: 'Multiplus',
+        title: 'Bitplus',
         headerRight: (
             <TouchableWithoutFeedback onPress={() => navigation.navigate(Views.SETTINGS)}>
                 <Image style={styles.headerIcon} source={require('assets/img/settings.png')} />
