@@ -3,7 +3,6 @@ import { ActivityIndicator, Image, StyleSheet, Text, TouchableWithoutFeedback, V
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 import { colors, measures } from 'common/styles';
-import { BLOCKCHAIN_DECIMALS } from 'common/constants';
 import { Wallet } from 'common/actions';
 import { tokenDecimals } from 'common/utils';
 
@@ -20,7 +19,7 @@ import { tokenDecimals } from 'common/utils';
 export class Balance extends React.Component {
 
     get balance() {
-        return tokenDecimals(this.props.balance, BLOCKCHAIN_DECIMALS);
+        return tokenDecimals(this.props.balance);
     }
     
     componentWillMount() {

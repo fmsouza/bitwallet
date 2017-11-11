@@ -15,13 +15,21 @@ export class ConfirmTransaction extends React.Component {
 
     static navigationOptions = { title: 'Confirmação de envio' };
 
+    get address() {
+        return this.props.navigation.state.params.address;
+    }
+
+    get amount() {
+        return parseFloat(this.props.navigation.state.params.amount);
+    }
+
     @autobind
     onSend() {
-        const { isLoading, transfer, navigation: { state } } = this.props;
-        const { params: { address, amount } } = state;
+        const { isLoading, transfer } = this.props;
         isLoading(true);
         setTimeout(() => {
-            transfer(address, amount);
+            const realAmount = expandTokenAmount(this.amount);
+            transfer(this.address, realAmount);
             setTimeout(() => {
                 this.props.navigation.navigate('Overview', { replaceRoute: true });
             }, 2000);
@@ -29,14 +37,13 @@ export class ConfirmTransaction extends React.Component {
     }
 
     render() {
-        const { loading, navigation: { state } } = this.props;
-        const { params: { address, amount } } = state;
+        const { loading } = this.props;
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Destinatário</Text>
-                <Text style={styles.value}>{address}</Text>
+                <Text style={styles.value}>{this.address}</Text>
                 <Text style={styles.title}>Pontos a enviar</Text>
-                <Text style={styles.value}>{amount}</Text>
+                <Text style={styles.value}>{this.amount}</Text>
                 <Button title="Confirmar e enviar" onPress={this.onSend} />
                 {loading && <ActivityIndicator animating />}
             </View>

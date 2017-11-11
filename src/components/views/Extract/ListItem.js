@@ -4,6 +4,7 @@ import moment from 'moment';
 import autobind from 'autobind-decorator';
 import { colors, measures } from 'common/styles';
 import { transactionDetailsURL } from 'common/utils';
+import { tokenDecimals } from 'common/utils';
 
 export default class ListItem extends React.Component {
 
@@ -12,7 +13,8 @@ export default class ListItem extends React.Component {
     }
 
     get points() {
-        return parseInt(this.props.transaction.data);
+        const value = parseInt(this.props.transaction.data);
+        return tokenDecimals(value);
     }
 
     get from() {
