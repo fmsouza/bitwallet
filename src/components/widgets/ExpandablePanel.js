@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         marginVertical: measures.defaultMargin
     },
     header: {
-        backgroundColor: '#EFEFEF',
+        backgroundColor: colors.lightGrey,
         height: 40,
         alignItems: 'center',
         justifyContent: 'space-between',

@@ -2,7 +2,7 @@ import React from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
-import { colors } from 'common/styles';
+import { colors, measures } from 'common/styles';
 import { BLOCKCHAIN_DECIMALS } from 'common/constants';
 import { Wallet } from 'common/actions';
 import { tokenDecimals } from 'common/utils';
@@ -79,12 +79,12 @@ const styles = StyleSheet.create({
         padding: 8
     },
     title: {
-        fontSize: 20
+        fontSize: measures.fontSizeMedium
     },
     balance: {
-        fontSize: 26,
+        fontSize: measures.fontSizeLarge,
         fontWeight: 'bold',
-        color: '#0C71B1'
+        color: colors.lightBlue
     },
     header: {
         flexDirection: 'row'
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         height: 24
     },
     history: {
-        fontSize: 14,
-        color: 'grey'
+        fontSize: measures.fontSizeSmall + 4,
+        color: colors.darkGrey
     }
 });

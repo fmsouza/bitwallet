@@ -5,7 +5,7 @@ import { colors } from 'common/styles';
 export const Footer = ({ label, onPress }) => (
     <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.container}>
-            <Text style={styles.label}>{label}</Text>
+            <Text style={styles.label}>{label.toUpperCase()}</Text>
         </View>
     </TouchableWithoutFeedback>
 );

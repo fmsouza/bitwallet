@@ -87,7 +87,7 @@ export class SelectDestinationAddress extends React.Component {
                                 source={require('assets/img/camera.png')} />
                         </TouchableWithoutFeedback>
                     </View>
-                    <Button title="Enviar" onPress={this.onSend} />
+                    <Button borderless title="Enviar" onPress={this.onSend} />
                 </View>
                 <View style={styles.bottomBox}>
                     <FlatList
@@ -137,7 +137,8 @@ const styles = StyleSheet.create({
     },
     label: {
         alignSelf: 'center',
-        marginVertical: measures.defaultMargin
+        marginVertical: measures.defaultMargin,
+        fontSize: measures.fontSizeMedium
     },
     cameraLayer: {
         position: 'absolute',

@@ -72,7 +72,7 @@ export class LoadPK extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'black',
+        backgroundColor: colors.black,
         alignItems: 'center',
         justifyContent: 'flex-start',
         flex: 1

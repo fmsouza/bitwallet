@@ -58,7 +58,7 @@ export class SendPoints extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.secondary,
+        backgroundColor: colors.defaultBackground,
         flex: 5,
         alignItems: 'stretch'
     },
@@ -70,11 +70,11 @@ const styles = StyleSheet.create({
     txtAmount: {
         fontSize: measures.fontSizeLarge,
         fontWeight: 'bold',
-        color: colors.alternative
+        color: colors.lightBlue
     },
     subtitle: {
         fontSize: measures.fontSizeMedium,
-        color: colors.blind
+        color: colors.grey
     },
     bottomContainer: {
         flex: 4,

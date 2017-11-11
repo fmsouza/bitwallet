@@ -77,7 +77,7 @@ export default class ListItem extends React.Component {
 const styles = StyleSheet.create({
     container: {
         borderBottomWidth: 1,
-        borderColor: 'grey',
+        borderColor: colors.grey,
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center'
@@ -115,10 +115,10 @@ const styles = StyleSheet.create({
         padding: measures.defaultPadding
     },
     title: {
-        fontSize: 14,
+        fontSize: measures.fontSizeMedium,
         fontWeight: 'bold'
     },
     subtitle: {
-        fontSize: 12
+        fontSize: measures.fontSizeSmall
     }
 });

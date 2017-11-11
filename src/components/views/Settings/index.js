@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
         margin: measures.defaultMargin
     },
     itemTitle: {
-        fontSize: 18
+        fontSize: measures.fontSizeMedium
     }
 });

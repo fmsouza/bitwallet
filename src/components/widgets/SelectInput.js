@@ -18,9 +18,10 @@ export class SelectInput extends React.Component {
     }
 
     render() {
-        const { options } = this.props;
+        const { options, ...props } = this.props;
         return (
             <Picker
+                {...props}
                 selectedValue={this.state.value}
                 onValueChange={this.onValueChange}
                 children={options.map((option, i) => <Picker.Item key={i} {...option} />)} />
