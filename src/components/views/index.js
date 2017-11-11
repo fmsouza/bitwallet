@@ -7,5 +7,6 @@ export * from './Offers';
 export * from './Overview';
 export * from './Partners';
 export * from './ReceivePoints';
+export * from './SelectDestinationAddress';
 export * from './SendPoints';
 export * from './Settings';

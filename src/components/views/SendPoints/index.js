@@ -33,10 +33,11 @@ export class SendPoints extends React.Component {
         this.setState({ amount });
     }
 
+    @autobind
     onPressContinue() {
-        const { navigation } = this.props;
         const { amount } = this.state;
-        navigation.navigate('SelectDestinationAddress', { amount });
+        if (!amount) return;
+        this.props.navigation.navigate('SelectDestinationAddress', { amount });
     }
 
     render() {
@@ -49,7 +50,7 @@ export class SendPoints extends React.Component {
                 <View style={styles.bottomContainer}>
                     <NumberGrid onPressNumber={this.onPressNumber} />
                 </View>
-                <Footer label="Continuar" />
+                <Footer label="Continuar" onPress={this.onPressContinue} />
             </View>
         );
     }

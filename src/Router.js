@@ -18,6 +18,7 @@ const navigator = StackNavigator({
     Partners: { screen: Views.Partners },
     ReceivePoints: { screen: Views.ReceivePoints },
     SendPoints: { screen: Views.SendPoints },
+    SelectDestinationAddress: { screen: Views.SelectDestinationAddress },
     Settings: { screen: Views.Settings }
 }, {
     initialRouteName: INITIAL_ROUTE,
