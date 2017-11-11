@@ -1,13 +1,13 @@
 import ethers from 'ethers';
 import Storage from 'react-native-sensitive-info';
-import { CONTRACT_ABI, CONTRACT_ADDRESS, WALLET_ACTIONS, STORAGE_CONFIG, STORAGE_WALLET } from 'common/constants';
+import { BLOCKCHAIN_NETWORK, CONTRACT_ABI, CONTRACT_ADDRESS, WALLET_ACTIONS, STORAGE_CONFIG, STORAGE_WALLET } from 'common/constants';
 import { CustomSigner } from 'common/utils';
 import store from 'common/store';
 
 const { Contract, HDNode, providers, utils, Wallet } = ethers;
 const { LOAD_WALLET, LOADING, UPDATE_BALANCE } = WALLET_ACTIONS;
 
-const PROVIDER = providers.getDefaultProvider();
+const PROVIDER = providers.getDefaultProvider(BLOCKCHAIN_NETWORK);
 
 export const updateBalance = () => (dispatch) => {
     const { contract, wallet } = store.getState().wallet;
