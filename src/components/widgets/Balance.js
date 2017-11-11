@@ -3,7 +3,9 @@ import { ActivityIndicator, Image, StyleSheet, Text, TouchableWithoutFeedback, V
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 import { colors } from 'common/styles';
+import { BLOCKCHAIN_DECIMALS } from 'common/constants';
 import { Wallet } from 'common/actions';
+import { tokenDecimals } from 'common/utils';
 
 @connect(
     ({ wallet }) => ({
@@ -16,6 +18,10 @@ import { Wallet } from 'common/actions';
     })
 )
 export class Balance extends React.Component {
+
+    get balance() {
+        return tokenDecimals(this.props.balance, BLOCKCHAIN_DECIMALS);
+    }
     
     componentWillMount() {
         this.onPressRefresh();
@@ -49,7 +55,7 @@ export class Balance extends React.Component {
                     <Text style={styles.title}>Seu saldo de pontos atual é</Text>
                     <ActivityIndicator animating={loading} />
                 </View>
-                <Text style={styles.balance}>{balance}</Text>
+                <Text style={styles.balance}>{this.balance}</Text>
                 <View style={styles.footer}>
                     <TouchableWithoutFeedback onPress={this.onPressRefresh}>
                         <Image style={styles.refresh} source={require('assets/img/refresh.png')} />

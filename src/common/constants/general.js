@@ -21,3 +21,4 @@ export const CREDIT_METHODS = [
 export const FIAT_TOKEN_RATE = 0.10;
 
 export const BLOCKCHAIN_NETWORK = 'mainnet'; // 'mainnet' for production and 'rinkeby' for development
+export const BLOCKCHAIN_DECIMALS = 18;
