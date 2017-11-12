@@ -4,7 +4,7 @@ import Permissions from 'react-native-permissions';
 import Camera from 'react-native-camera';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
-import { Button } from 'components/widgets';
+import { Button, Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import ListItem from './ListItem';
 import contacts from './mockedContacts';
@@ -82,9 +82,9 @@ export class SelectDestinationAddress extends React.Component {
                             onChangeText={(address) => this.setState({ address })}
                             placeholder="Ex.: 0xZ173VZ103139dvd1eew0n3716vz07131731" />
                         <TouchableWithoutFeedback onPress={this.onPressCamera}>
-                            <Image
-                                style={styles.cameraIcon}
-                                source={require('assets/img/camera.png')} />
+                            <View style={styles.cameraIcon}>
+                                <Icon size="large" name="camera" />
+                            </View>
                         </TouchableWithoutFeedback>
                     </View>
                     <Button borderless title="Enviar" onPress={this.onSend} />
