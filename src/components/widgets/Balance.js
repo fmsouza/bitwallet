@@ -2,6 +2,7 @@ import React from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
+import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
 import { tokenDecimals } from 'common/utils';
@@ -34,13 +35,23 @@ export class Balance extends React.Component {
         }, 1);
     }
 
-    renderExtractButton() {
-        const { onPressExtract } = this.props;
+    renderExtractButton(onPressExtract) {
         if (!onPressExtract) return <View />;
         return (
             <TouchableWithoutFeedback onPress={onPressExtract}>
                 <View>
                     <Text style={styles.history}>Ver extrato de pontos</Text>
+                </View>
+            </TouchableWithoutFeedback>
+        );
+    }
+
+    renderRefreshButton(loading) {
+        if (loading) return <ActivityIndicator style={styles.refresh} animating />;
+        else return (
+            <TouchableWithoutFeedback onPress={this.onPressRefresh}>
+                <View style={styles.refresh}>
+                    <Icon name="refresh" />
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -52,14 +63,11 @@ export class Balance extends React.Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.title}>Seu saldo de pontos atual é</Text>
-                    <ActivityIndicator animating={loading} />
                 </View>
                 <Text style={styles.balance}>{this.balance}</Text>
                 <View style={styles.footer}>
-                    <TouchableWithoutFeedback onPress={this.onPressRefresh}>
-                        <Image style={styles.refresh} source={require('assets/img/refresh.png')} />
-                    </TouchableWithoutFeedback>
-                    {this.renderExtractButton()}
+                    {this.renderRefreshButton(loading)}
+                    {this.renderExtractButton(onPressExtract)}
                 </View>
             </View>
         );
