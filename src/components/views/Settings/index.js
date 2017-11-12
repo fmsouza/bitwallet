@@ -1,7 +1,8 @@
 import React from 'react';
-import { Image, StyleSheet, ScrollView, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
+import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Security } from 'common/actions';
 import { NAVIGABLE_VIEWS as Views } from 'common/constants';
@@ -28,7 +29,9 @@ export class Settings extends React.Component {
             <ScrollView style={styles.container}>
                 <ListItem onPress={this.onPressClose}>
                     <View style={styles.itemContainer}>
-                        <Image style={styles.icon} source={require('assets/img/power.png')} />
+                        <View style={styles.icon}>
+                            <Icon name="power" />
+                        </View>
                         <Text style={styles.itemTitle}>Fechar carteira</Text>
                     </View>
                 </ListItem>
