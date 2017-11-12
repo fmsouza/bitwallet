@@ -61,10 +61,14 @@ export class Balance extends React.Component {
         const { balance, loading, onPressExtract } = this.props;
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.title}>Seu saldo de pontos atual é</Text>
-                </View>
-                <Text style={styles.balance}>{this.balance}</Text>
+                <TouchableWithoutFeedback onPress={onPressExtract}>
+                    <View style={styles.headerContainer}>
+                        <View style={styles.header}>
+                            <Text style={styles.title}>Seu saldo de pontos atual é</Text>
+                        </View>
+                        <Text style={styles.balance}>{this.balance}</Text>
+                    </View>
+                </TouchableWithoutFeedback>
                 <View style={styles.footer}>
                     {this.renderRefreshButton(loading)}
                     {this.renderExtractButton(onPressExtract)}
@@ -81,9 +85,14 @@ const styles = StyleSheet.create({
         maxHeight: 128,
         borderBottomWidth: 2,
         borderBottomColor: '#CCCCCC',
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'space-between',
         padding: 8
+    },
+    headerContainer: {
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        flex: 1
     },
     title: {
         fontSize: measures.fontSizeMedium
@@ -97,9 +106,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     footer: {
-        width: '100%',
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'space-between'
     },
     refresh: {
