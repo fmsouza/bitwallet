@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 
 export class NumberGrid extends React.Component {
@@ -33,7 +34,7 @@ export class NumberGrid extends React.Component {
                 <View style={styles.row}>
                     {this.renderBlock('•', '.')}
                     {this.renderBlock('0', '0')}
-                    {this.renderBlock('←', 'erase')}
+                    {this.renderBlock(<Icon name="backspace" />, 'erase')}
                 </View>
             </View>
         );
