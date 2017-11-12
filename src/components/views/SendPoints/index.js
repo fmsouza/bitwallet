@@ -27,7 +27,9 @@ export class SendPoints extends React.Component {
                 break;
 
             default:
-                amount += number;
+                if (amount === number) return;
+                else if (amount === '0') amount = number;
+                else amount += number;
                 break;
         }
         this.setState({ amount });
@@ -36,7 +38,7 @@ export class SendPoints extends React.Component {
     @autobind
     onPressContinue() {
         const { amount } = this.state;
-        if (!amount) return;
+        if (!amount || Number(amount) === 0) return;
         this.props.navigation.navigate('SelectDestinationAddress', { amount });
     }
 
