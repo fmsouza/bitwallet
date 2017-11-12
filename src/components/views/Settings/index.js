@@ -30,7 +30,7 @@ export class Settings extends React.Component {
                 <ListItem onPress={this.onPressClose}>
                     <View style={styles.itemContainer}>
                         <View style={styles.icon}>
-                            <Icon name="power" />
+                            <Icon name="log-out" />
                         </View>
                         <Text style={styles.itemTitle}>Fechar carteira</Text>
                     </View>
