@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Image, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Vibration, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Vibration, View } from 'react-native';
 import Permissions from 'react-native-permissions';
 import Camera from 'react-native-camera';
 import { connect } from 'react-redux';
