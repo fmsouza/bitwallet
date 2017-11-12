@@ -83,7 +83,7 @@ export class SelectDestinationAddress extends React.Component {
                             placeholder="Ex.: 0xZ173VZ103139dvd1eew0n3716vz07131731" />
                         <TouchableWithoutFeedback onPress={this.onPressCamera}>
                             <View style={styles.cameraIcon}>
-                                <Icon size="large" name="camera" />
+                                <Icon name="qrcode-scan" type="mdc" />
                             </View>
                         </TouchableWithoutFeedback>
                     </View>

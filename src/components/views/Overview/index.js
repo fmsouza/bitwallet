@@ -29,14 +29,14 @@ export class Overview extends React.Component {
                     <View style={styles.row}>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.RECEIVE)}>
                             <View style={styles.block}>
-                                <Image style={styles.gridIcon} source={require('assets/img/qr_code.png')} />
+                                <Icon name="qrcode" type="fa" size="large" />
                                 <Text>RECEBER</Text>
                                 <Text>PONTOS</Text>
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.SEND)}>
                             <View style={styles.block}>
-                                <Image style={styles.gridIcon} source={require('assets/img/send_points.png')} />
+                                <Icon name="cube-send" type="mdc" size="large" />
                                 <Text>ENVIAR</Text>
                                 <Text>PONTOS</Text>
                             </View>
@@ -45,7 +45,7 @@ export class Overview extends React.Component {
                     <View style={styles.row}>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.MANAGE)}>
                             <View style={styles.block}>
-                                <Image style={styles.gridIcon} source={require('assets/img/transfer_points.png')} />
+                                <Icon name="attach-money" type="md" size="large" />
                                 <Text>COMPRAR/</Text>
                                 <Text>VENDER</Text>
                                 <Text>PONTOS</Text>
@@ -53,7 +53,7 @@ export class Overview extends React.Component {
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.OFFERS)}>
                             <View style={styles.block}>
-                                <Image style={styles.gridIcon} source={require('assets/img/offer.png')} />
+                                <Icon name="local-offer" type="md" size="large" />
                                 <Text>OFERTAS</Text>
                             </View>
                         </TouchableWithoutFeedback>
