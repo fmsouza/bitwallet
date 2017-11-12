@@ -5,8 +5,12 @@ import { Button } from 'components/widgets';
 import autobind from 'autobind-decorator';
 import { colors, measures } from 'common/styles';
 import { Transaction } from 'common/actions';
+import { tokenDecimals } from 'common/utils';
 
-@connect(null,
+@connect(
+    ({ wallet }) => ({
+        balance: wallet.balance
+    }),
     dispatch => ({
         isLoading: (loading) => dispatch(Transaction.isLoading(loading)),
         transfer: (address, amount) => dispatch(Transaction.transfer(address, amount))
@@ -14,6 +18,14 @@ import { Transaction } from 'common/actions';
 export class ConfirmTransaction extends React.Component {
 
     static navigationOptions = { title: 'Confirmação de envio' };
+    
+    get balance() {
+        return tokenDecimals(this.props.balance);
+    }
+
+    get finalBalance() {
+        return Number(tokenDecimals(this.props.balance)) - Number(this.amount);
+    }
 
     get address() {
         return this.props.navigation.state.params.address;
@@ -40,12 +52,18 @@ export class ConfirmTransaction extends React.Component {
         const { loading } = this.props;
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Destinatário</Text>
-                <Text style={styles.value}>{this.address}</Text>
-                <Text style={styles.title}>Pontos a enviar</Text>
-                <Text style={styles.value}>{this.amount}</Text>
-                <Button title="Confirmar e enviar" onPress={this.onSend} />
-                {loading && <ActivityIndicator animating />}
+                <View style={styles.content}>
+                    <Text style={styles.title}>Destinatário</Text>
+                    <Text style={styles.value}>{this.address}</Text>
+                    <Text style={styles.title}>Saldo disponível</Text>
+                    <Text style={styles.value}>{this.balance}</Text>
+                    <Text style={styles.title}>Pontos a enviar</Text>
+                    <Text style={styles.value}>{this.amount}</Text>
+                    <Text style={styles.title}>Saldo restante</Text>
+                    <Text style={styles.value}>{this.finalBalance}</Text>
+                    {loading && <ActivityIndicator animating />}
+                </View>
+                <Button borderless title="Confirmar e enviar" onPress={this.onSend} />
             </View>
         );
     }
@@ -57,7 +75,10 @@ const styles = StyleSheet.create({
         padding: measures.defaultPadding,
         flex: 1,
         alignItems: 'stretch',
-        justifyContent: 'flex-start'
+        justifyContent: 'space-between'
+    },
+    content: {
+        flex: 1
     },
     title: {
         alignSelf: 'center',
