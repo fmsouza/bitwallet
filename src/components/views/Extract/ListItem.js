@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Linking, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import moment from 'moment';
 import autobind from 'autobind-decorator';
+import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { transactionDetailsURL } from 'common/utils';
 import { tokenDecimals } from 'common/utils';
@@ -41,7 +42,7 @@ export default class ListItem extends React.Component {
         <View style={styles.container}>
             <View style={styles.left}>
                 <View style={styles.avatarIncoming}>
-                    <Image style={styles.icon} source={require('assets/img/download.png')} />
+                    <Icon name="download" type="mdc" color={colors.white} />
                 </View>
             </View>
             <View style={styles.right}>
@@ -56,7 +57,7 @@ export default class ListItem extends React.Component {
         <View style={styles.container}>
             <View style={styles.left}>
                 <View style={styles.avatarOutcoming}>
-                    <Image style={styles.icon} source={require('assets/img/upload.png')} />
+                    <Icon name="upload" type="mdc" color={colors.white} />
                 </View>
             </View>
             <View style={styles.right}>
