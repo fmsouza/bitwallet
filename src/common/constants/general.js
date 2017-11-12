@@ -1,3 +1,5 @@
+export const DEBUG = true;
+
 const STORAGE_KEYCHAIN = '@BitWalletKeychain-513961259';
 const STORAGE_PREFS = '@BitWalletPrefs-712638173';
 
@@ -20,5 +22,5 @@ export const CREDIT_METHODS = [
 
 export const FIAT_TOKEN_RATE = 0.10;
 
-export const BLOCKCHAIN_NETWORK = 'mainnet'; // 'mainnet' for production and 'rinkeby' for development
+export const BLOCKCHAIN_NETWORK = (DEBUG) ? 'rinkeby' : 'mainnet'; // 'mainnet' for production and 'rinkeby' for development
 export const BLOCKCHAIN_DECIMALS = 18;
