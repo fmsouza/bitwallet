@@ -32,7 +32,7 @@ export class NumberGrid extends React.Component {
                     {this.renderBlock('1', '1')}
                 </View>
                 <View style={styles.row}>
-                    {this.renderBlock('•', '.')}
+                    {this.renderBlock(<Icon name="dot-single" type="ent" />, '.')}
                     {this.renderBlock('0', '0')}
                     {this.renderBlock(<Icon name="backspace" />, 'erase')}
                 </View>
