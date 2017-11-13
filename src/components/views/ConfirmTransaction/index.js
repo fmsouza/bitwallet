@@ -5,7 +5,7 @@ import { Button } from 'components/widgets';
 import autobind from 'autobind-decorator';
 import { colors, measures } from 'common/styles';
 import { Transaction } from 'common/actions';
-import { tokenDecimals } from 'common/utils';
+import { expandTokenAmount, tokenDecimals } from 'common/utils';
 
 @connect(
     ({ wallet }) => ({
@@ -24,7 +24,7 @@ export class ConfirmTransaction extends React.Component {
     }
 
     get finalBalance() {
-        return Number(tokenDecimals(this.props.balance)) - Number(this.amount);
+        return Number(tokenDecimals(this.props.balance)) - this.amount;
     }
 
     get address() {

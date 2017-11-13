@@ -8,6 +8,6 @@ export const padStartHex = (hex, targetLength = 64, padString = '0') => {
     return `0x${hex.padStart(targetLength, padString)}`;
 }
 
-export const tokenDecimals = (value) => value / decimals;
+export const tokenDecimals = (value) => ethers.utils.formatEther(value);
 
 export const expandTokenAmount = (value) => value * decimals;

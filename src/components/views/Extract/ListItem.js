@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Linking, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import moment from 'moment';
 import autobind from 'autobind-decorator';
+import ethers from 'ethers';
 import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { transactionDetailsURL } from 'common/utils';
@@ -14,8 +15,7 @@ export default class ListItem extends React.Component {
     }
 
     get points() {
-        const value = parseInt(this.props.transaction.data);
-        return tokenDecimals(value);
+        return tokenDecimals(this.props.transaction.data);
     }
 
     get from() {
