@@ -15,7 +15,6 @@ export class Overview extends React.Component {
                 </View>
             </TouchableWithoutFeedback>
         )
-
     });
 
     render() {
