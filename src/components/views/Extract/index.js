@@ -34,9 +34,7 @@ export class Extract extends React.Component {
         const { transactionHistory, transactionLoading } = this.props;
         return (
             <View style={styles.container}>
-                <View style={styles.balance}>
-                    <Balance />
-                </View>
+                <Balance />
                 <View style={styles.historyContainer}>
                     {transactionLoading && <ActivityIndicator animating={transactionLoading} />}
                     <FlatList
@@ -51,16 +49,12 @@ export class Extract extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'flex-start',
+        alignItems: 'stretch',
         justifyContent: 'flex-start',
         flex: 1
     },
     historyContainer: {
-        width: '100%',
+        alignItems: 'stretch',
         flex: 1
-    },
-    balance: {
-        height: 140,
-        width: '100%'
     }
 });
