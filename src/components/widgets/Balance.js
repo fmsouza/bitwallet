@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#CCCCCC',
         alignItems: 'stretch',
         justifyContent: 'space-between',
-        padding: 8
+        padding: measures.defaultPadding
     },
     headerContainer: {
         alignItems: 'center',
