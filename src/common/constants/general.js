@@ -1,4 +1,4 @@
-export const DEBUG = true;
+export const DEBUG = process.env.NODE_ENV === 'development';
 
 const STORAGE_KEYCHAIN = '@BitWalletKeychain-513961259';
 const STORAGE_PREFS = '@BitWalletPrefs-712638173';
