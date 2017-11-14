@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Balance, Footer, Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
-import { NAVIGABLE_VIEWS as Views } from 'common/constants';
+import { Views } from 'common/constants';
 
 export class Overview extends React.Component {
 

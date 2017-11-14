@@ -3,6 +3,7 @@ import { Platform, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import NavigationActions from "react-navigation/lib/NavigationActions";
 import * as Views from './components/views';
+import { Navigation } from './common/actions';
 import { colors } from './common/styles';
 
 export const INITIAL_ROUTE = 'Login';
@@ -29,6 +30,8 @@ const navigator = StackNavigator({
         headerTintColor: colors.secondary
     }
 });
+
+Navigation.setNavigationHandler(navigator);
 
 const parentGetStateForAction = navigator.router.getStateForAction;
 

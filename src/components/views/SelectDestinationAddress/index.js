@@ -2,7 +2,6 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Vibration, View } from 'react-native';
 import Permissions from 'react-native-permissions';
 import Camera from 'react-native-camera';
-import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 import { Button, Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';

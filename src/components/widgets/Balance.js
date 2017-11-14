@@ -1,26 +1,19 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { connect } from 'react-redux';
+import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
-import { tokenDecimals } from 'common/utils';
+import { Wallet as WalletUtils } from 'common/utils';
 
-@connect(
-    ({ wallet }) => ({
-        balance: wallet.balance,
-        loading: wallet.loading
-    }),
-    dispatch => ({
-        isLoading: (loading) => dispatch(Wallet.isLoading(loading)),
-        updateBalance: () => dispatch(Wallet.updateBalance())
-    })
-)
+@inject('wallet')
+@observer
 export class Balance extends React.Component {
 
     get balance() {
-        return tokenDecimals(this.props.balance);
+        if (!this.props.wallet.balance) return 0;
+        return WalletUtils.tokenDecimals(this.props.wallet.balance);
     }
     
     componentWillMount() {
@@ -28,11 +21,15 @@ export class Balance extends React.Component {
     }
 
     @autobind
-    onPressRefresh() {
-        this.props.isLoading(true);
-        setTimeout(() => {
-            this.props.updateBalance();
-        }, 1);
+    async onPressRefresh() {
+        try {
+            await Wallet.isLoading(true);
+            await Wallet.updateBalance();
+        } catch (e) {
+            console.log(e.message);
+        } finally {
+            await Wallet.isLoading(false);
+        }
     }
 
     renderExtractButton(onPressExtract) {
@@ -58,7 +55,7 @@ export class Balance extends React.Component {
     }
 
     render() {
-        const { balance, loading, onPressExtract } = this.props;
+        const { onPressExtract, wallet: { balance, loading } } = this.props;
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={onPressExtract}>

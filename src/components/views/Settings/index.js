@@ -1,27 +1,24 @@
 import React from 'react';
 import { StyleSheet, ScrollView, Text, View } from 'react-native';
-import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
-import { Security } from 'common/actions';
-import { NAVIGABLE_VIEWS as Views } from 'common/constants';
+import { Wallet } from 'common/actions';
+import { Views } from 'common/constants';
 import ListItem from './ListItem';
 
-@connect(null, (dispatch) => ({
-    reset: () => dispatch(Security.reset())
-}))
 export class Settings extends React.Component {
 
     static navigationOptions = { title: 'Configurações' };
 
     @autobind
-    onPressClose() {
-        const { navigation, reset } = this.props;
-        reset();
-        setTimeout(() =>
-            navigation.navigate(Views.LOGIN, { replaceRoute: true })
-        , 1);
+    async onPressClose() {
+        try {
+            await Wallet.close();
+            this.props.navigation.navigate(Views.LOGIN, { replaceRoute: true });
+        } catch (e) {
+            console.error(e.message);
+        }
     }
 
     render() {

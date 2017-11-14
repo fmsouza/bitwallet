@@ -1,9 +1,12 @@
 import React from 'react';
 import { BackHandler, Platform, StatusBar, View } from 'react-native';
-import { Provider } from 'react-redux';
+import { useStrict } from 'mobx';
+import { Provider } from 'mobx-react';
 import autobind from 'autobind-decorator';
-import store from 'common/store';
+import * as stores from 'common/stores';
 import Router, { INITIAL_ROUTE } from './Router';
+
+useStrict(true);
 
 const ANDROID_STATUSBAR = {
     backgroundColor: "#000000",
@@ -34,7 +37,7 @@ export default class Application extends React.Component {
 
     render() {
         return (
-            <Provider store={store}>
+            <Provider {...stores}>
                 <View style={{ flex: 1 }}>
                     <StatusBar {...ANDROID_STATUSBAR} />
                     <Router />

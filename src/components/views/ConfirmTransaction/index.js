@@ -1,30 +1,24 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import { connect } from 'react-redux';
+import { inject, observer } from 'mobx-react';
 import { Button } from 'components/widgets';
 import autobind from 'autobind-decorator';
 import { colors, measures } from 'common/styles';
 import { Transaction } from 'common/actions';
 import { expandTokenAmount, tokenDecimals } from 'common/utils';
 
-@connect(
-    ({ wallet }) => ({
-        balance: wallet.balance
-    }),
-    dispatch => ({
-        isLoading: (loading) => dispatch(Transaction.isLoading(loading)),
-        transfer: (address, amount) => dispatch(Transaction.transfer(address, amount))
-    }))
+@inject('transaction', 'wallet')
+@observer
 export class ConfirmTransaction extends React.Component {
 
     static navigationOptions = { title: 'Confirmação de envio' };
     
     get balance() {
-        return tokenDecimals(this.props.balance);
+        return tokenDecimals(this.props.wallet.balance);
     }
 
     get finalBalance() {
-        return Number(tokenDecimals(this.props.balance)) - this.amount;
+        return Number(tokenDecimals(this.props.wallet.balance)) - this.amount;
     }
 
     get address() {
@@ -36,20 +30,21 @@ export class ConfirmTransaction extends React.Component {
     }
 
     @autobind
-    onSend() {
-        const { isLoading, transfer } = this.props;
-        isLoading(true);
-        setTimeout(() => {
+    async onSend() {
+        try {
+            await Transaction.isLoading(true);
             const realAmount = expandTokenAmount(this.amount);
-            transfer(this.address, realAmount);
-            setTimeout(() => {
-                this.props.navigation.navigate('Overview', { replaceRoute: true });
-            }, 2000);
-        }, 1);
+            await Transaction.transfer(this.address, realAmount);
+            this.props.navigation.navigate('Overview', { replaceRoute: true });
+        } catch(e) {
+            console.log(e.message);
+        } finally {
+            await Transaction.isLoading(false);
+        }
     }
 
     render() {
-        const { loading } = this.props;
+        const { loading } = this.props.transaction;
         return (
             <View style={styles.container}>
                 <View style={styles.content}>

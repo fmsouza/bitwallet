@@ -1,13 +1,14 @@
 import React from 'react';
 import { Clipboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
+import { inject, observer } from 'mobx-react';
 import { Footer } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { NAVIGABLE_VIEWS as Views } from 'common/constants';
 
-@connect(({ wallet }) => ({ wallet: wallet.wallet }))
+@inject('wallet')
+@observer
 export class ReceivePoints extends React.Component {
 
     static navigationOptions = { title: 'Receber pontos' };
@@ -16,7 +17,7 @@ export class ReceivePoints extends React.Component {
 
     @autobind
     copyToClipboard() {
-        const { wallet } = this.props;
+        const { wallet } = this.props.wallet;
         Clipboard.setString(wallet.getAddress());
         this.setState({ copiedToClipboard: true });
     }
@@ -26,7 +27,7 @@ export class ReceivePoints extends React.Component {
     }
 
     render() {
-        const { wallet } = this.props;
+        const { wallet } = this.props.wallet;
         return (
             <View style={styles.container}>
                 <View style={styles.subContainer}>

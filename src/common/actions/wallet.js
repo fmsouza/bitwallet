@@ -1,34 +1,40 @@
-import ethers from 'ethers';
-import Storage from 'react-native-sensitive-info';
-import { BLOCKCHAIN_NETWORK, CONTRACT_ABI, CONTRACT_ADDRESS, WALLET_ACTIONS, STORAGE_CONFIG, STORAGE_WALLET } from 'common/constants';
-import { CustomSigner } from 'common/utils';
-import store from 'common/store';
+import { Wallet as WalletConstants } from 'common/constants';
+import { Contract as ContractUtils, Wallet as WalletUtils } from 'common/utils';
+import { Storage as StorageService } from 'common/services';
+import { wallet as WalletStore } from 'common/stores';
 
-const { Contract, HDNode, providers, utils, Wallet } = ethers;
-const { LOAD_WALLET, LOADING, UPDATE_BALANCE } = WALLET_ACTIONS;
-
-const PROVIDER = providers.getDefaultProvider(BLOCKCHAIN_NETWORK);
-
-export const updateBalance = () => (dispatch) => {
-    const { contract, wallet } = store.getState().wallet;
-    contract.functions.balanceOf(wallet.getAddress())
-        .then(({ balance }) => dispatch({ type: UPDATE_BALANCE, payload: balance.toString() }));
+export async function isLoading(loading) {
+    WalletStore.isLoading(loading);
 }
 
-export const loadWalletFromPrivateKey = (pk) => (dispatch) => {
-    const wallet = new Wallet(pk, PROVIDER);
-    const signer = new CustomSigner(wallet);
-    const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-    Storage.setItem(STORAGE_WALLET, pk, STORAGE_CONFIG)
-        .then(() => dispatch({ type: LOAD_WALLET, payload: { contract, wallet } }));
+export async function loadWalletFromPrivateKey(pk) {
+    if(pk.indexOf('0x') !== 0) pk = `0x${pk}`; // Add '0x' to the beginning case it is not present
+    const wallet = WalletUtils.createWalletWithPK(pk);
+    const contract = ContractUtils.getContract(wallet);
+    await StorageService.setItem(WalletConstants.STORAGE, pk);
+    WalletStore.setWallet(wallet);
+    WalletStore.setContract(contract);
 }
 
-export const loadWalletFromLogin = (username, password) => (dispatch) => {
-    const seed = utils.toUtf8Bytes(username + password);
-    const node = HDNode.fromSeed(seed);
-    loadWalletFromPrivateKey(node.privateKey)(dispatch);
+export async function loadWalletFromLogin(username, password) {
+    const pk = WalletUtils.generateKeyFromSeed(username + password);
+    await loadWalletFromPrivateKey(pk);
 }
 
-export const loadWalletFromMemory = () => Storage.getItem(STORAGE_WALLET, STORAGE_CONFIG);
+export async function loadWalletFromMemory() {
+    const pk = await StorageService.getItem(WalletConstants.STORAGE);
+    const wallet = WalletUtils.createWalletWithPK(pk);
+    const contract = ContractUtils.getContract(wallet);
+    WalletStore.setWallet(wallet);
+    WalletStore.setContract(contract);
+}   
 
-export const isLoading = (loading) => ({ type: LOADING, payload: !!loading });
+export async function updateBalance() {
+    const { balance } = await WalletStore.contract.functions.balanceOf(WalletStore.wallet.getAddress());
+    WalletStore.setBalance(balance.toString());
+}
+
+export async function close() {
+    await StorageService.setItem(WalletConstants.STORAGE, '');
+    WalletStore.reset();
+}

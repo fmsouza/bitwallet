@@ -1,6 +1,7 @@
 import ethers from 'ethers';
+import { Contract } from 'common/constants';
 
-export class CustomSigner {
+class CustomSigner {
 
     constructor(wallet) {
         this.wallet = wallet;
@@ -15,3 +16,5 @@ export class CustomSigner {
         return Promise.resolve(this.wallet.sign(transaction));
     }
 }
+
+export const getContract = (wallet) => new ethers.Contract(Contract.ADDRESS, Contract.ABI, new CustomSigner(wallet));

@@ -1,63 +1,52 @@
 import React from 'react';
 import { ActivityIndicator, Image, Keyboard, StyleSheet, Text, View } from 'react-native';
-import { connect } from 'react-redux';
+import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 import { Button } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
 import LoginForm from './LoginForm';
 
-@connect(
-    ({ wallet }) => ({
-        wallet: wallet.wallet,
-        loading: wallet.loading
-    }),
-    dispatch => ({
-        loadWalletFromLogin: (username, password) => dispatch(Wallet.loadWalletFromLogin(username, password)),
-        loadWalletFromPrivateKey: (pk) => dispatch(Wallet.loadWalletFromPrivateKey(pk)),
-        isLoading: (loading) => dispatch(Wallet.isLoading(loading))
-    })
-)
+@inject('wallet')
+@observer
 export class Login extends React.Component {
 
     static navigationOptions = { header: null };
 
-    componentWillMount() {
-        this.props.isLoading(true);
-        this.loadWallet();
+    async componentWillMount() {
+        try {
+            await Wallet.isLoading(true);
+            await Wallet.loadWalletFromMemory();
+            if (this.props.wallet.wallet) this.props.navigation.navigate('Overview', { replaceRoute: true });
+        } catch (e) {
+            console.log("No wallet registered yet.");
+        } finally {
+            await Wallet.isLoading(false);
+        }
     }
 
-    async loadWallet() {
+    async loadWalletFromLogin(username, password) {
         try {
-            const privateKey = await Wallet.loadWalletFromMemory();
-            if (privateKey) {
-                this.props.loadWalletFromPrivateKey(privateKey);
-                setTimeout(() =>
-                    this.props.navigation.navigate('Overview', { replaceRoute: true })
-                , 1);
-            }
+            await Wallet.isLoading(true);
+            await Wallet.loadWalletFromLogin(username, password);
+            if (this.props.wallet.wallet) this.props.navigation.navigate('Overview', { replaceRoute: true });
         } catch (e) {
-            console.log("Error:", e.message);
+            console.error("Error:", e.message);
         } finally {
-            this.props.isLoading(false);
+            await Wallet.isLoading(false);
         }
     }
 
     @autobind
     onSubmitLogin({ username, password }) {
         Keyboard.dismiss();
-        this.props.isLoading(true);
-        setTimeout(() => {
-            this.props.loadWalletFromLogin(username, password);
-            setTimeout(() =>
-                this.props.navigation.navigate('Overview', { replaceRoute: true })
-            , 1);
-        }, 0);
+        this.loadWalletFromLogin(username, password);
     }
 
     renderBody() {
-        const { loading, navigation, wallet } = this.props;
-        if (loading) return <ActivityIndicator animating={this.props.loading} />;
+        const { navigation, wallet: { loading, wallet } } = this.props;
+
+        if (loading) return <ActivityIndicator animating />;
         else if (!wallet) return (
             <View style={styles.bodyContainer}>
                 <LoginForm onSubmit={this.onSubmitLogin} />

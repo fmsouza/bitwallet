@@ -1,5 +1,5 @@
-import * as Security from './security';
+import * as Navigation from './navigation';
 import * as Transaction from './transaction';
 import * as Wallet from './wallet';
 
-export { Security, Transaction, Wallet };
+export { Navigation, Transaction, Wallet };

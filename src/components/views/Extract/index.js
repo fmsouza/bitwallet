@@ -1,44 +1,43 @@
 import React from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
-import { connect } from 'react-redux';
+import { inject, observer } from 'mobx-react';
 import { Balance } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Transaction } from 'common/actions';
 import ListItem from './ListItem';
 
-@connect(
-    ({ transaction, wallet }) => ({
-        transactionHistory: transaction.history,
-        transactionLoading: transaction.loading,
-        walletAddress: wallet.wallet.getAddress()
-    }),
-    dispatch => ({
-        transactionLoadHistory: () => dispatch(Transaction.history()),
-        transactionIsLoading: (loading) => dispatch(Transaction.isLoading(loading))
-    })
-)
+@inject('transaction')
+@observer
 export class Extract extends React.Component {
 
     static navigationOptions = { title: 'Extrato de pontos' };
     
     componentDidMount() {
-        this.props.transactionIsLoading(true);
-        setTimeout(() => {
-            this.props.transactionLoadHistory();
-        }, 1);
+        this.loadHistory();
     }
 
-    renderItem = ({ item }) => <ListItem transaction={item} walletAddress={this.props.walletAddress} />
+    async loadHistory() {
+        try {
+            await Transaction.isLoading(true);
+            await Transaction.loadHistory();
+        } catch(e) {
+            console.log(e.message);
+        } finally {
+            await Transaction.isLoading(false);
+        }
+    }
+
+    renderItem = ({ item }) => <ListItem transaction={item} walletAddress={this.props.wallet.wallet.getAddress()} />
 
     render() {
-        const { transactionHistory, transactionLoading } = this.props;
+        const { history, loading } = this.props.transaction;
         return (
             <View style={styles.container}>
                 <Balance />
                 <View style={styles.historyContainer}>
-                    {transactionLoading && <ActivityIndicator animating={transactionLoading} />}
+                    {loading && <ActivityIndicator animating />}
                     <FlatList
-                        data={transactionHistory}
+                        data={history}
                         keyExtractor={item => item.transactionHash}
                         renderItem={this.renderItem} />
                 </View>

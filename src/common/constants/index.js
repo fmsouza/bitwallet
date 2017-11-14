@@ -1,6 +1,6 @@
-export * from './contract';
-export * from './general';
-export * from './navigation';
-export * from './security';
-export * from './transaction';
-export * from './wallet';
+import * as Contract from './contract';
+import * as Storage from './storage';
+import * as Views from './views';
+import * as Wallet from './wallet';
+
+export { Contract, Storage, Views, Wallet };

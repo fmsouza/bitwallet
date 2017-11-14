@@ -1,22 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, Vibration, View } from 'react-native';
-import { connect } from 'react-redux';
+import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 import Permissions from 'react-native-permissions';
 import Camera from 'react-native-camera';
 import { Wallet } from 'common/actions';
 import { colors, measures } from 'common/styles';
 
-
-@connect(
-    ({ wallet }) => ({
-        loading: wallet.loading
-    }),
-    dispatch => ({
-        loadWallet: (pk) => dispatch(Wallet.loadWalletFromPrivateKey(pk)),
-        isLoading: (loading) => dispatch(Wallet.isLoading(loading))
-    })
-)
+@inject('wallet')
+@observer
 export class LoadPK extends React.Component {
 
     static navigationOptions = { header: null };
@@ -38,19 +30,23 @@ export class LoadPK extends React.Component {
         }
     }
 
+    async loadWalletFromPrivateKey(pk) {
+        try {
+            await Wallet.isLoading(true);
+            await Wallet.loadWalletFromPrivateKey(pk);
+            if (this.props.wallet.wallet) this.props.navigation.navigate('Overview', { replaceRoute: true });
+        } catch(e) {
+            console.log(e.message);
+        } finally {
+            await Wallet.isLoading(false);
+        }
+    }
+
     @autobind
     onBarCodeRead({ type, data }) {
-        if (type === 'QR_CODE') {
-            Vibration.vibrate();
-            this.props.isLoading(true);
-            this.setState({ showCamera: false }, () => {
-                if(data.indexOf('0x') !== 0) data = `0x${data}`; // Add '0x' to the beginning case it is not present
-                this.props.loadWallet(data);
-                setTimeout(() =>
-                    this.props.navigation.navigate('Overview', { replaceRoute: true })
-                , 1);
-            });
-        }
+        if (type !== 'QR_CODE') return;
+        Vibration.vibrate();
+        this.setState({ showCamera: false }, () => this.loadWalletFromPrivateKey(data));
     }
 
     render() {

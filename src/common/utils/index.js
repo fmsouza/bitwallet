@@ -1,3 +1,5 @@
-export * from './contract';
-export * from './transaction';
-export * from './wallet';
+import * as Contract from './contract';
+import * as Transaction from './transaction';
+import * as Wallet from './wallet';
+
+export { Contract, Transaction, Wallet };
