@@ -6,6 +6,7 @@ import Permissions from 'react-native-permissions';
 import Camera from 'react-native-camera';
 import { Wallet } from 'common/actions';
 import { colors, measures } from 'common/styles';
+import { Views } from 'common/constants';
 
 @inject('wallet')
 @observer
@@ -34,7 +35,7 @@ export class LoadPK extends React.Component {
         try {
             await Wallet.isLoading(true);
             await Wallet.loadWalletFromPrivateKey(pk);
-            if (this.props.wallet.wallet) this.props.navigation.navigate('Overview', { replaceRoute: true });
+            if (this.props.wallet.wallet) this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch(e) {
             console.log(e.message);
         } finally {

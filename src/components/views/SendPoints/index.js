@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Footer, NumberGrid } from 'components/widgets';
 import autobind from 'autobind-decorator';
+import { Footer, NumberGrid } from 'components/widgets';
 import { colors, measures } from 'common/styles';
+import { Views } from 'common/constants';
 
 export class SendPoints extends React.Component {
 
@@ -39,7 +40,7 @@ export class SendPoints extends React.Component {
     onPressContinue() {
         const { amount } = this.state;
         if (!amount || Number(amount) === 0) return;
-        this.props.navigation.navigate('SelectDestinationAddress', { amount });
+        this.props.navigation.navigate(Views.SELECTDEST, { amount });
     }
 
     render() {

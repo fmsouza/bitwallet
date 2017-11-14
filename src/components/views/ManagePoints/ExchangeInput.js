@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import autobind from 'autobind-decorator';
-import { FIAT_TOKEN_RATE } from 'common/constants';
+import { General } from 'common/constants';
 
 export default class ExchangeInput extends React.Component {
 
@@ -9,7 +9,7 @@ export default class ExchangeInput extends React.Component {
 
     @autobind
     onChangeFiat(fiat) {
-        const token = String(fiat * FIAT_TOKEN_RATE);
+        const token = String(fiat * General.FIAT_TOKEN_RATE);
         this.setState({ fiat, token }, () => {
             this.props.onChange({ fiat, token });
         });
@@ -17,7 +17,7 @@ export default class ExchangeInput extends React.Component {
     
     @autobind
     onChangeToken(token) {
-        const fiat = String(token / FIAT_TOKEN_RATE);
+        const fiat = String(token / General.FIAT_TOKEN_RATE);
         this.setState({ fiat, token }, () => {
             this.props.onChange({ fiat, token });
         });

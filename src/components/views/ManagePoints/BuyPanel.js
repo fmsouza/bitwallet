@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import autobind from 'autobind-decorator';
 import { measures } from 'common/styles';
 import { Button, ExpandablePanel, SelectInput } from 'components/widgets';
-import { PAYMENT_METHODS } from 'common/constants';
+import { General } from 'common/constants';
 import ExchangeInput from './ExchangeInput';
 
 export default class BuyPanel extends React.Component {
@@ -22,7 +22,7 @@ export default class BuyPanel extends React.Component {
                 <View style={styles.container}>
                     <Text>Forma de pagamento</Text>
                     <SelectInput
-                        options={PAYMENT_METHODS}
+                        options={General.PAYMENT_METHODS}
                         onValueChange={method => this.setState({ method })} />
                     <Text>Quantidade</Text>
                     <ExchangeInput

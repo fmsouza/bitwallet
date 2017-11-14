@@ -1,3 +1,0 @@
-export const SECURITY_ACTIONS = {
-    RESET: 'ACTION/SECURITY/RESET'
-};

@@ -5,7 +5,7 @@ import autobind from 'autobind-decorator';
 import { inject, observer } from 'mobx-react';
 import { Footer } from 'components/widgets';
 import { colors, measures } from 'common/styles';
-import { NAVIGABLE_VIEWS as Views } from 'common/constants';
+import { Views } from 'common/constants';
 
 @inject('wallet')
 @observer

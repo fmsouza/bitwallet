@@ -5,6 +5,7 @@ import Camera from 'react-native-camera';
 import autobind from 'autobind-decorator';
 import { Button, Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
+import { Views } from 'common/constants';
 import ListItem from './ListItem';
 import contacts from './mockedContacts';
 
@@ -45,7 +46,7 @@ export class SelectDestinationAddress extends React.Component {
         const { address } = this.state;
         if (!address) return;
         const { state: { params: { amount } }, navigate } = this.props.navigation; //.state.params;
-        navigate('ConfirmTransaction', { address, amount });
+        navigate(Views.CONFIRMTXN, { address, amount });
     }
 
     renderCamera() {

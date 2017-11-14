@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import autobind from 'autobind-decorator';
 import { measures } from 'common/styles';
 import { Button, ExpandablePanel, SelectInput } from 'components/widgets';
-import { CREDIT_METHODS } from 'common/constants';
+import { General } from 'common/constants';
 import ExchangeInput from './ExchangeInput';
 
 export default class SellPanel extends React.Component {
@@ -22,7 +22,7 @@ export default class SellPanel extends React.Component {
                 <View style={styles.container}>
                     <Text>Forma de crédito</Text>
                     <SelectInput
-                        options={CREDIT_METHODS}
+                        options={General.CREDIT_METHODS}
                         onValueChange={method => this.setState({ method })} />
                     <Text>Quantidade</Text>
                     <ExchangeInput

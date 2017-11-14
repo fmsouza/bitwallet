@@ -1,12 +1,10 @@
 import React from 'react';
-import { Image, Linking, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Linking, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import moment from 'moment';
 import autobind from 'autobind-decorator';
-import ethers from 'ethers';
 import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
-import { transactionDetailsURL } from 'common/utils';
-import { tokenDecimals } from 'common/utils';
+import { Transaction as TransactionUtils, Wallet as WalletUtils } from 'common/utils';
 
 export default class ListItem extends React.Component {
 
@@ -15,7 +13,7 @@ export default class ListItem extends React.Component {
     }
 
     get points() {
-        return tokenDecimals(this.props.transaction.data);
+        return WalletUtils.tokenDecimals(this.props.transaction.data);
     }
 
     get from() {
@@ -35,7 +33,7 @@ export default class ListItem extends React.Component {
     @autobind
     onPress() {
         const { transactionHash } = this.props.transaction;
-        Linking.openURL(transactionDetailsURL(transactionHash));
+        Linking.openURL(TransactionUtils.transactionDetailsURL(transactionHash));
     }
 
     renderIncoming = () => (

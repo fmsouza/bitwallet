@@ -5,6 +5,7 @@ import autobind from 'autobind-decorator';
 import { Button } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
+import { Views } from 'common/constants';
 import LoginForm from './LoginForm';
 
 @inject('wallet')
@@ -17,7 +18,7 @@ export class Login extends React.Component {
         try {
             await Wallet.isLoading(true);
             await Wallet.loadWalletFromMemory();
-            if (this.props.wallet.wallet) this.props.navigation.navigate('Overview', { replaceRoute: true });
+            if (this.props.wallet.wallet) this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch (e) {
             console.log("No wallet registered yet.");
         } finally {
@@ -29,7 +30,7 @@ export class Login extends React.Component {
         try {
             await Wallet.isLoading(true);
             await Wallet.loadWalletFromLogin(username, password);
-            if (this.props.wallet.wallet) this.props.navigation.navigate('Overview', { replaceRoute: true });
+            if (this.props.wallet.wallet) this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch (e) {
             console.error("Error:", e.message);
         } finally {
@@ -53,7 +54,7 @@ export class Login extends React.Component {
                 <Button
                     borderless
                     title="Entrar com chave privada"
-                    onPress={() => this.props.navigation.navigate('LoadPK')} />
+                    onPress={() => this.props.navigation.navigate(Views.LOADPK)} />
             </View>
         );
         else return null;
