@@ -12,7 +12,7 @@ import { Wallet as WalletUtils } from 'common/utils';
 export class Balance extends React.Component {
 
     get balance() {
-        if (!this.props.wallet.balance) return 0;
+        if (!this.props.wallet.balance) return '';
         return WalletUtils.tokenDecimals(this.props.wallet.balance);
     }
     
