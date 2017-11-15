@@ -38,7 +38,7 @@ export class ConfirmTransaction extends React.Component {
             await Transaction.transfer(this.address, realAmount);
             this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch(e) {
-            console.log(e.message);
+            console.warn(e.message);
         } finally {
             await Transaction.isLoading(false);
         }

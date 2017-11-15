@@ -20,7 +20,7 @@ export class Login extends React.Component {
             await Wallet.loadWalletFromMemory();
             if (this.props.wallet.wallet) this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch (e) {
-            console.log("No wallet registered yet.");
+            console.warn("No wallet registered yet.");
         } finally {
             await Wallet.isLoading(false);
         }

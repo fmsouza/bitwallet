@@ -6,7 +6,7 @@ import { colors, measures } from 'common/styles';
 import { Transaction } from 'common/actions';
 import ListItem from './ListItem';
 
-@inject('transaction')
+@inject('transaction', 'wallet')
 @observer
 export class Extract extends React.Component {
 
@@ -18,10 +18,11 @@ export class Extract extends React.Component {
 
     async loadHistory() {
         try {
+            const { wallet } = this.props.wallet;
             await Transaction.isLoading(true);
-            await Transaction.loadHistory();
+            await Transaction.loadHistory(wallet.getAddress());
         } catch(e) {
-            console.log(e.message);
+            console.warn(e.message);
         } finally {
             await Transaction.isLoading(false);
         }

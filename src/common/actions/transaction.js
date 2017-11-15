@@ -6,7 +6,7 @@ export async function transfer(to, amount) {
     return await TransactionService.transfer(to, amount);
 }
 
-export async function history(walletAddress) {
+export async function loadHistory(walletAddress) {
     const history = await TransactionService.getTransactionHistory(walletAddress);
     TransactionStore.setHistory(history);
 }
