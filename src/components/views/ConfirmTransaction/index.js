@@ -35,7 +35,7 @@ export class ConfirmTransaction extends React.Component {
         try {
             await Transaction.isLoading(true);
             const realAmount = WalletUtils.expandTokenAmount(this.amount);
-            await Transaction.transfer(this.address, realAmount);
+            const txn = await Transaction.transfer(this.address, realAmount);
             this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch(e) {
             console.warn(e.message);

@@ -1,10 +1,10 @@
 import ethers from 'ethers';
-import { BLOCKCHAIN_DECIMALS, BLOCKCHAIN_NETWORK } from 'common/constants';
+import { General } from 'common/constants';
 
 const { Contract, HDNode, providers, utils, Wallet } = ethers;
 
-const PROVIDER = providers.getDefaultProvider(BLOCKCHAIN_NETWORK);
-const decimals = Math.pow(10, BLOCKCHAIN_DECIMALS);
+const PROVIDER = providers.getDefaultProvider(General.BLOCKCHAIN_NETWORK);
+const decimals = Math.pow(10, General.BLOCKCHAIN_DECIMALS);
 
 export const createWalletWithPK = (pk, provider=PROVIDER) => new Wallet(pk, provider);
 

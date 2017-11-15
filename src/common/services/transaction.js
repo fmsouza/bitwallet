@@ -11,6 +11,5 @@ export async function getTransactionHistory(walletAddress) {
 }
 
 export async function transfer(to, amount) {
-    const { contract, wallet } = WalletStore;
-    return await contract.functions.transfer(to, amount, Transaction.OPTIONS);
+    return await WalletStore.contract.functions.transfer(to, amount, Transaction.OPTIONS);
 }
