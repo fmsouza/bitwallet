@@ -1,6 +1,6 @@
 import { Wallet as WalletConstants } from 'common/constants';
 import { Contract as ContractUtils, Wallet as WalletUtils } from 'common/utils';
-import { Storage as StorageService } from 'common/services';
+import { Storage as StorageService, Wallet as WalletService } from 'common/services';
 import { wallet as WalletStore } from 'common/stores';
 
 export async function isLoading(loading) {
@@ -30,8 +30,8 @@ export async function loadWalletFromMemory() {
 }   
 
 export async function updateBalance() {
-    const { balance } = await WalletStore.contract.functions.balanceOf(WalletStore.wallet.getAddress());
-    WalletStore.setBalance(balance.toString());
+    const balance = await WalletService.updateBalance(WalletStore.contract, WalletStore.wallet);
+    WalletStore.setBalance(balance);
 }
 
 export async function close() {

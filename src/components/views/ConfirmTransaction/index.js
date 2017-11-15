@@ -5,7 +5,7 @@ import { Button } from 'components/widgets';
 import autobind from 'autobind-decorator';
 import { colors, measures } from 'common/styles';
 import { Transaction } from 'common/actions';
-import { expandTokenAmount, tokenDecimals } from 'common/utils';
+import { Wallet as WalletUtils } from 'common/utils';
 import { Views } from 'common/constants';
 
 @inject('transaction', 'wallet')
@@ -15,11 +15,11 @@ export class ConfirmTransaction extends React.Component {
     static navigationOptions = { title: 'Confirmação de envio' };
     
     get balance() {
-        return tokenDecimals(this.props.wallet.balance);
+        return WalletUtils.tokenDecimals(this.props.wallet.balance);
     }
 
     get finalBalance() {
-        return Number(tokenDecimals(this.props.wallet.balance)) - this.amount;
+        return Number(WalletUtils.tokenDecimals(this.props.wallet.balance)) - this.amount;
     }
 
     get address() {
@@ -34,7 +34,7 @@ export class ConfirmTransaction extends React.Component {
     async onSend() {
         try {
             await Transaction.isLoading(true);
-            const realAmount = expandTokenAmount(this.amount);
+            const realAmount = WalletUtils.expandTokenAmount(this.amount);
             await Transaction.transfer(this.address, realAmount);
             this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch(e) {
