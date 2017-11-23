@@ -8,7 +8,7 @@ export async function transfer(to, amount) {
 
 export async function loadHistory(walletAddress) {
     const history = await TransactionService.getTransactionHistory(walletAddress);
-    TransactionStore.setHistory(history);
+    TransactionStore.setHistory(history.reverse());
 }
 
 export async function isLoading(loading) {
