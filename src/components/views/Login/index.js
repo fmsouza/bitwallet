@@ -2,7 +2,7 @@ import React from 'react';
 import { ActivityIndicator, Image, Keyboard, StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
-import { Button } from 'components/widgets';
+import { Button, Container } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
 import { Views } from 'common/constants';
@@ -62,22 +62,15 @@ export class Login extends React.Component {
 
     render() {
         return (
-            <View style={styles.background}>
-                <View style={styles.container}>
-                    <Image style={styles.logo} source={require('assets/img/logo.png')} />
-                    {this.renderBody()}
-                </View>
-            </View>
+            <Container style={styles.container}>
+                <Image style={styles.logo} source={require('assets/img/logo.png')} />
+                {this.renderBody()}
+            </Container>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    background: {
-        flex: 1,
-        backgroundColor: colors.primary,
-        padding: measures.defaultPadding
-    },
     container: {
         alignItems: 'center',
         justifyContent: 'flex-start',

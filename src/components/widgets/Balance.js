@@ -37,7 +37,7 @@ export class Balance extends React.Component {
         return (
             <TouchableWithoutFeedback onPress={onPressExtract}>
                 <View>
-                    <Text style={styles.history}>Ver extrato de pontos</Text>
+                    <Text style={styles.history}>Ver Extrato</Text>
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -48,22 +48,25 @@ export class Balance extends React.Component {
         else return (
             <TouchableWithoutFeedback onPress={this.onPressRefresh}>
                 <View style={styles.refresh}>
-                    <Icon name="refresh" />
+                    <Icon name="refresh" color={colors.white} />
                 </View>
             </TouchableWithoutFeedback>
         );
     }
 
     render() {
-        const { onPressExtract, wallet: { balance, loading } } = this.props;
+        const { onPressExtract, wallet: { loading } } = this.props;
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={onPressExtract}>
                     <View style={styles.headerContainer}>
                         <View style={styles.header}>
-                            <Text style={styles.title}>Seu saldo de pontos atual é</Text>
+                            <Text style={styles.title}>Saldo Disponível</Text>
                         </View>
-                        <Text style={styles.balance}>{this.balance}</Text>
+                        <View style={styles.balanceContainer}>
+                            <Text style={styles.balanceLabel}>{this.balance}</Text>
+                            <Text style={styles.unitLabel}>Pts</Text>
+                        </View>
                     </View>
                 </TouchableWithoutFeedback>
                 <View style={styles.footer}>
@@ -77,27 +80,42 @@ export class Balance extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.defaultBackground,
         flex: 1,
         maxHeight: 128,
-        borderBottomWidth: 2,
-        borderBottomColor: '#CCCCCC',
         alignItems: 'stretch',
         justifyContent: 'space-between',
-        padding: measures.defaultPadding
+        backgroundColor: colors.almond
     },
     headerContainer: {
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        flex: 1
+        marginTop: measures.defaultMargin,
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        flex: 1,
+        backgroundColor: colors.zorba
     },
     title: {
-        fontSize: measures.fontSizeMedium
+        fontSize: measures.fontSizeMedium,
+        marginTop: measures.defaultMargin,
+        marginLeft: measures.defaultMargin * 2,
+        color: colors.white,
+        backgroundColor: 'transparent'
     },
-    balance: {
-        fontSize: measures.fontSizeLarge,
-        fontWeight: 'bold',
-        color: colors.lightBlue
+    balanceContainer: {
+        paddingLeft: measures.defaultPadding * 2,
+        marginTop: measures.defaultMargin,
+        paddingVertical: 0,
+        backgroundColor: colors.martini,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    balanceLabel: {
+        fontSize: measures.fontSizeLarge * 1.3,
+        color: colors.white
+    },
+    unitLabel: {
+        marginLeft: measures.defaultMargin,
+        fontSize: measures.fontSizeMedium,
+        color: colors.white
     },
     header: {
         flexDirection: 'row'
@@ -108,11 +126,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     refresh: {
+        marginLeft: measures.defaultMargin * 2,
         width: 24,
-        height: 24
+        height: 24,
+        backgroundColor: 'transparent'
     },
     history: {
+        marginRight: measures.defaultMargin * 2,
         fontSize: measures.fontSizeSmall + 4,
-        color: colors.darkGrey
+        color: colors.white,
+        backgroundColor: 'transparent'
     }
 });

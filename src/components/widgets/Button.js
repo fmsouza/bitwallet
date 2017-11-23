@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
         borderRadius: 4
     },
     borderless: {
-        borderWidth: 0
+        borderWidth: 0,
+        backgroundColor: 'transparent'
     },
     title: {
         color: colors.secondary,
@@ -29,7 +30,7 @@ const getStyles = (borderless) => {
 }
 
 export const Button = ({ borderless, onPress, title, ...props }) => (
-    <TouchableHighlight style={getStyles(borderless)} onPress={onPress} underlayColor={null}>
+    <TouchableHighlight style={getStyles(borderless)} onPress={onPress} underlayColor={null} {...props}>
         <Text style={styles.title} children={title} />
     </TouchableHighlight>
 );
