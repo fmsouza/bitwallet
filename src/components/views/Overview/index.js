@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'stretch',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
     },
     balance: {
         height: 140,
