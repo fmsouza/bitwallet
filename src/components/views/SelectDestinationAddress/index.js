@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Vibrat
 import Permissions from 'react-native-permissions';
 import Camera from 'react-native-camera';
 import autobind from 'autobind-decorator';
-import { Button, Icon } from 'components/widgets';
+import { Button, Container, Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Views } from 'common/constants';
 import ListItem from './ListItem';
@@ -11,9 +11,7 @@ import contacts from './mockedContacts';
 
 export class SelectDestinationAddress extends React.Component {
 
-    static navigationOptions = {
-        title: 'Enviar pontos'
-    };
+    static navigationOptions = { title: 'Enviar pontos' };
     
     state = { address: '', showCamera: false, contacts };
 
@@ -69,9 +67,9 @@ export class SelectDestinationAddress extends React.Component {
 
     renderView() {
         return (
-            <View style={styles.container}>
+            <Container style={styles.container}>
                 <View style={styles.topBox}>
-                    <Text style={styles.label}>Destinatário</Text>
+                    <Text style={styles.label}>DESTINATÁRIO</Text>
                     <View style={styles.inline}>
                         <TextInput
                             style={styles.input}
@@ -83,7 +81,7 @@ export class SelectDestinationAddress extends React.Component {
                             placeholder="Ex.: 0xZ173VZ103139dvd1eew0n3716vz07131731" />
                         <TouchableWithoutFeedback onPress={this.onPressCamera}>
                             <View style={styles.cameraIcon}>
-                                <Icon name="qrcode-scan" type="mdc" />
+                                <Icon name="qrcode-scan" type="mdc" color={colors.white} />
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
@@ -95,7 +93,7 @@ export class SelectDestinationAddress extends React.Component {
                         keyExtractor={item => item.id}
                         renderItem={this.renderContact} />
                 </View>
-            </View>
+            </Container>
         );
     }
 
@@ -106,30 +104,32 @@ export class SelectDestinationAddress extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.secondary,
-        padding: measures.defaultPadding,
         flex: 1
     },
     topBox: {
         flexDirection: 'column',
         alignItems: 'stretch',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        backgroundColor: colors.almond
     },
     bottomBox: {
+        padding: measures.defaultPadding,
         flex: 1
     },
     inline: {
+        paddingTop: measures.defaultPadding,
+        backgroundColor: colors.zorba,
         flexDirection: 'row'
     },
     input: {
         width: '90%',
         alignSelf: 'center',
         borderBottomWidth: 1,
-        borderBottomColor: 'black',
+        borderBottomColor: colors.white,
         padding: 4,
         paddingLeft: 0,
         marginRight: 2,
-        color: 'black'
+        color: colors.white
     },
     cameraIcon: {
         width: 36,
@@ -137,8 +137,12 @@ const styles = StyleSheet.create({
     },
     label: {
         alignSelf: 'center',
-        marginVertical: measures.defaultMargin,
-        fontSize: measures.fontSizeMedium
+        marginTop: measures.defaultMargin,
+        fontSize: measures.fontSizeSmall,
+        color: colors.white,
+        backgroundColor: colors.zorba,
+        width: '100%',
+        textAlign: 'center'
     },
     cameraLayer: {
         position: 'absolute',

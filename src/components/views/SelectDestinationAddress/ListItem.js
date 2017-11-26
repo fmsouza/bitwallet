@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { measures } from 'common/styles';
+import { colors, measures } from 'common/styles';
 
 export default ({ address, name }) => (
     <View style={styles.container}>
@@ -20,9 +20,13 @@ const styles = StyleSheet.create({
         padding: measures.defaultPadding
     },
     title: {
-        fontSize: 20
+        backgroundColor: 'transparent',
+        color: colors.white,
+        fontSize: measures.fontSizeMedium
     },
     subtitle: {
-        fontSize: 14
+        backgroundColor: 'transparent',
+        color: colors.white,
+        fontSize: measures.fontSizeSmall
     }
 });
