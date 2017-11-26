@@ -28,28 +28,24 @@ export class Overview extends React.Component {
                     <View style={styles.row}>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.RECEIVE)}>
                             <View style={styles.block}>
-                                <Icon name="qrcode" type="fa" size="large" />
-                                <Text style={styles.blockTitle}>Receber Pontos</Text>
+                                <Image style={styles.blockImage} source={require('assets/img/receive_points.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.SEND)}>
                             <View style={styles.block}>
-                                <Icon name="cube-send" type="mdc" size="large" />
-                                <Text style={styles.blockTitle}>Enviar Pontos</Text>
+                                <Image style={styles.blockImage} source={require('assets/img/send_points.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
                     <View style={styles.row}>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.MANAGE)}>
                             <View style={styles.block}>
-                                <Icon name="attach-money" type="md" size="large" />
-                                <Text style={styles.blockTitle}>Comprar e Vender</Text>
+                                <Image style={styles.blockImage} source={require('assets/img/buy_sell.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.OFFERS)}>
                             <View style={styles.block}>
-                                <Icon name="local-offer" type="md" size="large" />
-                                <Text style={styles.blockTitle}>Ofertas</Text>
+                                <Image style={styles.blockImage} source={require('assets/img/offers.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
@@ -83,19 +79,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 130
     },
-    gridIcon: {
-        width: 36,
-        height: 36
-    },
     block: {
         margin: 8,
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: colors.jellyBean,
         borderWidth: 1,
         borderColor: colors.white
+    },
+    blockImage: {
+        width: '100%',
+        height: '100%'
     },
     blockTitle: {
         color: colors.white
