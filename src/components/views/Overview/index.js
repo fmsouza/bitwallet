@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     },
     clubTitle: {
         color: colors.white,
-        fontSize: measures.fontSizeLarge
+        fontSize: measures.fontSizeLarge - 2
     },
     clubDescription: {
         color: colors.white,

@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent'
     },
     balanceContainer: {
-        paddingLeft: measures.defaultPadding * 2,
+        flex: 1,
+        paddingHorizontal: measures.defaultPadding * 2,
         marginTop: measures.defaultMargin,
         paddingVertical: 0,
         backgroundColor: colors.martini,
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     balanceLabel: {
-        fontSize: measures.fontSizeLarge * 1.3,
+        fontSize: measures.fontSizeLarge,
         color: colors.white
     },
     unitLabel: {
