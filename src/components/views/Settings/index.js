@@ -4,7 +4,7 @@ import autobind from 'autobind-decorator';
 import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
-import { Views } from 'common/constants';
+import { General, Views } from 'common/constants';
 import ListItem from './ListItem';
 
 export class Settings extends React.Component {
@@ -17,7 +17,7 @@ export class Settings extends React.Component {
             await Wallet.close();
             this.props.navigation.navigate(Views.LOGIN, { replaceRoute: true });
         } catch (e) {
-            console.error(e.message);
+            General.DEBUG && console.error(e.message);
         }
     }
 

@@ -5,6 +5,7 @@ import autobind from 'autobind-decorator';
 import Permissions from 'react-native-permissions';
 import Camera from 'react-native-camera';
 import { Wallet } from 'common/actions';
+import { General } from 'common/constants';
 import { colors, measures } from 'common/styles';
 import { Views } from 'common/constants';
 
@@ -27,7 +28,7 @@ export class LoadPK extends React.Component {
                 else throw new Error('Not allowed to use the camera.');
             }
         } catch (e) {
-            console.error(e);
+            General.DEBUG && console.error(e);
         }
     }
 
@@ -37,7 +38,7 @@ export class LoadPK extends React.Component {
             await Wallet.loadWalletFromPrivateKey(pk);
             if (this.props.wallet.wallet) this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch(e) {
-            console.log(e.message);
+            General.DEBUG && console.warn(e.message);
         } finally {
             await Wallet.isLoading(false);
         }

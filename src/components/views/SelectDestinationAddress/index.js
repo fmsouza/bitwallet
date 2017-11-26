@@ -5,7 +5,7 @@ import Camera from 'react-native-camera';
 import autobind from 'autobind-decorator';
 import { Button, Container, Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
-import { Views } from 'common/constants';
+import { General, Views } from 'common/constants';
 import ListItem from './ListItem';
 import contacts from './mockedContacts';
 
@@ -27,7 +27,7 @@ export class SelectDestinationAddress extends React.Component {
                 else throw new Error('Not allowed to use the camera.');
             }
         } catch (e) {
-            console.error(e);
+            General.DEBUG && console.error(e);
         }
     }
     

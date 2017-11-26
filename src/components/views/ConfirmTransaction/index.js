@@ -6,7 +6,7 @@ import autobind from 'autobind-decorator';
 import { colors, measures } from 'common/styles';
 import { Transaction } from 'common/actions';
 import { Wallet as WalletUtils } from 'common/utils';
-import { Views } from 'common/constants';
+import { General, Views } from 'common/constants';
 
 @inject('transaction', 'wallet')
 @observer
@@ -38,7 +38,7 @@ export class ConfirmTransaction extends React.Component {
             const txn = await Transaction.transfer(this.address, String(realAmount));
             this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch(e) {
-            console.error(e);
+            General.DEBUG && console.error(e);
         } finally {
             await Transaction.isLoading(false);
         }

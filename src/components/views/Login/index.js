@@ -5,7 +5,7 @@ import autobind from 'autobind-decorator';
 import { Button, Container } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
-import { Views } from 'common/constants';
+import { General, Views } from 'common/constants';
 import LoginForm from './LoginForm';
 
 @inject('wallet')
@@ -20,7 +20,7 @@ export class Login extends React.Component {
             await Wallet.loadWalletFromMemory();
             if (this.props.wallet.wallet) this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch (e) {
-            console.warn("No wallet registered yet.");
+            General.DEBUG && console.warn("No wallet registered yet.");
         } finally {
             await Wallet.isLoading(false);
         }
@@ -32,7 +32,7 @@ export class Login extends React.Component {
             await Wallet.loadWalletFromLogin(username, password);
             if (this.props.wallet.wallet) this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
         } catch (e) {
-            console.error("Error:", e.message);
+            General.DEBUG && console.error("Error:", e.message);
         } finally {
             await Wallet.isLoading(false);
         }

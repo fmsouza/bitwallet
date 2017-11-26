@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import { Balance } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Transaction } from 'common/actions';
+import { General } from 'common/constants';
 import ListItem from './ListItem';
 
 @inject('transaction', 'wallet')
@@ -22,7 +23,7 @@ export class Extract extends React.Component {
             await Transaction.isLoading(true);
             await Transaction.loadHistory(wallet.getAddress());
         } catch(e) {
-            console.warn(e.message);
+            General.DEBUG && console.warn(e.message);
         } finally {
             await Transaction.isLoading(false);
         }

@@ -6,6 +6,7 @@ import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
 import { Wallet as WalletUtils } from 'common/utils';
+import { General } from 'common/constants';
 
 @inject('wallet')
 @observer
@@ -26,7 +27,7 @@ export class Balance extends React.Component {
             await Wallet.isLoading(true);
             await Wallet.updateBalance();
         } catch (e) {
-            console.log(e.message);
+            General.DEBUG && console.warn(e.message);
         } finally {
             await Wallet.isLoading(false);
         }

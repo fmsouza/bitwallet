@@ -1,15 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import autobind from 'autobind-decorator';
-import { Container, Footer, NumberGrid } from 'components/widgets';
+import { Footer, NumberGrid } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Views } from 'common/constants';
 
 export class SendPoints extends React.Component {
 
-    static navigationOptions = {
-        title: 'Enviar pontos'
-    };
+    static navigationOptions = { title: 'Enviar pontos' };
     
     state = { amount: '' };
 
@@ -45,7 +43,7 @@ export class SendPoints extends React.Component {
 
     render() {
         return (
-            <Container style={styles.container}>
+            <View style={styles.container}>
                 <View style={styles.topContainer}>
                     <Text style={styles.txtAmount}>{this.state.amount || 0}</Text>
                     <Text style={styles.subtitle}>pontos</Text>
@@ -54,13 +52,14 @@ export class SendPoints extends React.Component {
                     <NumberGrid onPressNumber={this.onPressNumber} />
                 </View>
                 <Footer label="Continuar" onPress={this.onPressContinue} />
-            </Container>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: colors.primary,
         flex: 5,
         alignItems: 'stretch'
     },
