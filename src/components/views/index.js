@@ -6,6 +6,7 @@ export * from './ManagePoints';
 export * from './Offers';
 export * from './Overview';
 export * from './Products';
+export * from './ProductDetails';
 export * from './ReceivePoints';
 export * from './SelectDestinationAddress';
 export * from './SendPoints';

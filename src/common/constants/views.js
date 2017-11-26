@@ -6,6 +6,7 @@ export const MANAGE = 'ManagePoints';
 export const OFFERS = 'Offers';
 export const OVERVIEW = 'Overview';
 export const PRODUCTS = 'Products';
+export const PRODUCT = 'ProductDetails';
 export const PARTNERS = 'Partners';
 export const RECEIVE = 'ReceivePoints';
 export const SELECTDEST = 'SelectDestinationAddress';

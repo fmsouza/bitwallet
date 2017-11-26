@@ -17,6 +17,7 @@ const navigator = StackNavigator({
     Offers: { screen: Views.Offers },
     Overview: { screen: Views.Overview },
     Products: { screen: Views.Products },
+    ProductDetails: { screen: Views.ProductDetails },
     ReceivePoints: { screen: Views.ReceivePoints },
     SendPoints: { screen: Views.SendPoints },
     SelectDestinationAddress: { screen: Views.SelectDestinationAddress },

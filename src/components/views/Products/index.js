@@ -1,4 +1,3 @@
-import { fontSizeLarge } from '../../../common/styles/measures';
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import autobind from 'autobind-decorator';
@@ -20,18 +19,20 @@ export class Products extends React.Component {
     @autobind
     renderItem({ item, index }) {
         return (
-            <View key={index}>
-                <View style={styles.subLayer}>
-                    <Image style={styles.cardImage} source={{ uri: item.img }} />
-                    <Text style={styles.cardFromLabel}>De {item.from} para</Text>
-                    <Text style={styles.cardToLabel}>{item.to.toUpperCase()}</Text>
-                    <Image style={styles.cardLogo} source={require('assets/img/offers/latam.png')} />
+            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate(Views.PRODUCT, { item })}>
+                <View key={index}>
+                    <View style={styles.subLayer}>
+                        <Image style={styles.cardImage} source={{ uri: item.img }} />
+                        <Text style={styles.cardFromLabel}>De {item.from} para</Text>
+                        <Text style={styles.cardToLabel}>{item.to.toUpperCase()}</Text>
+                        <Image style={styles.cardLogo} source={require('assets/img/offers/latam.png')} />
+                    </View>
+                    <View style={styles.cardBottom}>
+                        <Text style={styles.cardAmountLabel}>A partir de</Text>
+                        <Text style={styles.cardAmountValue}>{item.amount}</Text>
+                    </View>
                 </View>
-                <View style={styles.cardBottom}>
-                    <Text style={styles.cardAmountLabel}>A partir de</Text>
-                    <Text style={styles.cardAmountValue}>{item.amount}</Text>
-                </View>
-            </View>
+            </TouchableWithoutFeedback>
         );
     }
 
