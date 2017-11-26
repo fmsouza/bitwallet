@@ -31,20 +31,19 @@ function getIonicon({ name, ...props }) {
 export const Icon = (props) => {
     if (!props.name) return null;
     const size = getSize(props.size);
-    const color = props.color || colors.black;
     switch (props.type) {
-        case 'ent': return <Entypo {...props} size={size} color={color} />;
-        case 'ei': return <EvilIcon {...props} size={size} color={color} />;
-        case 'fe': return <Feather {...props} size={size} color={color} />;
-        case 'fa': return <FontAwesome {...props} size={size} color={color} />;
-        case 'fo': return <Foundation {...props} size={size} color={color} />;
-        case 'md': return <MaterialIcon {...props} size={size} color={color} />;
-        case 'mdc': return <MaterialCommunityIcon {...props} size={size} color={color} />;
-        case 'oct': return <Octicon {...props} size={size} color={color} />;
-        case 'zo': return <Zocial {...props} size={size} color={color} />;
-        case 'simple': return <SimpleLineIcon {...props} size={size} color={color} />;
+        case 'ent': return <Entypo {...props} size={size} />;
+        case 'ei': return <EvilIcon {...props} size={size} />;
+        case 'fe': return <Feather {...props} size={size} />;
+        case 'fa': return <FontAwesome {...props} size={size} />;
+        case 'fo': return <Foundation {...props} size={size} />;
+        case 'md': return <MaterialIcon {...props} size={size} />;
+        case 'mdc': return <MaterialCommunityIcon {...props} size={size} />;
+        case 'oct': return <Octicon {...props} size={size} />;
+        case 'zo': return <Zocial {...props} size={size} />;
+        case 'simple': return <SimpleLineIcon {...props} size={size} />;
 
         default:
-        case 'ionicons': return getIonicon({ color, size, ...props });
+        case 'ionicons': return getIonicon({ size, ...props });
     }
 };

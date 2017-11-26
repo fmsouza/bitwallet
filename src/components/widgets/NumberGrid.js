@@ -32,9 +32,9 @@ export class NumberGrid extends React.Component {
                     {this.renderBlock('1', '1')}
                 </View>
                 <View style={styles.row}>
-                    {this.renderBlock(<Icon name="dot-single" type="ent" />, '.')}
+                    {this.renderBlock(<Icon name="dot-single" type="ent" color={styles.label.color} />, '.')}
                     {this.renderBlock('0', '0')}
-                    {this.renderBlock(<Icon name="backspace" />, 'erase')}
+                    {this.renderBlock(<Icon name="backspace" color={styles.label.color} />, 'erase')}
                 </View>
             </View>
         );
@@ -57,13 +57,14 @@ const styles = StyleSheet.create({
     block: {
         flex: 1,
         borderWidth: 2,
-        borderColor: colors.secondary,
-        backgroundColor: colors.lightGrey,
+        borderColor: colors.primary,
+        backgroundColor: colors.raven,
         alignItems: 'center',
         justifyContent: 'center'
     },
     label: {
         fontSize: measures.fontSizeMedium,
+        color: colors.white,
         fontWeight: 'bold'
     }
 });
