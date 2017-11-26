@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Button, Container } from 'components/widgets';
+import { Button, Container, MultiplusBox } from 'components/widgets';
+import { Views } from 'common/constants';
 import { colors, measures } from 'common/styles';
 
 export class Offers extends React.Component {
@@ -14,47 +15,43 @@ export class Offers extends React.Component {
                 <Text style={styles.title}>Ofertas em Destaque</Text>
                 <View style={styles.grid}>
                     <View style={styles.row}>
-                        <TouchableWithoutFeedback onPress={() => navigate(Views.RECEIVE)}>
+                        <TouchableWithoutFeedback onPress={() => navigate(Views.PRODUCTS, { category: 'banks' })}>
                             <View style={styles.block}>
                                 <Image style={styles.blockImage} source={require('assets/img/offers/banks.png')} />
                             </View>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={() => navigate(Views.SEND)}>
+                        <TouchableWithoutFeedback onPress={() => navigate(Views.PRODUCTS, { category: 'telecom' })}>
                             <View style={styles.block}>
                                 <Image style={styles.blockImage} source={require('assets/img/offers/telecom.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
                     <View style={styles.row}>
-                        <TouchableWithoutFeedback onPress={() => navigate(Views.MANAGE)}>
+                        <TouchableWithoutFeedback onPress={() => navigate(Views.PRODUCTS, { category: 'ecommerce' })}>
                             <View style={styles.block}>
                                 <Image style={styles.blockImage} source={require('assets/img/offers/ecommerce.png')} />
                             </View>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={() => navigate(Views.OFFERS)}>
+                        <TouchableWithoutFeedback onPress={() => navigate(Views.PRODUCTS, { category: 'tickets' })}>
                             <View style={styles.block}>
                                 <Image style={styles.blockImage} source={require('assets/img/offers/tickets.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
                     <View style={styles.row}>
-                        <TouchableWithoutFeedback onPress={() => navigate(Views.MANAGE)}>
+                        <TouchableWithoutFeedback onPress={() => navigate(Views.PRODUCTS, { category: 'favorites' })}>
                             <View style={styles.block}>
                                 <Image style={styles.blockImage} source={require('assets/img/offers/favorites.png')} />
                             </View>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={() => navigate(Views.OFFERS)}>
+                        <TouchableWithoutFeedback onPress={() => navigate(Views.PRODUCTS, { category: 'tourism' })}>
                             <View style={styles.block}>
                                 <Image style={styles.blockImage} source={require('assets/img/offers/tourism.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
                 </View>
-                <View style={styles.clubContainer}>
-                    <Text style={styles.clubTitle}>Clube Multiplus</Text>
-                    <Text style={styles.clubDescription}>Com o Clube Multiplus você junta pontos mais rápido, participa de promoções e conquista seus objetivos rapidamente.</Text>
-                    <Button style={styles.clubButton} borderless title="Veja como funciona" onPress={() => {}} />
-                </View>
+                <MultiplusBox />
             </Container>
         );
     }
@@ -93,22 +90,5 @@ const styles = StyleSheet.create({
     blockImage: {
         width: '100%',
         height: '100%'
-    },
-    clubContainer: {
-        backgroundColor: colors.antique,
-        paddingHorizontal: measures.defaultPadding * 2,
-        justifyContent: 'space-around',
-        height: 140
-    },
-    clubTitle: {
-        color: colors.white,
-        fontSize: measures.fontSizeLarge - 2
-    },
-    clubDescription: {
-        color: colors.white,
-        fontSize: measures.fontSizeMedium - 2
-    },
-    clubButton: {
-        alignSelf: 'flex-end'
     }
 });

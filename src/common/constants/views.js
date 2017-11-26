@@ -5,6 +5,7 @@ export const LOGIN = 'Login';
 export const MANAGE = 'ManagePoints';
 export const OFFERS = 'Offers';
 export const OVERVIEW = 'Overview';
+export const PRODUCTS = 'Products';
 export const PARTNERS = 'Partners';
 export const RECEIVE = 'ReceivePoints';
 export const SELECTDEST = 'SelectDestinationAddress';

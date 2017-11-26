@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Balance, Button, Container, Footer, Icon } from 'components/widgets';
+import { Balance, Button, Container, Footer, Icon, MultiplusBox } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Views } from 'common/constants';
 
@@ -50,11 +50,7 @@ export class Overview extends React.Component {
                         </TouchableWithoutFeedback>
                     </View>
                 </View>
-                <View style={styles.clubContainer}>
-                    <Text style={styles.clubTitle}>Clube Multiplus</Text>
-                    <Text style={styles.clubDescription}>Com o Clube Multiplus você junta pontos mais rápido, participa de promoções e conquista seus objetivos rapidamente.</Text>
-                    <Button style={styles.clubButton} borderless title="Veja como funciona" onPress={() => {}} />
-                </View>
+                <MultiplusBox />
             </Container>
         );
     }
@@ -96,22 +92,5 @@ const styles = StyleSheet.create({
         width: 24,
         height: 24,
         marginRight: measures.defaultMargin
-    },
-    clubContainer: {
-        backgroundColor: colors.antique,
-        paddingHorizontal: measures.defaultPadding * 2,
-        justifyContent: 'space-around',
-        height: 140
-    },
-    clubTitle: {
-        color: colors.white,
-        fontSize: measures.fontSizeLarge - 2
-    },
-    clubDescription: {
-        color: colors.white,
-        fontSize: measures.fontSizeMedium - 2
-    },
-    clubButton: {
-        alignSelf: 'flex-end'
     }
 });
