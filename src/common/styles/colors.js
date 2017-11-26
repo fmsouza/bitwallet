@@ -14,6 +14,7 @@ export const jellyBean              = '#487A91';
 export const zorba                  = '#A1968E';
 export const martini                = '#B5AAA3';
 export const raven                  = '#686F80';
+export const mobster                = '#80708A';
 
 export const primary                = chambray;
 export const secondary              = white;

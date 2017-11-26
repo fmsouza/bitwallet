@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { Button } from 'components/widgets';
+import { Container, Footer } from 'components/widgets';
 import autobind from 'autobind-decorator';
 import { colors, measures } from 'common/styles';
 import { Transaction } from 'common/actions';
@@ -47,28 +47,30 @@ export class ConfirmTransaction extends React.Component {
     render() {
         const { loading } = this.props.transaction;
         return (
-            <View style={styles.container}>
+            <Container style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.title}>Destinatário</Text>
-                    <Text style={styles.value}>{this.address}</Text>
-                    <Text style={styles.title}>Saldo disponível</Text>
-                    <Text style={styles.value}>{this.balance}</Text>
-                    <Text style={styles.title}>Pontos a enviar</Text>
-                    <Text style={styles.value}>{this.amount}</Text>
-                    <Text style={styles.title}>Saldo restante</Text>
-                    <Text style={styles.value}>{this.finalBalance}</Text>
+                    <View style={styles.topBox}>
+                        <View style={styles.subLayer}>
+                            <Text style={styles.title}>DESTINATÁRIO</Text>
+                            <Text style={styles.value}>{this.address}</Text>
+                            <Text style={styles.title}>PONTOS A ENVIAR</Text>
+                            <Text style={styles.value}>{this.amount}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.bottomBox}>
+                        <Text style={styles.balanceTitle}>Saldo disponível:</Text>
+                        <Text style={styles.balanceValue}>{this.balance} pts</Text>
+                    </View>
                     {loading && <ActivityIndicator animating />}
                 </View>
-                <Button borderless title="Confirmar e enviar" onPress={this.onSend} />
-            </View>
+                <Footer label="Confirmar e enviar" onPress={this.onSend} />
+            </Container>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.secondary,
-        padding: measures.defaultPadding,
         flex: 1,
         alignItems: 'stretch',
         justifyContent: 'space-between'
@@ -76,13 +78,39 @@ const styles = StyleSheet.create({
     content: {
         flex: 1
     },
+    topBox: {
+        paddingVertical: measures.defaultPadding,
+        backgroundColor: colors.almond
+    },
+    subLayer: {
+        backgroundColor: colors.zorba,
+        paddingVertical: measures.defaultPadding
+    },
     title: {
         alignSelf: 'center',
-        marginVertical: measures.defaultMargin,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: colors.white
     },
     value: {
         alignSelf: 'center',
+        color: colors.white,
         marginVertical: measures.defaultMargin
+    },
+    bottomBox: {
+        marginTop: measures.defaultMargin * 4,
+        backgroundColor: colors.mobster,
+        padding: measures.defaultPadding,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    balanceTitle: {
+        color: colors.white,
+        fontSize: measures.fontSizeMedium
+    },
+    balanceValue: {
+        marginLeft: measures.defaultMargin,
+        color: colors.white,
+        fontSize: measures.fontSizeMedium
     }
 });
