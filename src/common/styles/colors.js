@@ -15,6 +15,9 @@ export const zorba                  = '#A1968E';
 export const martini                = '#B5AAA3';
 export const raven                  = '#686F80';
 export const mobster                = '#80708A';
+export const rum                    = '#7E6D87';
+export const maverick               = '#C5B6C2';
+export const sanJuan                = '#344A6B';
 
 export const primary                = chambray;
 export const secondary              = white;

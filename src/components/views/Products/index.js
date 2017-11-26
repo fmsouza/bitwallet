@@ -1,3 +1,4 @@
+import { fontSizeLarge } from '../../../common/styles/measures';
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import autobind from 'autobind-decorator';
@@ -20,9 +21,16 @@ export class Products extends React.Component {
     renderItem({ item, index }) {
         return (
             <View key={index}>
-                <Text>{item.from}</Text>
-                <Text>{item.to}</Text>
-                <Text>{item.amount}</Text>
+                <View style={styles.subLayer}>
+                    <Image style={styles.cardImage} source={{ uri: item.img }} />
+                    <Text style={styles.cardFromLabel}>De {item.from} para</Text>
+                    <Text style={styles.cardToLabel}>{item.to.toUpperCase()}</Text>
+                    <Image style={styles.cardLogo} source={require('assets/img/offers/latam.png')} />
+                </View>
+                <View style={styles.cardBottom}>
+                    <Text style={styles.cardAmountLabel}>A partir de</Text>
+                    <Text style={styles.cardAmountValue}>{item.amount}</Text>
+                </View>
             </View>
         );
     }
@@ -74,13 +82,55 @@ const styles = StyleSheet.create({
         margin: measures.defaultMargin
     },
     card: {
-        borderRadius: 5,
+        borderRadius: 7,
         width: wp(80, Dimensions.get('window').width),
-        backgroundColor: colors.white,
-        padding: measures.defaultPadding,
+        backgroundColor: colors.maverick,
+        borderWidth: 4,
+        borderColor: colors.white,
         shadowOffset: { width: 2, height: 2 },
         shadowColor: colors.darkGray,
         shadowOpacity: 0.8,
         elevation: 1
+    },
+    cardImage: {
+        width: '100%',
+        height: 100
+    },
+    subLayer: {
+        padding: measures.defaultPadding,
+        backgroundColor: colors.rum
+    },
+    cardFromLabel: {
+        color: colors.white,
+        fontSize: measures.fontSizeMedium - 2,
+        marginVertical: measures.defaultMargin
+    },
+    cardToLabel: {
+        color: colors.white,
+        fontWeight: 'bold',
+        fontSize: measures.fontSizeMedium,
+        textAlign: 'center'
+    },
+    cardLogo: {
+        margin: measures.defaultMargin,
+        alignSelf: 'flex-end',
+        width: 80,
+        height: 16
+    },
+    cardBottom: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: measures.defaultPadding,
+        height: 60
+    },
+    cardAmountLabel: {
+        color: colors.white,
+        fontSize: measures.fontSizeMedium - 2
+    },
+    cardAmountValue: {
+        fontSize: measures.fontSizeLarge,
+        fontWeight: 'bold',
+        color: colors.sanJuan
     }
 });
