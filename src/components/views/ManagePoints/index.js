@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Balance } from 'components/widgets';
+import { Balance, Container } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import BuyPanel from './BuyPanel';
 import SellPanel from './SellPanel';
@@ -11,13 +11,13 @@ export class ManagePoints extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <Container style={styles.container}>
                 <Balance />
                 <ScrollView style={styles.scrollContainer}>
                     <BuyPanel />
                     <SellPanel />
                 </ScrollView>
-            </View>
+            </Container>
         );
     }
 }

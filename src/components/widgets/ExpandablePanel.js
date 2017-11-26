@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
     },
     containerBody: {
         padding: measures.defaultPadding,
-        backgroundColor: colors.defaultBackground
+        backgroundColor: colors.white
     }
 });
