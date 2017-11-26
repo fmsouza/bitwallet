@@ -78,7 +78,7 @@ export default class ListItem extends React.Component {
 const styles = StyleSheet.create({
     container: {
         borderBottomWidth: 1,
-        borderColor: colors.grey,
+        borderColor: colors.gray,
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center'

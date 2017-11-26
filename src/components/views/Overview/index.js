@@ -28,24 +28,24 @@ export class Overview extends React.Component {
                     <View style={styles.row}>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.RECEIVE)}>
                             <View style={styles.block}>
-                                <Image style={styles.blockImage} source={require('assets/img/receive_points.png')} />
+                                <Image style={styles.blockImage} source={require('assets/img/overview/receive_points.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.SEND)}>
                             <View style={styles.block}>
-                                <Image style={styles.blockImage} source={require('assets/img/send_points.png')} />
+                                <Image style={styles.blockImage} source={require('assets/img/overview/send_points.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
                     <View style={styles.row}>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.MANAGE)}>
                             <View style={styles.block}>
-                                <Image style={styles.blockImage} source={require('assets/img/buy_sell.png')} />
+                                <Image style={styles.blockImage} source={require('assets/img/overview/buy_sell.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback onPress={() => navigate(Views.OFFERS)}>
                             <View style={styles.block}>
-                                <Image style={styles.blockImage} source={require('assets/img/offers.png')} />
+                                <Image style={styles.blockImage} source={require('assets/img/overview/offers.png')} />
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
@@ -91,9 +91,6 @@ const styles = StyleSheet.create({
     blockImage: {
         width: '100%',
         height: '100%'
-    },
-    blockTitle: {
-        color: colors.white
     },
     headerIcon: {
         width: 24,

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         height: 48,
-        borderBottomColor: 'grey',
+        borderBottomColor: colors.gray,
         borderBottomWidth: 1
     }
 });

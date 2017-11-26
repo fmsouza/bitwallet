@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     container: {
         borderBottomWidth: 1,
         width: '100%',
-        borderColor: 'grey',
+        borderColor: colors.gray,
         height: 64,
         alignItems: 'flex-start',
         justifyContent: 'center',

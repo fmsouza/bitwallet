@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: measures.fontSizeMedium,
-        color: colors.grey
+        color: colors.gray
     },
     bottomContainer: {
         flex: 4,

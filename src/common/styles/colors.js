@@ -1,9 +1,9 @@
 export const black                  = '#000000';
-export const darkGrey               = '#1E1E1E';
+export const darkGray               = '#1E1E1E';
 export const darkBlue               = '#27354A';
-export const grey                   = '#CCCCCC';
+export const gray                   = '#B0ADB8';
 export const lightBlue              = '#0C71B1';
-export const lightGrey              = '#EFEFEF';
+export const lightGray              = '#EFEFEF';
 export const white                  = '#FFFFFF';
 export const chambray               = '#4E547D'; // topbar
 export const purple                 = '#434772'; // bgTop
