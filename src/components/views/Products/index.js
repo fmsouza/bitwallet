@@ -5,7 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 import { Balance, Container, MultiplusBox } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Views } from 'common/constants';
-import flightOffers from './mockedFlightOffers';
+import mockedOffers from './mockedOffers';
 
 function wp (percentage, size) {
     const value = (percentage * size) / 100;
@@ -20,16 +20,14 @@ export class Products extends React.Component {
     renderItem({ item, index }) {
         return (
             <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate(Views.PRODUCT, { item })}>
-                <View key={index}>
+                <View key={index} style={{ flex: 1 }}>
                     <View style={styles.subLayer}>
-                        <Image style={styles.cardImage} source={{ uri: item.img }} />
-                        <Text style={styles.cardFromLabel}>De {item.from} para</Text>
-                        <Text style={styles.cardToLabel}>{item.to.toUpperCase()}</Text>
-                        <Image style={styles.cardLogo} source={require('assets/img/offers/latam.png')} />
+                        <Image style={styles.cardImage} source={{ uri: item.imgUri }} />
+                        <Text style={styles.cardTitle}>{item.title}</Text>
                     </View>
                     <View style={styles.cardBottom}>
-                        <Text style={styles.cardAmountLabel}>A partir de</Text>
-                        <Text style={styles.cardAmountValue}>{item.amount}</Text>
+                        <Text style={styles.cardAmountLabel}>Por</Text>
+                        <Text style={styles.cardAmountValue}>{item.amount} Pts</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -46,7 +44,7 @@ export class Products extends React.Component {
                     <Text style={styles.label}>OFERTAS ESPECIAIS</Text>
                     <Carousel
                         enableMomentum
-                        data={flightOffers}
+                        data={mockedOffers}
                         renderItem={this.renderItem}
                         contentContainerCustomStyle={styles.productsContainer}
                         slideStyle={styles.card}
@@ -95,35 +93,28 @@ const styles = StyleSheet.create({
     },
     cardImage: {
         width: '100%',
-        height: 100
+        height: 130
     },
     subLayer: {
+        flex: 4,
+        borderTopLeftRadius: 7,
+        borderTopRightRadius: 7,
         padding: measures.defaultPadding,
         backgroundColor: colors.rum
     },
-    cardFromLabel: {
+    cardTitle: {
         color: colors.white,
         fontSize: measures.fontSizeMedium - 2,
         marginVertical: measures.defaultMargin
     },
-    cardToLabel: {
-        color: colors.white,
-        fontWeight: 'bold',
-        fontSize: measures.fontSizeMedium,
-        textAlign: 'center'
-    },
-    cardLogo: {
-        margin: measures.defaultMargin,
-        alignSelf: 'flex-end',
-        width: 80,
-        height: 16
-    },
     cardBottom: {
+        flex: 1,
+        borderBottomLeftRadius: 7,
+        borderBottomRightRadius: 7,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: measures.defaultPadding,
-        height: 60
+        paddingHorizontal: measures.defaultPadding
     },
     cardAmountLabel: {
         color: colors.white,
