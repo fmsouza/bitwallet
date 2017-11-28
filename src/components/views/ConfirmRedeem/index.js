@@ -48,7 +48,7 @@ export class ConfirmRedeem extends React.Component {
 
     @autobind
     onPressBack() {
-        this.props.navigation.navigate(Views.OVERVIEW);
+        this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
     }
 
     renderSuccessBox() {

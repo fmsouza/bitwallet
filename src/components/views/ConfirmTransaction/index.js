@@ -13,6 +13,8 @@ import { General, Views } from 'common/constants';
 export class ConfirmTransaction extends React.Component {
 
     static navigationOptions = { title: 'Confirmação de envio' };
+
+    state = { success: false };
     
     get balance() {
         return WalletUtils.tokenDecimals(this.props.wallet.balance);
@@ -36,12 +38,32 @@ export class ConfirmTransaction extends React.Component {
             await Transaction.isLoading(true);
             const realAmount = WalletUtils.expandTokenAmount(this.amount);
             const txn = await Transaction.transfer(this.address, String(realAmount));
-            this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
+            this.setState({ success: Boolean(txn) });
         } catch(e) {
             General.DEBUG && console.error(e);
         } finally {
             await Transaction.isLoading(false);
         }
+    }
+    
+    @autobind
+    onPressBack() {
+        this.props.navigation.navigate(Views.OVERVIEW, { replaceRoute: true });
+    }
+    
+    renderSuccessBox() {
+        return !this.state.success ? null : (
+            <View style={styles.successBox}>
+                <Text style={styles.successTitle}>ENVIO REALIZADO COM SUCESSO</Text>
+                <Text style={styles.successSubtitle}>Você receberá uma confirmação em breve.</Text>
+            </View>
+        );
+    }
+    
+    renderFooter() {
+        return this.state.success ?
+            <Footer label="Voltar ao início" onPress={this.onPressBack} /> :
+            <Footer label="Confirmar e enviar" onPress={this.onSend} />;
     }
 
     render() {
@@ -62,8 +84,9 @@ export class ConfirmTransaction extends React.Component {
                         <Text style={styles.balanceValue}>{this.balance} pts</Text>
                     </View>
                     {loading && <ActivityIndicator animating />}
+                    {this.renderSuccessBox()}
                 </View>
-                <Footer label="Confirmar e enviar" onPress={this.onSend} />
+                {this.renderFooter()}
             </Container>
         );
     }
@@ -89,12 +112,16 @@ const styles = StyleSheet.create({
     title: {
         alignSelf: 'center',
         fontWeight: 'bold',
-        color: colors.white
+        color: colors.white,
+        fontSize: measures.fontSizeMedium + 1
     },
     value: {
         alignSelf: 'center',
         color: colors.white,
-        marginVertical: measures.defaultMargin
+        marginVertical: measures.defaultMargin * 2,
+        fontSize: measures.fontSizeMedium,
+        textAlign: 'center',
+        maxWidth: '90%'
     },
     bottomBox: {
         marginTop: measures.defaultMargin * 4,
@@ -112,5 +139,23 @@ const styles = StyleSheet.create({
         marginLeft: measures.defaultMargin,
         color: colors.white,
         fontSize: measures.fontSizeMedium
+    },
+    successBox: {
+        marginTop: measures.defaultMargin * 4,
+        backgroundColor: colors.mobster,
+        padding: measures.defaultPadding,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    successTitle: {
+        fontSize: measures.fontSizeLarge,
+        textAlign: 'center',
+        color: colors.fuelYellow
+    },
+    successSubtitle: {
+        fontSize: measures.fontSizeMedium,
+        textAlign: 'center',
+        color: colors.white
     }
 });
