@@ -13,7 +13,7 @@ import { General } from 'common/constants';
 export class Balance extends React.Component {
 
     get balance() {
-        if (!this.props.wallet.balance) return '';
+        if (!this.props.wallet.balance) return 0;
         return Number(WalletUtils.tokenDecimals(this.props.wallet.balance)).toFixed(2);
     }
     
