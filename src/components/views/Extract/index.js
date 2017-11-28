@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View, RefreshControl } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { Balance } from 'components/widgets';
 import { colors, measures } from 'common/styles';
@@ -37,9 +37,9 @@ export class Extract extends React.Component {
             <View style={styles.container}>
                 <Balance />
                 <View style={styles.historyContainer}>
-                    {loading && <ActivityIndicator animating />}
                     <FlatList
                         data={history}
+                        refreshControl={<RefreshControl refreshing={loading} onRefresh={() => this.loadHistory()} />}
                         keyExtractor={item => item.transactionHash}
                         renderItem={this.renderItem} />
                 </View>
