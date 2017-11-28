@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { colors } from 'common/styles';
 
-export const Footer = ({ label, onPress }) => (
+export const Footer = ({ label, onPress, style }) => (
     <TouchableWithoutFeedback onPress={onPress}>
-        <View style={styles.container}>
+        <View style={StyleSheet.flatten([styles.container, (style || {})])}>
             <Text style={styles.label}>{label.toUpperCase()}</Text>
         </View>
     </TouchableWithoutFeedback>

@@ -1,4 +1,5 @@
 export const CONFIRMTXN = 'ConfirmTransaction';
+export const CONFIRMRDM = 'ConfirmRedeem';
 export const EXTRACT = 'Extract';
 export const LOADPK = 'LoadPK';
 export const LOGIN = 'Login';

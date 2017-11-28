@@ -1,3 +1,4 @@
+export * from './ConfirmRedeem';
 export * from './ConfirmTransaction';
 export * from './Extract';
 export * from './LoadPK';
