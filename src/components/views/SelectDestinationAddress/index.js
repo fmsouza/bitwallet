@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Vibration, View } from 'react-native';
+import { FlatList, Keyboard, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Vibration, View } from 'react-native';
 import Permissions from 'react-native-permissions';
 import Camera from 'react-native-camera';
 import autobind from 'autobind-decorator';
@@ -17,6 +17,7 @@ export class SelectDestinationAddress extends React.Component {
 
     @autobind
     async onPressCamera() {
+        Keyboard.dismiss();
         var status;
         try {
             status = await Permissions.check('camera');
@@ -41,6 +42,7 @@ export class SelectDestinationAddress extends React.Component {
 
     @autobind
     onSend() {
+        Keyboard.dismiss();
         const { address } = this.state;
         if (!address) return;
         const { state: { params: { amount } }, navigate } = this.props.navigation; //.state.params;
