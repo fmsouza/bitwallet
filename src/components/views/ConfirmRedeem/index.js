@@ -46,6 +46,26 @@ export class ConfirmRedeem extends React.Component {
         }
     }
 
+    @autobind
+    onPressBack() {
+        this.props.navigation.navigate(Views.OVERVIEW);
+    }
+
+    renderSuccessBox() {
+        return !this.state.success ? null : (
+            <View style={styles.redeemSuccessBox}>
+                <Text style={styles.redeemSuccessTitle}>RESGATE REALIZADO COM SUCESSO</Text>
+                <Text style={styles.redeemSuccessSubtitle}>Você receberá uma confirmação em breve.</Text>
+            </View>
+        );
+    }
+
+    renderFooter() {
+        return this.state.success ?
+            <Footer style={styles.redeemButton} label="Voltar ao início" onPress={this.onPressBack} /> :
+            <Footer style={styles.redeemButton} label="Confirmar resgate" onPress={this.onSend} />;
+    }
+
     render() {
         const { loading } = this.props.transaction;
         return (
@@ -64,8 +84,9 @@ export class ConfirmRedeem extends React.Component {
                         <Text style={styles.balanceValue}>{this.balance} Pontos</Text>
                     </View>
                     {loading && <ActivityIndicator animating />}
+                    {this.renderSuccessBox()}
                 </View>
-                <Footer style={styles.redeemButton} label="Confirmar resgate" onPress={this.onSend} />
+                {this.renderFooter()}
             </Container>
         );
     }
@@ -121,5 +142,23 @@ const styles = StyleSheet.create({
     },
     redeemButton: {
         backgroundColor: colors.etonBlue
+    },
+    redeemSuccessBox: {
+        marginTop: measures.defaultMargin * 4,
+        backgroundColor: colors.mobster,
+        padding: measures.defaultPadding,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    redeemSuccessTitle: {
+        fontSize: measures.fontSizeLarge,
+        textAlign: 'center',
+        color: colors.fuelYellow
+    },
+    redeemSuccessSubtitle: {
+        fontSize: measures.fontSizeMedium,
+        textAlign: 'center',
+        color: colors.white
     }
 });
