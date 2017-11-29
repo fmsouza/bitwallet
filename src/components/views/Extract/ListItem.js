@@ -1,7 +1,6 @@
 import React from 'react';
 import { Linking, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import moment from 'moment';
-import autobind from 'autobind-decorator';
 import { Icon } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Transaction as TransactionUtils, Wallet as WalletUtils } from 'common/utils';
@@ -9,20 +8,20 @@ import { Transaction as TransactionUtils, Wallet as WalletUtils } from 'common/u
 export default class ListItem extends React.Component {
 
     get timestamp() {
-        return moment(parseInt(this.props.transaction.timeStamp)*1000).format('D/M/Y hh:mm');
+        return moment(parseInt(this.props.item.timeStamp)*1000).format('D/M/Y hh:mm');
     }
 
     get points() {
-        return WalletUtils.tokenDecimals(this.props.transaction.data);
+        return WalletUtils.tokenDecimals(this.props.item.data);
     }
 
     get from() {
-        const address = this.props.transaction.topics[1].split('x')[1].replace(/^0+(?!\.|$)/, '');
+        const address = this.props.item.topics[1].split('x')[1].replace(/^0+(?!\.|$)/, '');
         return `0x${address}`;
     }
     
     get to() {
-        const address = this.props.transaction.topics[2].split('x')[1].replace(/^0+(?!\.|$)/, '');
+        const address = this.props.item.topics[2].split('x')[1].replace(/^0+(?!\.|$)/, '');
         return `0x${address}`;
     }
 
@@ -30,9 +29,8 @@ export default class ListItem extends React.Component {
         return parseInt(this.from) === parseInt(this.props.walletAddress);
     }
 
-    @autobind
     onPress() {
-        const { transactionHash } = this.props.transaction;
+        const { transactionHash } = this.props.item;
         Linking.openURL(TransactionUtils.transactionDetailsURL(transactionHash));
     }
 
@@ -69,7 +67,7 @@ export default class ListItem extends React.Component {
     render() {
         return (
             <TouchableWithoutFeedback
-                onPress={this.onPress}
+                onPress={() => this.onPress()}
                 children={this.isSending() ? this.renderOutcoming() : this.renderIncoming()} />
         );
     }

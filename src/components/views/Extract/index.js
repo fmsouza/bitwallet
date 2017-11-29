@@ -29,7 +29,7 @@ export class Extract extends React.Component {
         }
     }
 
-    renderItem = ({ item }) => <ListItem transaction={item} walletAddress={this.props.wallet.wallet.getAddress()} />
+    renderItem = ({ item }) => <ListItem item={item} walletAddress={this.props.wallet.wallet.getAddress()} />
 
     render() {
         const { history, loading } = this.props.transaction;
