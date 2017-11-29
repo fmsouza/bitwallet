@@ -14,7 +14,7 @@ export class ConfirmTransaction extends React.Component {
 
     static navigationOptions = { title: 'Confirmação de envio' };
 
-    state = { success: false };
+    state = { success: false, error: false };
     
     get balance() {
         return WalletUtils.tokenDecimals(this.props.wallet.balance);
@@ -38,8 +38,9 @@ export class ConfirmTransaction extends React.Component {
             await Transaction.isLoading(true);
             const realAmount = WalletUtils.expandTokenAmount(this.amount);
             const txn = await Transaction.transfer(this.address, String(realAmount));
-            this.setState({ success: Boolean(txn) });
+            this.setState({ success: true });
         } catch(e) {
+            this.setState({ error: true });
             General.DEBUG && console.error(e);
         } finally {
             await Transaction.isLoading(false);
@@ -60,8 +61,17 @@ export class ConfirmTransaction extends React.Component {
         );
     }
     
+    renderErrorBox() {
+        return !this.state.error ? null : (
+            <View style={styles.errorBox}>
+                <Text style={styles.errorTitle}>OCORREU UM ERRO</Text>
+                <Text style={styles.errorSubtitle}>Não foi possível realizar o envio. Tente novamente mais tarde.</Text>
+            </View>
+        );
+    }
+    
     renderFooter() {
-        return this.state.success ?
+        return (this.state.success || this.state.error) ?
             <Footer label="Voltar ao início" onPress={this.onPressBack} /> :
             <Footer label="Confirmar e enviar" onPress={this.onSend} />;
     }
@@ -85,6 +95,7 @@ export class ConfirmTransaction extends React.Component {
                     </View>
                     {loading && <ActivityIndicator animating />}
                     {this.renderSuccessBox()}
+                    {this.renderErrorBox()}
                 </View>
                 {this.renderFooter()}
             </Container>
@@ -154,6 +165,24 @@ const styles = StyleSheet.create({
         color: colors.fuelYellow
     },
     successSubtitle: {
+        fontSize: measures.fontSizeMedium,
+        textAlign: 'center',
+        color: colors.white
+    },
+    errorBox: {
+        marginTop: measures.defaultMargin * 4,
+        backgroundColor: colors.mobster,
+        padding: measures.defaultPadding,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    errorTitle: {
+        fontSize: measures.fontSizeLarge,
+        textAlign: 'center',
+        color: colors.errorRed
+    },
+    errorSubtitle: {
         fontSize: measures.fontSizeMedium,
         textAlign: 'center',
         color: colors.white
