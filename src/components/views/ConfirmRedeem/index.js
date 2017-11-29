@@ -14,7 +14,7 @@ export class ConfirmRedeem extends React.Component {
 
     static navigationOptions = { title: 'Confirmação de Resgate' };
 
-    state = { success: false };
+    state = { success: false, error: false };
     
     get balance() {
         return WalletUtils.tokenDecimals(this.props.wallet.balance);
@@ -38,9 +38,10 @@ export class ConfirmRedeem extends React.Component {
             await Transaction.isLoading(true);
             const realAmount = WalletUtils.expandTokenAmount(this.amount);
             const txn = await Transaction.transfer(this.address, String(realAmount));
-            this.setState({ success: Boolean(txn) });
+            this.setState({ success: true });
         } catch(e) {
-            General.DEBUG && console.error(e);
+            this.setState({ error: true });
+            General.DEBUG && console.warn(e);
         } finally {
             await Transaction.isLoading(false);
         }
@@ -59,9 +60,18 @@ export class ConfirmRedeem extends React.Component {
             </View>
         );
     }
+    
+    renderErrorBox() {
+        return !this.state.error ? null : (
+            <View style={styles.redeemErrorBox}>
+                <Text style={styles.redeemErrorTitle}>OCORREU UM ERRO</Text>
+                <Text style={styles.redeemErrorSubtitle}>Não foi possível realizar o resgate. Tente novamente mais tarde.</Text>
+            </View>
+        );
+    }
 
     renderFooter() {
-        return this.state.success ?
+        return (this.state.success || this.state.error) ?
             <Footer style={styles.redeemButton} label="Voltar ao início" onPress={this.onPressBack} /> :
             <Footer style={styles.redeemButton} label="Confirmar resgate" onPress={this.onSend} />;
     }
@@ -85,6 +95,7 @@ export class ConfirmRedeem extends React.Component {
                     </View>
                     {loading && <ActivityIndicator animating />}
                     {this.renderSuccessBox()}
+                    {this.renderErrorBox()}
                 </View>
                 {this.renderFooter()}
             </Container>
@@ -157,6 +168,24 @@ const styles = StyleSheet.create({
         color: colors.fuelYellow
     },
     redeemSuccessSubtitle: {
+        fontSize: measures.fontSizeMedium,
+        textAlign: 'center',
+        color: colors.white
+    },
+    redeemErrorBox: {
+        marginTop: measures.defaultMargin * 4,
+        backgroundColor: colors.mobster,
+        padding: measures.defaultPadding,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    redeemErrorTitle: {
+        fontSize: measures.fontSizeLarge,
+        textAlign: 'center',
+        color: colors.errorRed
+    },
+    redeemErrorSubtitle: {
         fontSize: measures.fontSizeMedium,
         textAlign: 'center',
         color: colors.white

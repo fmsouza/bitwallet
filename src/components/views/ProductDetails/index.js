@@ -54,11 +54,13 @@ const styles = StyleSheet.create({
         paddingVertical: measures.defaultPadding * 2
     },
     productTitle: {
+        backgroundColor: 'transparent',
         color: colors.white,
         fontSize: measures.fontSizeMedium + 2,
         margin: measures.defaultMargin
     },
     amount: {
+        backgroundColor: 'transparent',
         color: colors.fuelYellow,
         fontSize: measures.fontSizeMedium,
         margin: measures.defaultMargin
@@ -67,6 +69,7 @@ const styles = StyleSheet.create({
         marginTop: measures.defaultMargin * 2
     },
     characteristicsTitle: {
+        backgroundColor: 'transparent',
         color: colors.white,
         fontSize: measures.fontSizeMedium - 2,
         marginLeft: measures.defaultMargin
@@ -77,6 +80,7 @@ const styles = StyleSheet.create({
         marginBottom: measures.defaultMargin
     },
     productDescription: {
+        backgroundColor: 'transparent',
         color: colors.white,
         fontSize: measures.fontSizeMedium - 3,
         margin: measures.defaultMargin

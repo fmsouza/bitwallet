@@ -20,6 +20,7 @@ export const maverick               = '#C5B6C2';
 export const sanJuan                = '#344A6B';
 export const fuelYellow             = '#EBA71F';
 export const etonBlue               = '#99C09C';
+export const errorRed               = '#C50001';
 
 export const primary                = chambray;
 export const secondary              = white;
