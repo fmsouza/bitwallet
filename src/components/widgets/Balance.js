@@ -74,10 +74,10 @@ export class Balance extends React.Component {
                     </View>
                 </TouchableWithoutFeedback>
                 <View style={styles.footer}>
-                    {this.renderRefreshButton(loading)}
                     {this.renderExtractButton(onPressExtract)}
                 </View>
             </View>
+                // {this.renderRefreshButton(loading)}
         );
     }
 }
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     footer: {
         flexDirection: 'row',
         alignItems: 'stretch',
-        justifyContent: 'space-between'
+        justifyContent: 'flex-end'
     },
     refresh: {
         marginLeft: measures.defaultMargin * 2,
