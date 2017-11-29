@@ -8,6 +8,8 @@ import { Wallet } from 'common/actions';
 import { Wallet as WalletUtils } from 'common/utils';
 import { General } from 'common/constants';
 
+const UPDATE_INTERVAL = 15000;
+
 @inject('wallet')
 @observer
 export class Balance extends React.Component {
@@ -17,12 +19,12 @@ export class Balance extends React.Component {
         return WalletUtils.tokenDecimals(this.props.wallet.balance);
     }
     
-    componentWillMount() {
+    componentDidMount() {
         this.onPressRefresh();
     }
 
     @autobind
-    async onPressRefresh() {
+    async onPressRefresh(autoUpdate = true) {
         try {
             await Wallet.isLoading(true);
             await Wallet.updateBalance();
@@ -30,6 +32,7 @@ export class Balance extends React.Component {
             General.DEBUG && console.warn(e.message);
         } finally {
             await Wallet.isLoading(false);
+            autoUpdate && setTimeout(() => this.onPressRefresh(), UPDATE_INTERVAL);
         }
     }
 
@@ -47,7 +50,7 @@ export class Balance extends React.Component {
     renderRefreshButton(loading) {
         if (loading) return <ActivityIndicator style={styles.refresh} animating />;
         else return (
-            <TouchableWithoutFeedback onPress={this.onPressRefresh}>
+            <TouchableWithoutFeedback onPress={() => this.onPressRefresh(false)}>
                 <View style={styles.refresh}>
                     <Icon name="refresh" color={colors.white} />
                 </View>
