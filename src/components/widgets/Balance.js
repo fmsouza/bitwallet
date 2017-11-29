@@ -14,7 +14,7 @@ export class Balance extends React.Component {
 
     get balance() {
         if (!this.props.wallet.balance) return 0;
-        return Number(WalletUtils.tokenDecimals(this.props.wallet.balance)).toFixed(2);
+        return WalletUtils.tokenDecimals(this.props.wallet.balance);
     }
     
     componentWillMount() {
@@ -65,7 +65,7 @@ export class Balance extends React.Component {
                             <Text style={styles.title}>Saldo Disponível</Text>
                         </View>
                         <View style={styles.balanceContainer}>
-                            <Text style={styles.balanceLabel}>{this.balance}</Text>
+                            <Text style={styles.balanceLabel}>{WalletUtils.truncateBalance(this.balance)}</Text>
                             <Text style={styles.unitLabel}>Pts</Text>
                         </View>
                     </View>
