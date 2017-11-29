@@ -91,7 +91,7 @@ export class ConfirmRedeem extends React.Component {
                     </View>
                     <View style={styles.bottomBox}>
                         <Text style={styles.balanceTitle}>Saldo disponível:</Text>
-                        <Text style={styles.balanceValue}>{this.balance} Pontos</Text>
+                        <Text style={styles.balanceValue}>{WalletUtils.truncateBalance(this.balance)} Pontos</Text>
                     </View>
                     {loading && <ActivityIndicator animating />}
                     {this.renderSuccessBox()}

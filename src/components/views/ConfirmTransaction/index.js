@@ -20,10 +20,6 @@ export class ConfirmTransaction extends React.Component {
         return WalletUtils.tokenDecimals(this.props.wallet.balance);
     }
 
-    get finalBalance() {
-        return Number(WalletUtils.tokenDecimals(this.props.wallet.balance)) - this.amount;
-    }
-
     get address() {
         return this.props.navigation.state.params.address;
     }
@@ -91,7 +87,7 @@ export class ConfirmTransaction extends React.Component {
                     </View>
                     <View style={styles.bottomBox}>
                         <Text style={styles.balanceTitle}>Saldo disponível:</Text>
-                        <Text style={styles.balanceValue}>{this.balance} pts</Text>
+                        <Text style={styles.balanceValue}>{WalletUtils.truncateBalance(this.balance)} pts</Text>
                     </View>
                     {loading && <ActivityIndicator animating />}
                     {this.renderSuccessBox()}

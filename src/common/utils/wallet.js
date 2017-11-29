@@ -26,3 +26,9 @@ export const generateKeyFromSeed = (value) => {
     const node = HDNode.fromSeed(seed);
     return node.privateKey;
 }
+
+export const truncateBalance = (balance) => {
+    balance = balance.toString();
+    balance = balance.slice(0, (balance.indexOf(".")) + 3);
+    return Number(balance);
+}
