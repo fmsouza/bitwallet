@@ -89,23 +89,20 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         marginTop: measures.defaultMargin,
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: 'flex-start',
         flex: 1,
         backgroundColor: colors.zorba
     },
     title: {
         fontSize: measures.fontSizeMedium,
-        marginTop: measures.defaultMargin,
-        marginLeft: measures.defaultMargin * 2,
+        paddingVertical: measures.defaultPadding,
         color: colors.white,
         backgroundColor: 'transparent'
     },
     balanceContainer: {
         flex: 1,
         paddingHorizontal: measures.defaultPadding * 2,
-        marginTop: measures.defaultMargin,
-        paddingVertical: 0,
         backgroundColor: colors.martini,
         flexDirection: 'row',
         alignItems: 'center'
@@ -118,9 +115,6 @@ const styles = StyleSheet.create({
         marginLeft: measures.defaultMargin,
         fontSize: measures.fontSizeMedium,
         color: colors.white
-    },
-    header: {
-        flexDirection: 'row'
     },
     footer: {
         flexDirection: 'row',
