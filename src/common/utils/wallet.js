@@ -15,7 +15,11 @@ export const padStartHex = (hex, targetLength = 64, padString = '0') => {
 
 export const tokenDecimals = (value) => ethers.utils.formatEther(value);
 
-export const expandTokenAmount = (value) => value * decimals;
+export const expandTokenAmount = (value) => {
+    const big = utils.bigNumberify(value);
+    const dec = utils.bigNumberify(String(decimals));
+    return big.mul(dec);
+}
 
 export const generateKeyFromSeed = (value) => {
     const seed = utils.toUtf8Bytes(value);
