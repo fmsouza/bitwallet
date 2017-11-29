@@ -10,8 +10,8 @@
     "android:bundle": "react-native bundle --dev false --platform android --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "android:clean": "cd android && ./gradlew clean && cd ..",
     "android:generate": "npm run android:bundle && npm run android:build",
-    "android": "react-native run-android && react-native log-android",
-    "ios": "react-native run-ios && react-native log-ios"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios"
   },
   "dependencies": {
     "autobind-decorator": "2.1.0",
