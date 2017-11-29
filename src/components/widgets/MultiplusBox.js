@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
     },
     title: {
         color: colors.white,
-        fontSize: measures.fontSizeLarge - 2
+        fontSize: measures.fontSizeLarge - 4
     },
     description: {
         color: colors.white,
-        fontSize: measures.fontSizeMedium - 2
+        fontSize: measures.fontSizeMedium - 4
     },
     button: {
         alignSelf: 'flex-end'
