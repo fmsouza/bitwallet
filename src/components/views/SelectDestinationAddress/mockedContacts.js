@@ -5,7 +5,7 @@ export default [
         address: '0xf5b60c2b97b27b6fb5d5ff2c202bee62d06cfc11'
     },
     {
-        id: 1,
+        id: 2,
         name: 'Carteira de teste',
         address: '0x407428BF09ea7Dac2824A64AfE88171041a02b14'
     },
