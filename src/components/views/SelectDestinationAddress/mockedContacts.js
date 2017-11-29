@@ -11,6 +11,11 @@ export default [
     },
     {
         id: 3,
+        name: 'Fred Souza',
+        address: '0x2119A62990F908F852ef6AaF1c803107c53d4299'
+    },
+    {
+        id: 4,
         name: 'Marco Jardim',
         address: '0x6b206b76d8f589a131da52ec90548c61aafc6530'
     }
