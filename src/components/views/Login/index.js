@@ -54,7 +54,7 @@ export class Login extends React.Component {
                 <Button
                     borderless
                     title="Entrar com chave privada"
-                    onPress={() => this.props.navigation.navigate(Views.LOADPK)} />
+                    onPress={() => navigation.navigate(Views.LOADPK)} />
             </View>
         );
         else return null;
@@ -63,7 +63,6 @@ export class Login extends React.Component {
     render() {
         return (
             <Container style={styles.container}>
-                <Image style={styles.logo} source={require('assets/img/logo.png')} />
                 {this.renderBody()}
             </Container>
         );
@@ -73,7 +72,7 @@ export class Login extends React.Component {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         flex: 1
     },
     bodyContainer: {
