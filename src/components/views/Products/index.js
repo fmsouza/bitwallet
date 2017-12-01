@@ -2,7 +2,7 @@ import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import autobind from 'autobind-decorator';
 import Carousel from 'react-native-snap-carousel';
-import { Balance, Container, MultiplusBox } from 'components/widgets';
+import { Balance, Container, LoyaltyClubBox } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Views } from 'common/constants';
 import mockedOffers from './mockedOffers';
@@ -55,7 +55,7 @@ export class Products extends React.Component {
                         activeSlideAlignment='start'
                         removeClippedSubviews={false} />
                 </View>
-                <MultiplusBox />
+                <LoyaltyClubBox />
             </Container>
         );
     }

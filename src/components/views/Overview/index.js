@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Balance, Button, Container, Footer, Icon, MultiplusBox } from 'components/widgets';
+import { Balance, Button, Container, Footer, Icon, LoyaltyClubBox } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Views } from 'common/constants';
 
@@ -50,7 +50,7 @@ export class Overview extends React.Component {
                         </TouchableWithoutFeedback>
                     </View>
                 </View>
-                <MultiplusBox />
+                <LoyaltyClubBox />
             </Container>
         );
     }

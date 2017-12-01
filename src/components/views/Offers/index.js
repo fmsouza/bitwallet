@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Button, Container, MultiplusBox } from 'components/widgets';
+import { Button, Container, LoyaltyClubBox } from 'components/widgets';
 import { Views } from 'common/constants';
 import { colors, measures } from 'common/styles';
 
@@ -51,7 +51,7 @@ export class Offers extends React.Component {
                         </TouchableWithoutFeedback>
                     </View>
                 </View>
-                <MultiplusBox />
+                <LoyaltyClubBox />
             </Container>
         );
     }

@@ -3,9 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 
-export const MultiplusBox = () => (
+export const LoyaltyClubBox = () => (
     <View style={styles.container}>
-        <Text style={styles.title}>Clube Multiplus</Text>
+        <Text style={styles.title}>Clube de Fidelidade</Text>
         <Text style={styles.description}>Com o Clube Multiplus você junta pontos mais rápido, participa de promoções e conquista seus objetivos rapidamente.</Text>
         <Button style={styles.button} borderless title="Veja como funciona" onPress={() => {}} />
     </View>
