@@ -1,8 +1,8 @@
 import React from 'react';
-import { ActivityIndicator, Image, Keyboard, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Image, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
-import { Button, Container } from 'components/widgets';
+import { Container } from 'components/widgets';
 import { colors, measures } from 'common/styles';
 import { Wallet } from 'common/actions';
 import { General, Views } from 'common/constants';
@@ -51,10 +51,11 @@ export class Login extends React.Component {
         else if (!wallet) return (
             <View style={styles.bodyContainer}>
                 <LoginForm onSubmit={this.onSubmitLogin} />
-                <Button
-                    borderless
-                    title="Entrar com chave privada"
-                    onPress={() => navigation.navigate(Views.LOADPK)} />
+                <TouchableWithoutFeedback onPress={() => navigation.navigate(Views.LOADPK)}>
+                    <View style={styles.buttonContainer}>
+                        <Text style={styles.buttonTitle}>Entrar com chave privada</Text>
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
         );
         else return null;
@@ -78,12 +79,16 @@ const styles = StyleSheet.create({
     bodyContainer: {
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         flex: 1
     },
-    logo: {
-        width: 155,
-        height: 60,
-        marginVertical: 60
+    buttonContainer: {
+        backgroundColor: 'transparent',
+        marginTop: measures.defaultMargin * 10
+    },
+    buttonTitle: {
+        backgroundColor: 'transparent',
+        color: colors.white,
+        fontSize: measures.fontSizeMedium
     }
 });
